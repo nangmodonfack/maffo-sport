@@ -16,7 +16,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="fr">
-      <body>
+    <body>
         {children}
         <CookieBanner />
       </body>
