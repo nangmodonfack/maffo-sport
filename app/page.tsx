@@ -1,5 +1,5 @@
 "use client";
-
+import NewsletterForm from "./components/NewsletterForm";
 import { useEffect, useMemo, useState } from "react";
 import {
   ArrowRight,
@@ -1010,18 +1010,7 @@ export default function Home() {
                 Un résumé des informations importantes, sans spam.
               </p>
             </div>
-
-            <div className="flex w-full md:w-auto gap-2">
-              <input
-                type="email"
-                placeholder="Votre adresse email"
-                className="min-w-0 md:w-72 bg-white/5 border border-white/10 rounded-xl px-4 outline-none focus:border-green-400/50"
-              />
-
-              <button className="bg-white text-black font-bold px-5 rounded-xl hover:bg-zinc-200">
-                S’inscrire
-              </button>
-            </div>
+ <NewsletterForm />
           </div>
         </section>
       </main>
