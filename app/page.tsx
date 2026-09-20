@@ -1201,7 +1201,7 @@ export default function Home() {
               © 2026 Maffo Sport. Tous droits réservés.
             </span>
 
-            <span>
+           <span>
               Maffo Sport est un média sportif indépendant.
             </span>
           </div>
