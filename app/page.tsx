@@ -984,11 +984,13 @@ export default function Home() {
             </div>
 
             <a
-              href="#"
-              className="bg-green-500 text-black font-black px-6 py-3 rounded-xl text-center hover:bg-green-400 transition"
-            >
-              Rejoindre Telegram
-            </a>
+  href="https://t.me/maffoparissportifs"
+  target="_blank"
+  rel="noopener noreferrer"
+  className="bg-green-500 text-black font-black px-6 py-3 rounded-xl text-center hover:bg-green-400 transition"
+>
+  Rejoindre Telegram
+</a>
           </div>
         </section>
 
