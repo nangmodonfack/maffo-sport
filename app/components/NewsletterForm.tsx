@@ -82,7 +82,7 @@ export default function NewsletterForm() {
 
       <p className="mt-3 text-xs leading-5 text-zinc-600">
         En vous inscrivant, vous acceptez de recevoir les actualités et
-        contenus de Maffo Sport. Vous pouvez vous désinscrire à tout moment.
+        contenus de Maffo Sport. Vous pouvez vous désinscrire à tout moment.🔞 Réservé aux majeurs (18+/21+ selon votre pays de résidence).
         <a
           href="/politique-confidentialite"
           className="ml-1 underline hover:text-zinc-400"
