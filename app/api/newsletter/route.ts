@@ -51,7 +51,7 @@ export async function POST(request: Request) {
 
     return NextResponse.json({
       success: true,
-      message: "Inscription réussie.",
+      message: "Inscription réussie.Votre email de bienvenue est en route 📩 Vérifiez vos spams au besoin.",
     });
   } catch {
     return NextResponse.json(
