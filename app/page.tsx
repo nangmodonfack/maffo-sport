@@ -1,4 +1,4 @@
-"use client";
+"use client"; 
 import NewsletterForm from "./components/NewsletterForm";
 import { useEffect, useMemo, useState } from "react";
 import {
