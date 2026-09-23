@@ -275,5 +275,97 @@ export const articles: Article[] = [
     "Sources : Confédération africaine de football (CAF), Ligue des champions et Coupe de la Confédération 2026/27."
   ],
 },
+{
+  slug: "1n2-double-chance-over-under-comprendre-les-bases",
+  title: "1N2, double chance, Over/Under : comprendre les bases",
+  category: "Types de paris",
+  excerpt:
+    "1N2, double chance, Over/Under : voici comment fonctionnent les principaux marchés de paris sportifs et ce que signifie réellement chaque sélection.",
+  image: "",
+  date: "23 septembre 2026",
+  author: "Maffo Sport",
+  content: [
+    "Avant de regarder une cote ou de choisir une sélection, il faut d'abord comprendre le marché sur lequel elle porte. En football, plusieurs options permettent de miser sur le résultat d'un match, le nombre de buts ou différents événements de la rencontre.",
 
+    "Le marché 1N2 est le plus connu. Le 1 correspond à une victoire de l'équipe qui reçoit, le N à un match nul et le 2 à une victoire de l'équipe visiteuse. Par exemple, pour un match entre Marseille et Lille, sélectionner « 1 » signifie que l'on mise sur une victoire de Marseille.",
+
+    "La double chance permet de couvrir deux des trois résultats possibles. Les sélections les plus courantes sont 1X, X2 et 12. Avec 1X, le pari est gagnant si l'équipe à domicile gagne ou si le match se termine par un nul. Avec X2, le pari est gagnant en cas de nul ou de victoire de l'équipe extérieure.",
+
+    "Le marché Over/Under concerne généralement le nombre total de buts marqués pendant la rencontre. Un Over 2,5 signifie qu'il faut au moins trois buts dans le match. Un Under 2,5 signifie qu'il doit y avoir zéro, un ou deux buts.",
+
+    "Il existe également des marchés portant sur les deux équipes qui marquent, le nombre de buts d'une équipe, les corners, les cartons ou encore le résultat à la mi-temps. Plus le marché devient spécifique, plus il faut comprendre précisément la condition nécessaire pour que la sélection soit gagnante.",
+
+    "Les cotes indiquent le montant du retour potentiel selon le montant misé, mais elles ne constituent pas une probabilité certaine du résultat. Les opérateurs intègrent également leur marge dans les cotes proposées.",
+
+    "Le plus important est donc de lire la sélection jusqu'au bout avant de la valider. Une différence entre Over 1,5 et Over 2,5, par exemple, change complètement la condition nécessaire pour gagner.",
+
+    "Enfin, aucun marché ne supprime le risque. Un match peut prendre une tournure différente de ce que les statistiques ou les tendances laissaient penser. Les paris sportifs restent donc une activité avec un risque de perte financière.",
+
+    "Source : GamCare, informations pédagogiques sur le fonctionnement des paris et des cotes."
+  ],
+},
+  {
+  slug: "comment-analyser-les-cotes-d-un-match",
+  title: "Comment analyser les cotes d'un match ?",
+  category: "Stratégie",
+  excerpt:
+    "Une cote ne dit pas simplement combien un pari peut rapporter. Elle donne aussi une indication sur la probabilité estimée par le marché et doit être replacée dans son contexte.",
+  image: "",
+  date: "23 septembre 2026",
+  author: "Maffo Sport",
+  content: [
+    "Lire une cote est l'une des premières choses à apprendre lorsqu'on s'intéresse aux paris sportifs. Une cote permet de calculer le retour potentiel d'une mise, mais elle ne doit pas être considérée comme une garantie sur le résultat d'un match.",
+
+    "Avec une cote décimale de 2,00, une mise de 1 000 FCFA produit un retour potentiel de 2 000 FCFA si la sélection est gagnante, mise comprise. Le bénéfice potentiel serait donc de 1 000 FCFA.",
+
+    "On peut également convertir une cote décimale en probabilité implicite théorique avec la formule : 1 ÷ cote × 100. Une cote de 2,00 correspond ainsi à 50 % de probabilité implicite avant de tenir compte de la marge du bookmaker.",
+
+    "Cette conversion permet surtout de comparer les cotes avec sa propre analyse. Par exemple, si une personne estime qu'une sélection possède une probabilité réelle supérieure à celle suggérée par la cote, elle peut considérer que la cote mérite une analyse plus approfondie. Cela ne signifie toutefois pas que le pari sera gagnant.",
+
+    "Il faut aussi comparer les cotes proposées par plusieurs opérateurs lorsque cela est possible. Une même sélection peut être proposée à des valeurs différentes. Une différence de quelques centièmes peut sembler faible, mais elle peut avoir un effet sur le retour potentiel lorsqu'elle se répète sur de nombreuses sélections.",
+
+    "L'évolution d'une cote peut également attirer l'attention. Une cote qui passe par exemple de 2,20 à 1,90 indique que le marché a évolué, mais cela ne permet pas à lui seul de connaître la raison du changement. Une information sur un joueur, une composition d'équipe ou les montants misés peuvent intervenir.",
+
+    "Il faut donc éviter de regarder uniquement une cote isolée. Pour analyser correctement une rencontre, il est préférable de la comparer aux statistiques, à la forme récente, aux absences, au calendrier et au contexte du match.",
+
+    "Une cote élevée n'est pas automatiquement intéressante et une cote faible n'est pas automatiquement sûre. Les deux représentent simplement des niveaux de retour et des probabilités implicites différents.",
+
+    "Enfin, les bookmakers construisent leurs cotes avec une marge intégrée. Les probabilités implicites de plusieurs issues peuvent donc dépasser 100 % lorsqu'on les additionne. Cette différence correspond notamment à la marge du marché.",
+
+    "Source : GamCare, informations sur le fonctionnement des cotes et la marge des opérateurs."
+  ],
+},
+  {
+  slug: "comment-construire-une-analyse-avant-un-pari-sportif",
+  title: "Comment construire une analyse avant un pari sportif ?",
+  category: "Guide",
+  excerpt:
+    "Une analyse sérieuse ne repose pas sur une intuition isolée. Voici les principaux éléments à examiner avant de considérer une sélection sur un match.",
+  image: "",
+  date: "23 septembre 2026",
+  author: "Maffo Sport",
+  content: [
+    "Analyser un match avant de considérer une sélection demande de séparer les faits des impressions. Une équipe peut être favorite sur le papier et pourtant rencontrer de grandes difficultés le jour du match.",
+
+    "La première étape consiste à regarder la forme récente des deux équipes. Les derniers résultats donnent une première indication, mais ils doivent être replacés dans leur contexte. Une série de victoires contre des équipes moins bien classées n'a pas forcément la même signification qu'une série obtenue contre des adversaires du haut de tableau.",
+
+    "Les performances à domicile et à l'extérieur constituent ensuite un élément intéressant. Certaines équipes sont beaucoup plus performantes devant leur public alors que d'autres obtiennent régulièrement de bons résultats en déplacement.",
+
+    "Il faut également vérifier les absences. Une suspension, une blessure ou une rotation importante peut modifier l'équilibre d'une équipe. Le poste concerné compte aussi : l'absence d'un gardien, d'un défenseur central ou d'un buteur peut avoir des conséquences différentes selon le style de jeu de l'équipe.",
+
+    "Les statistiques permettent ensuite d'aller plus loin. Tirs, tirs cadrés, buts marqués, buts encaissés, occasions créées, possession et buts attendus peuvent aider à comprendre si les résultats récents correspondent réellement au contenu des matchs.",
+
+    "Le calendrier mérite également d'être regardé. Une équipe qui vient de jouer plusieurs rencontres importantes en quelques jours peut effectuer une rotation ou manquer de fraîcheur. Le contexte est encore plus important lorsqu'une rencontre intervient entre deux matchs européens.",
+
+    "Le style des deux équipes doit aussi être pris en compte. Une équipe qui joue très haut peut laisser des espaces à un adversaire spécialisé dans les transitions. À l'inverse, une équipe défensive peut fermer le jeu et rendre une rencontre beaucoup moins ouverte que ne le suggèrent les résultats précédents.",
+
+    "Après avoir rassemblé ces informations, il faut comparer l'analyse avec le marché choisi. Une analyse peut être intéressante pour le résultat 1N2 mais beaucoup moins pertinente pour un marché Over/Under ou pour les deux équipes qui marquent.",
+
+    "Il est également important de reconnaître ce que l'on ne sait pas. Une composition officielle encore inconnue, une information récente sur un joueur ou une situation particulière peut rendre une analyse moins fiable. Il vaut mieux identifier cette incertitude que prétendre avoir une certitude.",
+
+    "Enfin, aucune analyse ne permet de supprimer le hasard d'un match. Le football comporte des événements imprévisibles et les paris peuvent entraîner une perte financière. Une mise ne devrait jamais dépasser ce que l'on peut se permettre de perdre.",
+
+    "Source : Maffo Sport. Pour les informations générales sur les risques liés aux paris, voir également les ressources de GamCare."
+  ],
+},
   ];
