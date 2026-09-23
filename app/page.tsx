@@ -581,40 +581,38 @@ export default function Home() {
 
             <div className="grid md:grid-cols-3 gap-5">
               {evergreenArticles.map((article) => (
-                <article
-                  key={article.title}
-                  className="glass rounded-2xl overflow-hidden card-hover"
-                >
-                  <div className="h-40">
-                    <ImagePlaceholder
-                      src={article.image}
-                      alt={article.title}
-                    />
-                  </div>
+  <a
+    key={article.title}
+    href={article.link}
+    className="glass rounded-2xl overflow-hidden card-hover block"
+  >
+    <div className="h-40">
+      <ImagePlaceholder
+        src={article.image}
+        alt={article.title}
+      />
+    </div>
 
-                  <div className="p-5">
-                    <div className="text-xs text-green-400 font-bold uppercase">
-                      {article.category}
-                    </div>
+    <div className="p-5">
+      <div className="text-xs text-green-400 font-bold uppercase">
+        {article.category}
+      </div>
 
-                    <h3 className="font-black text-xl mt-2">
-                      {article.title}
-                    </h3>
+      <h3 className="font-black text-xl mt-2">
+        {article.title}
+      </h3>
 
-                    <p className="text-sm text-zinc-400 mt-2 leading-6">
-                      {article.description}
-                    </p>
+      <p className="text-sm text-zinc-400 mt-2 leading-6">
+        {article.description}
+      </p>
 
-                    <a
-                      href="#"
-                      className="inline-flex items-center gap-1 text-sm font-bold mt-5"
-                    >
-                      Lire la suite
-                      <ArrowRight size={15} />
-                    </a>
-                  </div>
-                </article>
-              ))}
+      <span className="inline-flex items-center gap-1 text-sm font-bold mt-5">
+        Lire la suite
+        <ArrowRight size={15} />
+      </span>
+    </div>
+  </a>
+))}
             </div>
           </div>
         </section>
