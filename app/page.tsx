@@ -1,22 +1,16 @@
-"use client"; 
+"use client";
+
 import NewsletterForm from "./components/NewsletterForm";
 import { useEffect, useMemo, useState } from "react";
 import {
   ArrowRight,
-  Bell,
-  ChevronDown,
   ChevronRight,
   Clock3,
   Flame,
-  Menu,
-  Search,
   Trophy,
-  X,
   Zap,
   RefreshCw,
   Radio,
-  Facebook,
-  Youtube,
   Send,
 } from "lucide-react";
 
@@ -79,18 +73,21 @@ const evergreenArticles = [
     title: "Comment analyser une équipe avant un match de football ?",
     description:
       "Forme récente, absences, calendrier, statistiques et contexte : les éléments à regarder avant une rencontre.",
+    image: "/images/home/analyse-1.jpg",
   },
   {
     category: "Guide football",
     title: "Comprendre les principales statistiques du football",
     description:
       "Possession, tirs cadrés, buts attendus, efficacité offensive et autres indicateurs utiles.",
+    image: "/images/home/analyse-2.jpg",
   },
   {
     category: "Guide",
     title: "Comment lire les statistiques d'un match ?",
     description:
       "Les chiffres permettent de mieux comprendre le déroulement d'une rencontre et les performances des équipes.",
+    image: "/images/home/analyse-3.jpg",
   },
 ];
 
@@ -120,23 +117,35 @@ const news = [
     "Football",
     "Les informations importantes à retenir avant les prochains grands rendez-vous",
     "Actualité",
+    "/images/home/actualite.jpg",
   ],
   [
     "Mercato",
     "Les principaux mouvements et informations du marché des transferts",
     "Actualité",
+    "/images/home/mercato.jpg",
   ],
   [
     "Compétitions",
     "Les affiches et enjeux à suivre cette semaine",
     "Actualité",
+    "/images/home/competitions.jpg",
   ],
 ];
 
 const africanFootball = [
-  "Les joueurs africains à suivre cette saison",
-  "Les grandes compétitions africaines expliquées",
-  "Les clubs africains et leurs performances",
+  {
+    title: "Les joueurs africains à suivre cette saison",
+    image: "/images/home/afrique-1.jpg",
+  },
+  {
+    title: "Les grandes compétitions africaines expliquées",
+    image: "/images/home/afrique-2.jpg",
+  },
+  {
+    title: "Les clubs africains et leurs performances",
+    image: "/images/home/afrique-3.jpg",
+  },
 ];
 
 function todayDouala() {
@@ -173,14 +182,18 @@ function statusOf(short: string): MatchStatus {
 }
 
 function ImagePlaceholder({
-  label = "Votre photo",
+  src,
+  alt = "",
 }: {
-  label?: string;
+  src: string;
+  alt?: string;
 }) {
   return (
-    <div className="h-full min-h-32 w-full bg-gradient-to-br from-zinc-800 via-zinc-900 to-black flex items-center justify-center text-zinc-500 text-sm">
-      {label}
-    </div>
+    <img
+      src={src}
+      alt={alt}
+      className="h-full w-full object-cover"
+    />
   );
 }
 
@@ -241,154 +254,6 @@ function SectionTitle({
   );
 }
 
-function Header() {
-  const [open, setOpen] = useState(false);
-  const [search, setSearch] = useState(false);
-
-  return (
-    <header className="sticky top-0 z-50 bg-[#07090d]/90 backdrop-blur-xl border-b border-white/10">
-      <div className="container-x h-16 flex items-center justify-between">
-        <a
-          href="/"
-          className="font-black text-xl tracking-tight"
-        >
-          MAFFO <span className="text-green-400">SPORT</span>
-        </a>
-
-        <nav className="hidden lg:flex items-center gap-7 text-sm font-semibold">
-          <a href="/" className="text-green-400">
-            Accueil
-          </a>
-
-          <a href="#actus">Actualités</a>
-
-          {/* FOOTBALL - MENU DÉROULANT */}
-          <div className="relative group">
-            <button className="flex items-center gap-1">
-              Football <ChevronDown size={14} />
-            </button>
-
-            <div className="absolute top-7 left-0 invisible opacity-0 group-hover:visible group-hover:opacity-100 transition glass rounded-xl p-2 w-56">
-              {[
-                "Actualités football",
-                "Guides football",
-                "Compétitions",
-                "Équipes & joueurs",
-                "Records & histoire",
-                "Football africain",
-              ].map((item) => (
-                <a
-                  key={item}
-                  href="#football"
-                  className="block px-3 py-2 rounded-lg hover:bg-white/5"
-                >
-                  {item}
-                </a>
-              ))}
-            </div>
-          </div>
-
-          {/* PARIS SPORTIFS - MENU DÉROULANT */}
-          <div className="relative group">
-            <button className="flex items-center gap-1">
-              Paris sportifs <ChevronDown size={14} />
-            </button>
-
-            <div className="absolute top-7 left-0 invisible opacity-0 group-hover:visible group-hover:opacity-100 transition glass rounded-xl p-2 w-56">
-              {[
-                "Pronostics",
-                "Guides paris sportifs",
-                "Types de paris",
-                "Stratégies & conseils",
-                "Bookmakers",
-                "Comparatifs",
-              ].map((item) => (
-                <a
-                  key={item}
-                  href="#paris"
-                  className="block px-3 py-2 rounded-lg hover:bg-white/5"
-                >
-                  {item}
-                </a>
-              ))}
-            </div>
-          </div>
-
-          <a href="#analyses">Analyses</a>
-          <a href="#resultats">Résultats</a>
-          <a href="#calendrier">Calendrier</a>
-        </nav>
-
-        <div className="flex items-center gap-2">
-          <button
-            onClick={() => setSearch(!search)}
-            aria-label="Recherche"
-            className="p-2 rounded-lg hover:bg-white/10"
-          >
-            <Search size={19} />
-          </button>
-
-          <button
-            className="p-2 rounded-lg hover:bg-white/10 hidden sm:block"
-            aria-label="Notifications"
-          >
-            <Bell size={19} />
-          </button>
-
-          <button
-            onClick={() => setOpen(!open)}
-            className="p-2 rounded-lg hover:bg-white/10 lg:hidden"
-            aria-label="Menu"
-          >
-            {open ? <X /> : <Menu />}
-          </button>
-        </div>
-      </div>
-
-      {search && (
-        <div className="border-t border-white/10">
-          <div className="container-x py-3">
-            <div className="relative">
-              <Search
-                className="absolute left-3 top-3 text-zinc-500"
-                size={18}
-              />
-
-              <input
-                autoFocus
-                placeholder="Rechercher une actualité, une équipe..."
-                className="w-full rounded-xl bg-white/5 border border-white/10 py-2.5 pl-10 pr-4 outline-none focus:border-green-400/50"
-              />
-            </div>
-          </div>
-        </div>
-      )}
-
-      {open && (
-        <nav className="lg:hidden border-t border-white/10 bg-[#090c12] px-4 py-4 space-y-1">
-          {[
-            ["Actualités", "#actus"],
-            ["Football", "#football"],
-            ["Paris sportifs", "#paris"],
-            ["Analyses", "#analyses"],
-            ["Résultats", "#resultats"],
-            ["Calendrier", "#calendrier"],
-          ].map(([name, href]) => (
-            <a
-              key={name}
-              href={href}
-              onClick={() => setOpen(false)}
-              className="block py-3 border-b border-white/5"
-            >
-              {name}
-            </a>
-          ))}
-        </nav>
-      )}
-    </header>
-  );
-}
-
 function MatchCard({ m }: { m: Match }) {
   return (
     <div className="glass card-hover rounded-2xl p-4 min-w-[260px] snap-start">
@@ -409,6 +274,7 @@ function MatchCard({ m }: { m: Match }) {
       <div className="flex items-center justify-between gap-3">
         <div className="text-center flex-1">
           <TeamBadge logo={m.homeLogo} name={m.home} />
+
           <div className="text-sm mt-2 font-semibold">
             {m.home}
           </div>
@@ -533,8 +399,6 @@ export default function Home() {
 
   return (
     <div className="min-h-screen">
-      <Header />
-
       <main>
         {/* =========================
             1. À LA UNE
@@ -542,7 +406,10 @@ export default function Home() {
         <section className="hero-grid border-b border-white/10">
           <div className="container-x py-10 md:py-16 grid lg:grid-cols-[1.35fr_.65fr] gap-5">
             <article className="relative overflow-hidden rounded-3xl min-h-[390px] border border-white/10">
-              <ImagePlaceholder label="IMAGE PRINCIPALE — à remplacer" />
+              <ImagePlaceholder
+                src="/images/home/hero.jpg"
+                alt="Actualité sportive"
+              />
 
               <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
 
@@ -576,22 +443,28 @@ export default function Home() {
                 [
                   "Analyse",
                   "Les clés pour comprendre les grands matchs",
+                  "/images/home/analyse-match.jpg",
                 ],
                 [
                   "Guide",
                   "Les statistiques à connaître au football",
+                  "/images/home/statistiques.jpg",
                 ],
                 [
                   "Paris sportifs",
                   "Comprendre les principaux marchés de paris",
+                  "/images/home/paris-sportifs.jpg",
                 ],
-              ].map(([cat, title]) => (
+              ].map(([cat, title, image]) => (
                 <article
                   key={title}
                   className="glass rounded-2xl overflow-hidden card-hover"
                 >
                   <div className="h-28">
-                    <ImagePlaceholder />
+                    <ImagePlaceholder
+                      src={image}
+                      alt={title}
+                    />
                   </div>
 
                   <div className="p-4">
@@ -708,31 +581,36 @@ export default function Home() {
               {evergreenArticles.map((article) => (
                 <article
                   key={article.title}
-                  className="glass rounded-2xl p-5 card-hover"
+                  className="glass rounded-2xl overflow-hidden card-hover"
                 >
-                  <div className="h-32 rounded-xl overflow-hidden mb-5">
-                    <ImagePlaceholder />
+                  <div className="h-40">
+                    <ImagePlaceholder
+                      src={article.image}
+                      alt={article.title}
+                    />
                   </div>
 
-                  <div className="text-xs text-green-400 font-bold uppercase">
-                    {article.category}
+                  <div className="p-5">
+                    <div className="text-xs text-green-400 font-bold uppercase">
+                      {article.category}
+                    </div>
+
+                    <h3 className="font-black text-xl mt-2">
+                      {article.title}
+                    </h3>
+
+                    <p className="text-sm text-zinc-400 mt-2 leading-6">
+                      {article.description}
+                    </p>
+
+                    <a
+                      href="#"
+                      className="inline-flex items-center gap-1 text-sm font-bold mt-5"
+                    >
+                      Lire la suite
+                      <ArrowRight size={15} />
+                    </a>
                   </div>
-
-                  <h3 className="font-black text-xl mt-2">
-                    {article.title}
-                  </h3>
-
-                  <p className="text-sm text-zinc-400 mt-2 leading-6">
-                    {article.description}
-                  </p>
-
-                  <a
-                    href="#"
-                    className="inline-flex items-center gap-1 text-sm font-bold mt-5"
-                  >
-                    Lire la suite
-                    <ArrowRight size={15} />
-                  </a>
                 </article>
               ))}
             </div>
@@ -808,37 +686,42 @@ export default function Home() {
 
             <div className="grid lg:grid-cols-[1.5fr_1fr] gap-6">
               <div className="grid sm:grid-cols-2 gap-5">
-                {news.map(([category, title, label], index) => (
-                  <article
-                    key={title}
-                    className={`glass rounded-2xl overflow-hidden card-hover ${
-                      index === 0 ? "sm:col-span-2" : ""
-                    }`}
-                  >
-                    <div
-                      className={
-                        index === 0 ? "h-52" : "h-36"
-                      }
+                {news.map(
+                  ([category, title, label, image], index) => (
+                    <article
+                      key={title}
+                      className={`glass rounded-2xl overflow-hidden card-hover ${
+                        index === 0 ? "sm:col-span-2" : ""
+                      }`}
                     >
-                      <ImagePlaceholder />
-                    </div>
-
-                    <div className="p-5">
-                      <div className="text-xs text-green-400 font-bold uppercase">
-                        {category}
+                      <div
+                        className={
+                          index === 0 ? "h-52" : "h-36"
+                        }
+                      >
+                        <ImagePlaceholder
+                          src={image}
+                          alt={title}
+                        />
                       </div>
 
-                      <h3 className="font-black text-lg mt-1">
-                        {title}
-                      </h3>
+                      <div className="p-5">
+                        <div className="text-xs text-green-400 font-bold uppercase">
+                          {category}
+                        </div>
 
-                      <div className="flex items-center gap-2 text-xs text-zinc-500 mt-3">
-                        <Clock3 size={13} />
-                        {label}
+                        <h3 className="font-black text-lg mt-1">
+                          {title}
+                        </h3>
+
+                        <div className="flex items-center gap-2 text-xs text-zinc-500 mt-3">
+                          <Clock3 size={13} />
+                          {label}
+                        </div>
                       </div>
-                    </div>
-                  </article>
-                ))}
+                    </article>
+                  )
+                )}
               </div>
 
               <aside className="glass rounded-2xl p-5 h-fit">
@@ -860,6 +743,7 @@ export default function Home() {
                         className="flex justify-between p-3 rounded-xl hover:bg-white/5"
                       >
                         <span>{league}</span>
+
                         <ChevronRight
                           size={16}
                           className="text-zinc-600"
@@ -885,18 +769,21 @@ export default function Home() {
           />
 
           <div className="grid md:grid-cols-3 gap-5">
-            {africanFootball.map((title) => (
+            {africanFootball.map((article) => (
               <article
-                key={title}
+                key={article.title}
                 className="glass rounded-2xl overflow-hidden card-hover"
               >
                 <div className="h-36">
-                  <ImagePlaceholder />
+                  <ImagePlaceholder
+                    src={article.image}
+                    alt={article.title}
+                  />
                 </div>
 
                 <div className="p-5">
                   <h3 className="font-black">
-                    {title}
+                    {article.title}
                   </h3>
 
                   <a
@@ -984,13 +871,13 @@ export default function Home() {
             </div>
 
             <a
-  href="https://t.me/maffoparissportifs"
-  target="_blank"
-  rel="noopener noreferrer"
-  className="bg-green-500 text-black font-black px-6 py-3 rounded-xl text-center hover:bg-green-400 transition"
->
-  Rejoindre Telegram
-</a>
+              href="https://t.me/maffoparissportifs"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-green-500 text-black font-black px-6 py-3 rounded-xl text-center hover:bg-green-400 transition"
+            >
+              Rejoindre Telegram
+            </a>
           </div>
         </section>
 
@@ -1012,229 +899,11 @@ export default function Home() {
                 Un résumé des informations importantes, sans spam.
               </p>
             </div>
- <NewsletterForm />
+
+            <NewsletterForm />
           </div>
         </section>
       </main>
-{/* =========================
-          FOOTER
-      ========================== */}
-<footer
-  id="footer"
-  className="border-t border-white/10 bg-[#05070a]"
->
-  <div className="container-x py-10 grid md:grid-cols-5 gap-8">
-
-    {/* MARQUE */}
-    <div>
-      <div className="font-black text-xl">
-        MAFFO{" "}
-        <span className="text-green-400">
-          SPORT
-        </span>
-      </div>
-
-      <p className="text-sm text-zinc-500 mt-3 leading-6">
-        Actualités, analyses, résultats, calendrier
-        et pronostics sportifs.
-      </p>
     </div>
-
-    {/* SPORT */}
-    <div>
-      <div className="font-bold mb-3">
-        Sport
-      </div>
-
-      <div className="space-y-2 text-sm text-zinc-500">
-        <a
-          href="#actus"
-          className="block hover:text-white"
-        >
-          Actualités
-        </a>
-
-        <a
-          href="#football"
-          className="block hover:text-white"
-        >
-          Football
-        </a>
-
-        <a
-          href="#analyses"
-          className="block hover:text-white"
-        >
-          Analyses
-        </a>
-
-        <a
-          href="#resultats"
-          className="block hover:text-white"
-        >
-          Résultats
-        </a>
-      </div>
-    </div>
-
-    {/* PARIS SPORTIFS */}
-    <div>
-      <div className="font-bold mb-3">
-        Paris sportifs
-      </div>
-
-      <div className="space-y-2 text-sm text-zinc-500">
-        <a
-          href="#paris"
-          className="block hover:text-white"
-        >
-          Pronostics
-        </a>
-
-        <a
-          href="#paris"
-          className="block hover:text-white"
-        >
-          Guides
-        </a>
-
-        <a
-          href="#paris"
-          className="block hover:text-white"
-        >
-          Types de paris
-        </a>
-
-        <a
-          href="#paris"
-          className="block hover:text-white"
-        >
-          Bookmakers
-        </a>
-      </div>
-    </div>
-
-    {/* INFORMATIONS */}
-    <div>
-      <div className="font-bold mb-3">
-        Informations
-      </div>
-
-      <div className="space-y-2 text-sm text-zinc-500">
-        <a
-          href="/a-propos"
-          className="block hover:text-white"
-        >
-          À propos
-        </a>
-
-        <a
-          href="/contact"
-          className="block hover:text-white"
-        >
-          Contact
-        </a>
-
-        <a
-          href="/mentions-legales"
-          className="block hover:text-white"
-        >
-          Mentions légales
-        </a>
-
-        <a
-          href="/politique-confidentialite"
-          className="block hover:text-white"
-        >
-          Confidentialité
-        </a>
-
-        <a
-          href="/politique-cookies"
-          className="block hover:text-white"
-        >
-          Politique cookies
-        </a>
-
-        <a
-          href="/jouer-responsable"
-          className="block hover:text-white"
-        >
-          Jouer responsable
-        </a>
-      </div>
-    </div>
-
-    {/* SUIVEZ-NOUS */}
-    <div>
-      <div className="font-bold mb-3">
-        Suivez-nous
-      </div>
-
-      <div className="flex flex-col gap-3 text-sm text-zinc-500">
-
-        <a
-          href="https://www.facebook.com/share/14xFN6rsTtX/?mibextid=wwXIfr"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex items-center gap-2 hover:text-white"
-        >
-          <Facebook size={17} />
-          Facebook
-        </a>
-
-        <a
-          href="https://www.youtube.com/@maffohub"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex items-center gap-2 hover:text-white"
-        >
-          <Youtube size={17} />
-          YouTube
-        </a>
-
-        <a
-          href="https://t.me/maffoparissportifs"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex items-center gap-2 hover:text-white"
-        >
-          <Send size={17} />
-          Telegram
-        </a>
-
-      </div>
-    </div>
-  </div>
-
-  {/* BAS DU FOOTER */}
-  <div className="container-x py-5 border-t border-white/5 text-xs text-zinc-600 flex flex-col gap-3">
-
-    <div className="flex flex-col sm:flex-row justify-between gap-2">
-      <span>
-        © 2026 Maffo Sport. Tous droits réservés.
-      </span>
-
-      <span>
-        Maffo Sport est un média sportif indépendant.
-      </span>
-    </div>
-
-    <div className="leading-5">
-      <a
-        href="/jouer-responsable"
-        className="text-zinc-500 hover:text-white underline"
-      >
-        Jouez responsablement.
-      </a>{" "}
-      Réservé aux personnes majeures selon la législation
-      en vigueur dans votre pays de résidence (18+ / 21+).
-      Jouer comporte des risques : endettement, isolement,
-      dépendance.
-    </div>
-    </div>
-</footer> 
-    </div>
- );
+  );
 }
-      
