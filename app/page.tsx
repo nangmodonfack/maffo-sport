@@ -536,8 +536,7 @@ export default function Home() {
 
           {!apiOnline && (
             <div className="mb-4 rounded-xl border border-yellow-400/20 bg-yellow-400/5 p-3 text-xs text-yellow-200">
-              Mode démonstration. Les données réelles apparaîtront
-              lorsque l’API-Football sera disponible.
+              Mise à jour en cours...
               {apiError && ` ${apiError}`}
             </div>
           )}
