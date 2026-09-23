@@ -120,18 +120,21 @@ const news = [
     "Les informations importantes à retenir avant les prochains grands rendez-vous",
     "Actualité",
     "/images/home/actualite.jpg",
+    "/articles/xavi-nouveau-selectionneur-pays-bas",
   ],
   [
     "Mercato",
     "Les principaux mouvements et informations du marché des transferts",
     "Actualité",
     "/images/home/mercato.jpg",
+    "/articles/les-principales-rumeurs-mercato-23-septembre-2026",
   ],
   [
     "Compétitions",
     "Les affiches et enjeux à suivre cette semaine",
     "Actualité",
     "/images/home/competitions.jpg",
+    "/articles/qualifications-can-2027-demarrent",
   ],
 ];
 
