@@ -7,7 +7,7 @@ export type Article = {
   date: string;
   author: string;
   content: string[];
-};
+}; 
 
 export const articles: Article[] = [
   {
