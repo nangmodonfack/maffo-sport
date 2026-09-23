@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata } from "next"; 
 import "./globals.css";
 import CookieBanner from "./components/CookieBanner";
 import Header from "./components/Header";
