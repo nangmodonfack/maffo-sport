@@ -770,10 +770,11 @@ export default function Home() {
 
           <div className="grid md:grid-cols-3 gap-5">
             {africanFootball.map((article) => (
-              <article
-                key={article.title}
-                className="glass rounded-2xl overflow-hidden card-hover"
-              >
+             <a
+  href={article.link}
+  key={article.title}
+  className="glass rounded-2xl overflow-hidden card-hover block"
+>
                 <div className="h-36">
                   <ImagePlaceholder
                     src={article.image}
@@ -793,7 +794,7 @@ export default function Home() {
                     Découvrir →
                   </a>
                 </div>
-              </article>
+              </a>
             ))}
           </div>
         </section>
