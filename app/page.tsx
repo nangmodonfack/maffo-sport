@@ -690,13 +690,14 @@ export default function Home() {
             <div className="grid lg:grid-cols-[1.5fr_1fr] gap-6">
               <div className="grid sm:grid-cols-2 gap-5">
                 {news.map(
-                  ([category, title, label, image], index) => (
-                    <article
-                      key={title}
-                      className={`glass rounded-2xl overflow-hidden card-hover ${
-                        index === 0 ? "sm:col-span-2" : ""
-                      }`}
-                    >
+  ([category, title, label, image, link], index) => (
+    <a
+      href={link}
+      key={title}
+      className={glass rounded-2xl overflow-hidden card-hover block ${
+        index === 0 ? "sm:col-span-2" : ""
+      }}
+    >
                       <div
                         className={
                           index === 0 ? "h-52" : "h-36"
@@ -722,9 +723,9 @@ export default function Home() {
                           {label}
                         </div>
                       </div>
-                    </article>
-                  )
-                )}
+                   </a>
+  )
+)} 
               </div>
 
               <aside className="glass rounded-2xl p-5 h-fit">
