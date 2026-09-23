@@ -440,51 +440,54 @@ export default function Home() {
 
             <div className="grid sm:grid-cols-2 lg:grid-cols-1 gap-5">
               {[
-                [
-                  "Analyse",
-                  "Les clés pour comprendre les grands matchs",
-                  "/images/home/analyse-match.jpg",
-                ],
-                [
-                  "Guide",
-                  "Les statistiques à connaître au football",
-                  "/images/home/statistiques.jpg",
-                ],
-                [
-                  "Paris sportifs",
-                  "Comprendre les principaux marchés de paris",
-                  "/images/home/paris-sportifs.jpg",
-                ],
-              ].map(([cat, title, image]) => (
-                <article
-                  key={title}
-                  className="glass rounded-2xl overflow-hidden card-hover"
-                >
-                  <div className="h-28">
-                    <ImagePlaceholder
-                      src={image}
-                      alt={title}
-                    />
-                  </div>
+  [
+    "Analyse",
+    "Les clés pour comprendre les grands matchs",
+    "/images/home/analyse-match.jpg",
+    "/articles/comment-analyser-un-match-de-football",
+  ],
+  [
+    "Guide",
+    "Les statistiques à connaître au football",
+    "/images/home/statistiques.jpg",
+    "#analyses",
+  ],
+  [
+    "Paris sportifs",
+    "Comprendre les principaux marchés de paris",
+    "/images/home/paris-sportifs.jpg",
+    "#analyses",
+  ],
+].map(([cat, title, image, link]) => (
+  <article
+    key={title}
+    className="glass rounded-2xl overflow-hidden card-hover"
+  >
+    <div className="h-28">
+      <ImagePlaceholder
+        src={image}
+        alt={title}
+      />
+    </div>
 
-                  <div className="p-4">
-                    <div className="text-xs text-green-400 font-bold uppercase">
-                      {cat}
-                    </div>
+    <div className="p-4">
+      <div className="text-xs text-green-400 font-bold uppercase">
+        {cat}
+      </div>
 
-                    <h3 className="font-bold mt-1 leading-snug">
-                      {title}
-                    </h3>
+      <h3 className="font-bold mt-1 leading-snug">
+        {title}
+      </h3>
 
-                    <a
-                      href="#analyses"
-                      className="text-xs text-zinc-500 mt-2 inline-block"
-                    >
-                      Lire →
-                    </a>
-                  </div>
-                </article>
-              ))}
+      <a
+        href={link}
+        className="text-xs text-zinc-500 mt-2 inline-block"
+      >
+        Lire →
+      </a>
+    </div>
+  </article>
+))}
             </div>
           </div>
         </section>
