@@ -447,11 +447,11 @@ export default function Home() {
     "/articles/comment-analyser-un-match-de-football",
   ],
   [
-    "Guide",
-    "Les statistiques à connaître au football",
-    "/images/home/statistiques.jpg",
-    "#analyses",
-  ],
+  "Guide",
+  "Les statistiques à connaître au football",
+  "/images/home/statistiques.jpg",
+  "/articles/statistiques-a-connaitre-football",
+],
   [
     "Paris sportifs",
     "Comprendre les principaux marchés de paris",
