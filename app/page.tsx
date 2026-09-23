@@ -699,9 +699,7 @@ export default function Home() {
               }}
             >
               <div
-                className={
-                  index === 0 ? "h-52" : "h-36"
-                }
+                className={index === 0 ? "h-52" : "h-36"}
               >
                 <ImagePlaceholder
                   src={image}
@@ -759,7 +757,6 @@ export default function Home() {
     </div>
   </div>
 </section>
-
         {/* =========================
             6. FOOTBALL AFRICAIN
         ========================== */}
