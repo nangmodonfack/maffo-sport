@@ -695,8 +695,8 @@ export default function Home() {
               href={link}
               key={title}
               className={glass rounded-2xl overflow-hidden card-hover block ${
-                index === 0 ? "sm:col-span-2" : ""
-              }}
+  index === 0 ? "sm:col-span-2" : ""
+}}
             >
               <div
                 className={index === 0 ? "h-52" : "h-36"}
