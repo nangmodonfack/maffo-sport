@@ -142,14 +142,17 @@ const africanFootball = [
   {
     title: "Les joueurs africains à suivre cette saison",
     image: "/images/home/afrique-1.jpg",
+    link: "/articles/joueurs-africains-a-suivre-cette-saison",
   },
   {
     title: "Les grandes compétitions africaines expliquées",
     image: "/images/home/afrique-2.jpg",
+    link: "/articles/grandes-competitions-africaines-expliquees",
   },
   {
     title: "Les clubs africains et leurs performances",
     image: "/images/home/afrique-3.jpg",
+    link: "/articles/clubs-africains-et-leurs-performances",
   },
 ];
 
