@@ -35,7 +35,6 @@ export const articles: Article[] = [
       "Enfin, il est préférable de croiser plusieurs informations plutôt que de se baser sur un seul indicateur. Une analyse solide repose sur un ensemble d'éléments et ne garantit jamais le résultat d'un match ou un gain sur un pari sportif.",
     ],
   },
-];
 
 {
     slug: "statistiques-a-connaitre-football",
@@ -56,3 +55,4 @@ export const articles: Article[] = [
       "Enfin, aucune statistique ne permet de prévoir avec certitude le résultat d'une rencontre. L'objectif est plutôt de croiser plusieurs indicateurs afin de construire une analyse plus cohérente.",
     ],
   },
+];
