@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import CookieBanner from "./components/CookieBanner";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
 
 export const metadata: Metadata = {
   title: "Maffo Sport — Actualités, analyses, résultats et pronostics",
@@ -16,8 +18,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="fr">
-     <body>
+      <body>
+        <Header />
         {children}
+        <Footer />
         <CookieBanner />
       </body>
     </html>
