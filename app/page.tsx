@@ -99,18 +99,21 @@ const bettingArticles = [
     title: "1N2, double chance, Over/Under : comprendre les bases",
     description:
       "Les principaux marchés de paris sportifs expliqués simplement.",
+    link: "/articles/1n2-double-chance-over-under-comprendre-les-bases",
   },
   {
     category: "Stratégie",
     title: "Comment analyser les cotes d'un match ?",
     description:
       "Comprendre ce que représentent les cotes et les informations qu'elles peuvent contenir.",
+    link: "/articles/comment-analyser-les-cotes-d-un-match",
   },
   {
     category: "Guide",
     title: "Comment construire une analyse avant un pari sportif ?",
     description:
       "Forme, statistiques, contexte et informations disponibles avant de faire une sélection.",
+    link: "/articles/comment-construire-une-analyse-avant-un-pari-sportif",
   },
 ];
 
@@ -637,10 +640,11 @@ export default function Home() {
 
           <div className="grid md:grid-cols-3 gap-5">
             {bettingArticles.map((article) => (
-              <article
-                key={article.title}
-                className="glass rounded-2xl p-5 card-hover"
-              >
+              <a
+  href={article.link}
+  key={article.title}
+  className="glass rounded-2xl p-5 card-hover block"
+>
                 <div className="flex justify-between items-start">
                   <span className="text-xs text-zinc-500">
                     {article.category}
@@ -667,7 +671,7 @@ export default function Home() {
                   Lire le guide
                   <ArrowRight size={15} />
                 </a>
-              </article>
+             </a>
             ))}
           </div>
 
