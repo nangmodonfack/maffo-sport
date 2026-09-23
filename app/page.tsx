@@ -74,6 +74,7 @@ const evergreenArticles = [
     description:
       "Forme récente, absences, calendrier, statistiques et contexte : les éléments à regarder avant une rencontre.",
     image: "/images/home/analyse-1.jpg",
+    link: "/articles/analyser-une-equipe-avant-un-match",
   },
   {
     category: "Guide football",
@@ -81,6 +82,7 @@ const evergreenArticles = [
     description:
       "Possession, tirs cadrés, buts attendus, efficacité offensive et autres indicateurs utiles.",
     image: "/images/home/analyse-2.jpg",
+    link: "/articles/principales-statistiques-du-football",
   },
   {
     category: "Guide",
@@ -88,9 +90,9 @@ const evergreenArticles = [
     description:
       "Les chiffres permettent de mieux comprendre le déroulement d'une rencontre et les performances des équipes.",
     image: "/images/home/analyse-3.jpg",
+    link: "/articles/lire-statistiques-match-football",
   },
 ];
-
 const bettingArticles = [
   {
     category: "Types de paris",
