@@ -170,22 +170,22 @@ export const articles: Article[] = [
   ],
 },
   {
-  slug: "les-principales-rumeurs-mercato-23-septembre-2026",
-  title: "Mercato : les principales pistes qui circulent avant le mercato d'hiver",
-  category: "Mercato",
+  slug: "qualifications-can-2027-demarrent",
+  title: "Qualifications CAN 2027 : une nouvelle campagne débute en Afrique",
+  category: "Compétitions",
   excerpt:
-    "Plusieurs grands clubs européens commencent déjà à préparer leurs prochaines opérations alors que le mercato d'hiver approche.",
-  image: "/images/home/mercato.jpg",
+    "Les qualifications pour la CAN 2027 débutent cette semaine avec 48 sélections réparties dans 12 groupes pour tenter de décrocher une place à la phase finale.",
+  image: "/images/home/competitions.jpg",
   date: "23 septembre 2026",
   author: "Maffo Sport",
   content: [
-    "Même si le prochain mercato hivernal n'a pas encore ouvert ses portes, plusieurs clubs européens commencent déjà à surveiller différentes situations.",
-    "Manchester United serait notamment intéressé par Tyrick Mitchell, le défenseur de Crystal Palace. Son contrat doit arriver à son terme en juin 2027, ce qui pourrait attirer plusieurs clubs dans les prochains mois.",
-    "Alejandro Garnacho fait également partie des joueurs dont la situation est suivie. Prêté par Chelsea à Aston Villa, l'attaquant argentin dispose actuellement d'un temps de jeu limité et plusieurs clubs espagnols seraient attentifs à sa situation.",
-    "Du côté d'Arsenal, Declan Rice serait proche d'une prolongation de contrat selon les informations rapportées par la presse spécialisée. Son contrat actuel court jusqu'en juin 2028.",
-    "Le Bayern Munich surveillerait également Florian Wirtz et Morgan Gibbs-White selon plusieurs informations rapportées ce mercredi. Liverpool n'aurait toutefois pas l'intention de se séparer de Wirtz à ce stade.",
-    "Ces différentes informations correspondent à des intérêts ou des discussions rapportés par les médias. Elles ne signifient pas qu'un transfert est conclu.",
-    "Source : Eurosport et Sky Sports, 23 septembre 2026."
+    "Une nouvelle campagne de qualifications pour la Coupe d'Afrique des nations débute cette semaine avec les premiers matchs de groupes pour l'édition 2027.",
+    "Les 48 sélections engagées sont réparties dans 12 groupes. La phase de qualification doit se dérouler sur six journées et se poursuivre jusqu'au mois de mars prochain.",
+    "Dans neuf des douze groupes, les deux premières équipes au classement doivent obtenir leur qualification pour la phase finale.",
+    "Cette nouvelle campagne intervient alors que la dernière édition de la CAN reste au centre de l'actualité, avec une décision concernant le résultat final encore attendue.",
+    "Les premières journées permettront déjà de mesurer la forme des différentes sélections et de voir quelles équipes prennent rapidement une position favorable dans leur groupe.",
+    "Pour les supporters africains, cette période marque donc le début d'une nouvelle course vers la prochaine grande compétition continentale.",
+    "Source : Reuters, 22 septembre 2026."
   ],
 },
 
