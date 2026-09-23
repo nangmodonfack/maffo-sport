@@ -452,12 +452,12 @@ export default function Home() {
   "/images/home/statistiques.jpg",
   "/articles/statistiques-a-connaitre-football",
 ],
-  [
-    "Paris sportifs",
-    "Comprendre les principaux marchés de paris",
-    "/images/home/paris-sportifs.jpg",
-    "#analyses",
-  ],
+ [
+  "Paris sportifs",
+  "Comprendre les principaux marchés de paris",
+  "/images/home/paris-sportifs.jpg",
+  "/articles/comprendre-principaux-marches-paris-sportifs",
+],
 ].map(([cat, title, image, link]) => (
   <a
     key={title}
