@@ -188,5 +188,92 @@ export const articles: Article[] = [
     "Source : Reuters, 22 septembre 2026."
   ],
 },
+ {
+  slug: "joueurs-africains-a-suivre-cette-saison",
+  title: "Les joueurs africains à suivre cette saison",
+  category: "Football africain",
+  excerpt:
+    "La saison 2026/27 offre encore de nombreuses raisons de suivre les joueurs africains, entre cadres confirmés, jeunes talents et joueurs qui cherchent à franchir un nouveau cap.",
+  image: "/images/home/afrique-1.jpg",
+  date: "23 septembre 2026",
+  author: "Maffo Sport",
+  content: [
+    "Le football africain continue de produire des joueurs capables de s'imposer dans les plus grands championnats européens comme dans les compétitions continentales. La saison 2026/27 permettra notamment de suivre l'évolution de plusieurs profils déjà bien installés au plus haut niveau.",
+
+    "Achraf Hakimi fait partie des joueurs africains qui restent particulièrement suivis. Le défenseur marocain s'est installé parmi les références à son poste et son influence dépasse désormais largement son rôle défensif. Sa capacité à participer aux attaques et à créer des occasions en fait un joueur important à observer cette saison.",
+
+    "Victor Osimhen reste également l'un des attaquants africains les plus attendus. Son profil de buteur, sa vitesse et son jeu dans la profondeur lui permettent de peser sur les défenses même lorsqu'il dispose de peu d'espaces.",
+
+    "Derrière ces joueurs expérimentés, une nouvelle génération cherche également à prendre davantage de place. Plusieurs jeunes Africains évoluant en Europe ou dans les championnats du continent pourraient profiter de cette saison pour augmenter leur temps de jeu et attirer l'attention des grands clubs.",
+
+    "Les compétitions africaines seront elles aussi intéressantes à suivre. La Ligue des champions de la CAF et la Coupe de la Confédération permettent notamment d'observer des joueurs qui évoluent encore principalement sur le continent et qui peuvent ensuite franchir un nouveau cap dans leur carrière.",
+
+    "La saison 2026/27 sera également importante en vue de la CAN 2027. La compétition sera organisée conjointement par le Kenya, la Tanzanie et l'Ouganda du 19 juin au 17 juillet 2027. Les performances réalisées pendant la saison pourraient donc peser dans la sélection des différents pays.",
+
+    "Au-delà des noms déjà connus, l'intérêt sera surtout de voir quels joueurs confirmeront leur niveau, lesquels progresseront et quels nouveaux talents réussiront à se faire une place parmi les références du football africain.",
+
+    "Source : CAF, calendrier de la CAN 2027 et compétitions interclubs 2026/27."
+  ],
+},
+  {
+  slug: "grandes-competitions-africaines-expliquees",
+  title: "Les grandes compétitions africaines expliquées",
+  category: "Compétitions",
+  excerpt:
+    "CAN, Ligue des champions, Coupe de la Confédération et Supercoupe : voici comment fonctionnent les principales compétitions du football africain.",
+  image: "/images/home/afrique-2.jpg",
+  date: "23 septembre 2026",
+  author: "Maffo Sport",
+  content: [
+    "Le calendrier du football africain comprend plusieurs compétitions majeures qui concernent les sélections nationales et les clubs. Pour suivre la saison sans se perdre dans les différentes appellations, il faut surtout distinguer les compétitions internationales entre pays et celles réservées aux clubs.",
+
+    "La Coupe d'Afrique des nations, généralement appelée CAN, est la principale compétition continentale entre sélections nationales masculines. L'édition 2027 sera organisée par le Kenya, la Tanzanie et l'Ouganda. Le tournoi est prévu du 19 juin au 17 juillet 2027 et réunira 24 équipes.",
+
+    "Les qualifications pour cette CAN 2027 ont commencé en septembre 2026. Elles constituent donc l'un des grands fils conducteurs de la saison internationale africaine.",
+
+    "Du côté des clubs, la Ligue des champions de la CAF constitue la principale compétition continentale. Elle rassemble les meilleurs clubs des différents championnats africains. La saison 2026/27 a commencé par les tours préliminaires en septembre, avant une phase de groupes programmée entre novembre 2026 et janvier 2027.",
+
+    "La Coupe de la Confédération représente l'autre grande compétition interclubs de la CAF. Elle permet à d'autres clubs africains de participer à une compétition continentale et de viser un trophée majeur. La saison 2026/27 réunit 56 clubs.",
+
+    "La Supercoupe de la CAF oppose ensuite les vainqueurs des deux principales compétitions interclubs. Pour l'édition 2026, Mamelodi Sundowns, vainqueur de la Ligue des champions 2025/26, doit affronter l'USM Alger, vainqueur de la Coupe de la Confédération.",
+
+    "Ces compétitions ont chacune leur propre calendrier et leur propre système de qualification. Les suivre séparément permet de mieux comprendre les enjeux et les parcours des clubs et des sélections.",
+
+    "Pour les supporters, cette diversité fait aussi partie de l'intérêt du football africain : une saison peut être marquée à la fois par les qualifications de la CAN, les compétitions de clubs et les grands rendez-vous internationaux.",
+
+    "Sources : Confédération africaine de football (CAF), calendrier des compétitions 2026/27."
+  ],
+},
+  {
+  slug: "clubs-africains-et-leurs-performances",
+  title: "Les clubs africains et leurs performances",
+  category: "Football africain",
+  excerpt:
+    "Les clubs africains continuent de se livrer une forte concurrence sur la scène continentale, avec plusieurs équipes habituées aux grands rendez-vous de la CAF.",
+  image: "/images/home/afrique-3.jpg",
+  date: "23 septembre 2026",
+  author: "Maffo Sport",
+  content: [
+    "Le football de clubs africain repose sur plusieurs équipes qui ont construit une véritable expérience des compétitions continentales. Chaque saison, la Ligue des champions de la CAF et la Coupe de la Confédération permettent de mesurer les forces en présence.",
+
+    "Mamelodi Sundowns a terminé la saison 2025/26 au sommet de la Ligue des champions de la CAF. Le club sud-africain a remporté la finale face à l'AS FAR après un succès 1-0 à l'aller et un match nul 1-1 au retour, pour une victoire 2-1 sur l'ensemble des deux rencontres.",
+
+    "Cette victoire a offert aux Sundowns leur deuxième titre dans la compétition après celui remporté en 2016. Le club s'est également qualifié pour plusieurs rendez-vous internationaux liés à son statut de champion d'Afrique.",
+
+    "L'AS FAR a également confirmé sa place parmi les équipes importantes du continent en atteignant la finale de la Ligue des champions 2025/26. Le club marocain avait notamment terminé deuxième de son groupe avant de poursuivre son parcours jusqu'à la finale.",
+
+    "D'autres clubs comme Al Ahly, l'Espérance de Tunis et plusieurs formations d'Afrique du Nord et d'Afrique australe restent régulièrement présents dans les phases avancées des compétitions de la CAF.",
+
+    "La saison 2026/27 apporte toutefois un nouveau départ. Les tours préliminaires de la Ligue des champions et de la Coupe de la Confédération ont commencé en septembre, tandis que les phases de groupes sont prévues à partir de novembre.",
+
+    "La Coupe de la Confédération présente également un plateau particulièrement expérimenté cette saison. La CAF indique que neuf des équipes engagées ont déjà atteint au moins une finale de Ligue des champions dans leur histoire.",
+
+    "Pour suivre les performances des clubs africains, il ne suffit donc pas de regarder uniquement les résultats. Le parcours dans la compétition, la régularité à domicile et à l'extérieur, la capacité à gérer les matchs à élimination directe et la profondeur de l'effectif sont également des éléments intéressants à observer.",
+
+    "La saison 2026/27 permettra ainsi de voir si les clubs habitués aux dernières phases confirmeront leur présence au plus haut niveau ou si de nouvelles équipes réussiront à bousculer la hiérarchie continentale.",
+
+    "Sources : Confédération africaine de football (CAF), Ligue des champions et Coupe de la Confédération 2026/27."
+  ],
+},
 
   ];
