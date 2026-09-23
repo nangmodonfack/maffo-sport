@@ -439,7 +439,7 @@ export default function Home() {
             </article>
 
             <div className="grid sm:grid-cols-2 lg:grid-cols-1 gap-5">
-              {[
+             {[
   [
     "Analyse",
     "Les clés pour comprendre les grands matchs",
@@ -459,9 +459,10 @@ export default function Home() {
     "#analyses",
   ],
 ].map(([cat, title, image, link]) => (
-  <article
+  <a
     key={title}
-    className="glass rounded-2xl overflow-hidden card-hover"
+    href={link}
+    className="glass rounded-2xl overflow-hidden card-hover block"
   >
     <div className="h-28">
       <ImagePlaceholder
@@ -479,14 +480,11 @@ export default function Home() {
         {title}
       </h3>
 
-      <a
-        href={link}
-        className="text-xs text-zinc-500 mt-2 inline-block"
-      >
+      <span className="text-xs text-zinc-500 mt-2 inline-block">
         Lire →
-      </a>
+      </span>
     </div>
-  </article>
+  </a>
 ))}
             </div>
           </div>
