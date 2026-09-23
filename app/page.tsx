@@ -544,7 +544,7 @@ export default function Home() {
           {apiOnline && (
             <div className="mb-4 text-xs text-zinc-500 flex items-center gap-2">
               <Radio size={13} className="text-green-400" />
-              Données fournies par API-Football • mises en cache côté serveur
+              Données fournies par API-Football •
             </div>
           )}
 
