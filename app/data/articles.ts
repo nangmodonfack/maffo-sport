@@ -36,3 +36,23 @@ export const articles: Article[] = [
     ],
   },
 ];
+
+{
+    slug: "statistiques-a-connaitre-football",
+    title: "Les statistiques à connaître pour mieux analyser un match de football",
+    category: "Analyse & guides",
+    excerpt:
+      "Buts marqués, tirs cadrés, possession, occasions créées et buts encaissés : voici les statistiques utiles pour mieux lire un match de football.",
+    image: "/images/home/statistiques.jpg",
+    date: "23 septembre 2026",
+    author: "Maffo Sport",
+    content: [
+      "Les statistiques ne racontent pas tout d’un match de football, mais elles permettent de mieux comprendre ce qui se passe sur le terrain. Encore faut-il savoir lesquelles regarder et comment les interpréter.",
+      "Le nombre de buts marqués et encaissés constitue un premier point de départ. Il permet notamment de comparer la capacité d’une équipe à créer des occasions et à résister aux attaques adverses.",
+      "Les tirs cadrés sont également intéressants. Une équipe peut avoir beaucoup de possession sans réellement mettre le gardien adverse en difficulté. À l’inverse, quelques occasions bien construites peuvent parfois produire davantage de danger.",
+      "Les occasions créées et les buts attendus peuvent apporter une lecture plus précise de la performance offensive. Ils permettent notamment de voir si le résultat obtenu correspond globalement aux occasions produites.",
+      "La possession du ballon doit toutefois être interprétée avec prudence. Avoir davantage le ballon ne signifie pas forcément dominer réellement une rencontre.",
+      "Les performances à domicile et à l’extérieur peuvent aussi modifier la lecture des statistiques. Certaines équipes affichent des résultats très différents selon le lieu du match.",
+      "Enfin, aucune statistique ne permet de prévoir avec certitude le résultat d'une rencontre. L'objectif est plutôt de croiser plusieurs indicateurs afin de construire une analyse plus cohérente.",
+    ],
+  },
