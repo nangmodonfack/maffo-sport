@@ -691,12 +691,11 @@ export default function Home() {
       <div className="grid sm:grid-cols-2 gap-5">
         {news.map(
           ([category, title, label, image, link], index) => (
-            <a
-              href={link}
-              key={title}
-             className={glass rounded-2xl overflow-hidden card-hover block ${
-  index === 0 ? "sm:col-span-2" : ""
-}}
+           <a
+  href={link}
+  key={title}
+  className="glass rounded-2xl overflow-hidden card-hover block"
+>
             >
               <div
                 className={index === 0 ? "h-52" : "h-36"}
