@@ -55,4 +55,24 @@ export const articles: Article[] = [
       "Enfin, aucune statistique ne permet de prévoir avec certitude le résultat d'une rencontre. L'objectif est plutôt de croiser plusieurs indicateurs afin de construire une analyse plus cohérente.",
     ],
   },
-];
+{
+  slug: "comprendre-principaux-marches-paris-sportifs",
+  title: "Comprendre les principaux marchés de paris sportifs",
+  category: "Paris sportifs",
+  excerpt:
+    "1N2, double chance, plus ou moins de buts, les deux équipes marquent : voici comment fonctionnent les principaux marchés de paris sportifs.",
+  image: "/images/home/paris-sportifs.jpg",
+  date: "23 septembre 2026",
+  author: "Maffo Sport",
+  content: [
+    "Les paris sportifs proposent de nombreux marchés, et il n’est pas toujours évident de comprendre ce que signifie chaque option. Avant de choisir un pari, il est donc utile de connaître les règles du marché sélectionné.",
+    "Le marché 1N2 est l’un des plus simples à comprendre. Le 1 correspond à une victoire de l’équipe qui reçoit, le N à un match nul et le 2 à une victoire de l’équipe qui joue à l’extérieur.",
+    "La double chance permet de couvrir deux des trois résultats possibles. On peut par exemple choisir une victoire ou un match nul, ce qui réduit le nombre de scénarios nécessaires pour que le pari soit gagnant.",
+    "Le marché plus ou moins de buts concerne le nombre total de buts inscrits pendant une rencontre. Une sélection comme plus de 2,5 buts signifie qu’au moins trois buts doivent être marqués au total.",
+    "Le marché « Les deux équipes marquent » repose quant à lui sur une question simple : les deux équipes inscriront-elles au moins un but pendant le match ?",
+    "D’autres marchés peuvent porter sur le nombre de buts d’une équipe, le résultat à la mi-temps, les corners ou encore les cartons. Chaque marché possède ses propres conditions et doit être compris avant toute sélection.",
+    "Enfin, aucun marché ne garantit un résultat. Les statistiques peuvent aider à analyser une rencontre, mais un match de football reste incertain. Les paris sportifs comportent des risques et doivent rester une activité réservée aux personnes majeures selon la législation applicable dans leur pays.",
+  ],
+},
+
+  ];
