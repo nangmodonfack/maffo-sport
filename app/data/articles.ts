@@ -131,5 +131,62 @@ export const articles: Article[] = [
     "La meilleure manière de lire une statistique est donc de la comparer avec les autres informations disponibles plutôt que de lui donner une importance isolée.",
   ],
 },
+  {
+  slug: "xavi-nouveau-selectionneur-pays-bas",
+  title: "Xavi prépare ses débuts avec les Pays-Bas en Ligue des nations",
+  category: "Football",
+  excerpt:
+    "Nommé sélectionneur des Pays-Bas, Xavi s'apprête à diriger son premier match avec une équipe qui veut retrouver une identité de jeu basée sur la possession et l'intensité.",
+  image: "/images/home/actualite.jpg",
+  date: "23 septembre 2026",
+  author: "Maffo Sport",
+  content: [
+    "Les Pays-Bas s'apprêtent à ouvrir une nouvelle période avec Xavi Hernandez sur le banc. L'ancien joueur et entraîneur du FC Barcelone est devenu le premier sélectionneur étranger de la sélection néerlandaise depuis 1978.",
+    "Xavi doit diriger son premier match jeudi contre l'Allemagne à Amsterdam dans le cadre de la Ligue des nations. Cette rencontre sera le premier véritable test de son projet avec les Oranje.",
+    "Le technicien espagnol souhaite installer une équipe capable de contrôler davantage le ballon, de bien occuper les espaces et de réagir rapidement après une perte de balle.",
+    "Cette arrivée intervient après une période compliquée pour les Pays-Bas. L'équipe avait notamment connu une élimination précoce lors de la dernière Coupe du monde, ce qui avait accéléré le changement de sélectionneur.",
+    "Xavi pourra notamment compter sur Virgil van Dijk, qui conserve le brassard de capitaine. Le défenseur reste l'un des cadres de la sélection dans cette nouvelle période.",
+    "Les prochains matchs permettront surtout d'observer la manière dont les idées de Xavi se traduisent sur le terrain et si les joueurs adhèrent rapidement à son système.",
+    "Source : Reuters, 23 septembre 2026."
+  ],
+},
+  {
+  slug: "les-principales-rumeurs-mercato-23-septembre-2026",
+  title: "Mercato : les principales pistes qui circulent avant le mercato d'hiver",
+  category: "Mercato",
+  excerpt:
+    "Plusieurs grands clubs européens commencent déjà à préparer leurs prochaines opérations alors que le mercato d'hiver approche.",
+  image: "/images/home/mercato.jpg",
+  date: "23 septembre 2026",
+  author: "Maffo Sport",
+  content: [
+    "Même si le prochain mercato hivernal n'a pas encore ouvert ses portes, plusieurs clubs européens commencent déjà à surveiller différentes situations.",
+    "Manchester United serait notamment intéressé par Tyrick Mitchell, le défenseur de Crystal Palace. Son contrat doit arriver à son terme en juin 2027, ce qui pourrait attirer plusieurs clubs dans les prochains mois.",
+    "Alejandro Garnacho fait également partie des joueurs dont la situation est suivie. Prêté par Chelsea à Aston Villa, l'attaquant argentin dispose actuellement d'un temps de jeu limité et plusieurs clubs espagnols seraient attentifs à sa situation.",
+    "Du côté d'Arsenal, Declan Rice serait proche d'une prolongation de contrat selon les informations rapportées par la presse spécialisée. Son contrat actuel court jusqu'en juin 2028.",
+    "Le Bayern Munich surveillerait également Florian Wirtz et Morgan Gibbs-White selon plusieurs informations rapportées ce mercredi. Liverpool n'aurait toutefois pas l'intention de se séparer de Wirtz à ce stade.",
+    "Ces différentes informations correspondent à des intérêts ou des discussions rapportés par les médias. Elles ne signifient pas qu'un transfert est conclu.",
+    "Source : Eurosport et Sky Sports, 23 septembre 2026."
+  ],
+},
+  {
+  slug: "les-principales-rumeurs-mercato-23-septembre-2026",
+  title: "Mercato : les principales pistes qui circulent avant le mercato d'hiver",
+  category: "Mercato",
+  excerpt:
+    "Plusieurs grands clubs européens commencent déjà à préparer leurs prochaines opérations alors que le mercato d'hiver approche.",
+  image: "/images/home/mercato.jpg",
+  date: "23 septembre 2026",
+  author: "Maffo Sport",
+  content: [
+    "Même si le prochain mercato hivernal n'a pas encore ouvert ses portes, plusieurs clubs européens commencent déjà à surveiller différentes situations.",
+    "Manchester United serait notamment intéressé par Tyrick Mitchell, le défenseur de Crystal Palace. Son contrat doit arriver à son terme en juin 2027, ce qui pourrait attirer plusieurs clubs dans les prochains mois.",
+    "Alejandro Garnacho fait également partie des joueurs dont la situation est suivie. Prêté par Chelsea à Aston Villa, l'attaquant argentin dispose actuellement d'un temps de jeu limité et plusieurs clubs espagnols seraient attentifs à sa situation.",
+    "Du côté d'Arsenal, Declan Rice serait proche d'une prolongation de contrat selon les informations rapportées par la presse spécialisée. Son contrat actuel court jusqu'en juin 2028.",
+    "Le Bayern Munich surveillerait également Florian Wirtz et Morgan Gibbs-White selon plusieurs informations rapportées ce mercredi. Liverpool n'aurait toutefois pas l'intention de se séparer de Wirtz à ce stade.",
+    "Ces différentes informations correspondent à des intérêts ou des discussions rapportés par les médias. Elles ne signifient pas qu'un transfert est conclu.",
+    "Source : Eurosport et Sky Sports, 23 septembre 2026."
+  ],
+},
 
   ];
