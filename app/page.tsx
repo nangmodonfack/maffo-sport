@@ -689,40 +689,37 @@ export default function Home() {
 
     <div className="grid lg:grid-cols-[1.5fr_1fr] gap-6">
       <div className="grid sm:grid-cols-2 gap-5">
-        {news.map(
-          ([category, title, label, image, link], index) => (
-           <a
-  href={link}
-  key={title}
-  className="glass rounded-2xl overflow-hidden card-hover block"
->
-            >
-              <div
-                className={index === 0 ? "h-52" : "h-36"}
-              >
-                <ImagePlaceholder
-                  src={image}
-                  alt={title}
-                />
-              </div>
+       {news.map(
+  ([category, title, label, image, link]) => (
+    <a
+      href={link}
+      key={title}
+      className="glass rounded-2xl overflow-hidden card-hover block"
+    >
+      <div className="h-36">
+        <ImagePlaceholder
+          src={image}
+          alt={title}
+        />
+      </div>
 
-              <div className="p-5">
-                <div className="text-xs text-green-400 font-bold uppercase">
-                  {category}
-                </div>
+      <div className="p-5">
+        <div className="text-xs text-green-400 font-bold uppercase">
+          {category}
+        </div>
 
-                <h3 className="font-black text-lg mt-1">
-                  {title}
-                </h3>
+        <h3 className="font-black text-lg mt-1">
+          {title}
+        </h3>
 
-                <div className="flex items-center gap-2 text-xs text-zinc-500 mt-3">
-                  <Clock3 size={13} />
-                  {label}
-                </div>
-              </div>
-            </a>
-          )
-        )}
+        <div className="flex items-center gap-2 text-xs text-zinc-500 mt-3">
+          <Clock3 size={13} />
+          {label}
+        </div>
+      </div>
+    </a>
+  )
+)}
       </div>
 
       <aside className="glass rounded-2xl p-5 h-fit">
