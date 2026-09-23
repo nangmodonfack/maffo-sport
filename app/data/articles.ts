@@ -74,5 +74,62 @@ export const articles: Article[] = [
     "Enfin, aucun marché ne garantit un résultat. Les statistiques peuvent aider à analyser une rencontre, mais un match de football reste incertain. Les paris sportifs comportent des risques et doivent rester une activité réservée aux personnes majeures selon la législation applicable dans leur pays.",
   ],
 },
+  {
+  slug: "analyser-une-equipe-avant-un-match",
+  title: "Comment analyser une équipe avant un match de football ?",
+  category: "Analyse",
+  excerpt:
+    "Forme récente, absences, calendrier, statistiques et contexte : les éléments à regarder avant une rencontre.",
+  image: "/images/home/analyse-1.jpg",
+  date: "23 septembre 2026",
+  author: "Maffo Sport",
+  content: [
+    "Analyser une équipe avant un match ne consiste pas simplement à regarder son classement. Pour comprendre ses chances dans une rencontre, plusieurs éléments doivent être étudiés ensemble.",
+    "La forme récente permet d'abord de voir comment l'équipe aborde le match. Il est utile de regarder ses derniers résultats, mais aussi ses performances contre des adversaires de différents niveaux.",
+    "Les absences peuvent également modifier l'équilibre d'une équipe. Une suspension ou une blessure peut avoir davantage d'impact lorsque le joueur concerné occupe un rôle difficile à remplacer.",
+    "Le calendrier est un autre élément à prendre en compte. Une équipe qui enchaîne plusieurs rencontres importantes peut gérer son effectif différemment, notamment lorsque les matchs sont rapprochés.",
+    "Les statistiques permettent ensuite de compléter l'analyse. Les buts marqués et encaissés, les tirs cadrés, les occasions créées et les performances à domicile ou à l'extérieur peuvent donner une vision plus précise du niveau de l'équipe.",
+    "Enfin, le contexte du match peut avoir son importance. Un match de championnat, une rencontre de coupe ou un rendez-vous européen ne présente pas forcément les mêmes enjeux.",
+    "L'objectif n'est pas de trouver une certitude, mais de réunir suffisamment d'informations pour mieux comprendre la rencontre avant le coup d'envoi.",
+  ],
+},
+ {
+  slug: "principales-statistiques-du-football",
+  title: "Comprendre les principales statistiques du football",
+  category: "Guide football",
+  excerpt:
+    "Possession, tirs cadrés, buts attendus, efficacité offensive et autres indicateurs utiles pour mieux comprendre les performances d'une équipe.",
+  image: "/images/home/analyse-2.jpg",
+  date: "23 septembre 2026",
+  author: "Maffo Sport",
+  content: [
+    "Les statistiques sont devenues une partie importante de l'analyse du football. Elles permettent d'aller au-delà du simple score final et d'observer la manière dont une équipe construit ses performances.",
+    "La possession du ballon est l'un des indicateurs les plus connus. Elle montre quelle équipe a davantage contrôlé le ballon, mais elle ne suffit pas à déterminer qui a réellement dominé la rencontre.",
+    "Les tirs cadrés donnent une autre indication. Ils permettent notamment de distinguer une équipe qui frappe beaucoup d'une équipe qui parvient réellement à mettre le gardien adverse en difficulté.",
+    "Les buts attendus, souvent appelés xG, cherchent à mesurer la qualité des occasions obtenues. Ils peuvent aider à comprendre pourquoi une équipe a marqué beaucoup ou peu par rapport aux occasions qu'elle s'est procurées.",
+    "L'efficacité offensive permet également de comparer le nombre d'occasions produites avec le nombre de buts inscrits. Une équipe peut créer beaucoup d'occasions sans forcément être efficace devant le but.",
+    "Les buts encaissés, les occasions concédées et les performances à domicile ou à l'extérieur complètent cette lecture.",
+    "Aucune statistique ne suffit à elle seule. C'est en croisant plusieurs indicateurs avec le contexte du match que l'analyse devient réellement intéressante.",
+  ],
+},
+  {
+  slug: "lire-statistiques-match-football",
+  title: "Comment lire les statistiques d'un match ?",
+  category: "Guide",
+  excerpt:
+    "Les chiffres permettent de mieux comprendre le déroulement d'une rencontre et les performances des équipes.",
+  image: "/images/home/analyse-3.jpg",
+  date: "23 septembre 2026",
+  author: "Maffo Sport",
+  content: [
+    "Une feuille de statistiques peut sembler difficile à interpréter au premier regard. Pourtant, quelques indicateurs permettent déjà de comprendre une grande partie du déroulement d'un match.",
+    "Le score reste évidemment le premier élément à regarder, mais il ne raconte pas toujours toute l'histoire. Une équipe peut gagner tout en ayant subi une grande partie de la rencontre.",
+    "La possession permet de voir quelle équipe a davantage contrôlé le ballon. Elle doit cependant être comparée aux tirs, aux occasions et aux situations dangereuses créées.",
+    "Les tirs et les tirs cadrés permettent de mesurer plus concrètement la capacité des équipes à créer du danger. Un nombre élevé de tirs non cadrés ne signifie pas forcément qu'une équipe a été très dangereuse.",
+    "Les buts attendus peuvent également apporter une information complémentaire sur la qualité des occasions obtenues par chaque équipe.",
+    "Il faut aussi regarder les statistiques défensives et le contexte général du match. Une équipe qui mène rapidement au score peut volontairement laisser davantage le ballon à son adversaire.",
+    "La meilleure manière de lire une statistique est donc de la comparer avec les autres informations disponibles plutôt que de lui donner une importance isolée.",
+  ],
+},
 
   ];
