@@ -674,91 +674,91 @@ export default function Home() {
           </p>
         </section>
 
-        {/* =========================
-            5. ACTUALITÉS
-        ========================== */}
-        <section
-          id="actus"
-          className="bg-[#0b0e14] border-y border-white/5"
-        >
-          <div className="container-x py-12">
-            <SectionTitle
-              eyebrow="À ne pas manquer"
-              title="Dernières actualités"
-            />
+       {/* =========================
+    5. ACTUALITÉS
+========================== */}
+<section
+  id="actus"
+  className="bg-[#0b0e14] border-y border-white/5"
+>
+  <div className="container-x py-12">
+    <SectionTitle
+      eyebrow="À ne pas manquer"
+      title="Dernières actualités"
+    />
 
-            <div className="grid lg:grid-cols-[1.5fr_1fr] gap-6">
-              <div className="grid sm:grid-cols-2 gap-5">
-                {news.map(
-  ([category, title, label, image, link], index) => (
-    <a
-      href={link}
-      key={title}
-      className={glass rounded-2xl overflow-hidden card-hover block ${
-        index === 0 ? "sm:col-span-2" : ""
-      }}
-    >
-                      <div
-                        className={
-                          index === 0 ? "h-52" : "h-36"
-                        }
-                      >
-                        <ImagePlaceholder
-                          src={image}
-                          alt={title}
-                        />
-                      </div>
-
-                      <div className="p-5">
-                        <div className="text-xs text-green-400 font-bold uppercase">
-                          {category}
-                        </div>
-
-                        <h3 className="font-black text-lg mt-1">
-                          {title}
-                        </h3>
-
-                        <div className="flex items-center gap-2 text-xs text-zinc-500 mt-3">
-                          <Clock3 size={13} />
-                          {label}
-                        </div>
-                      </div>
-                   </a>
-  )
-)} 
+    <div className="grid lg:grid-cols-[1.5fr_1fr] gap-6">
+      <div className="grid sm:grid-cols-2 gap-5">
+        {news.map(
+          ([category, title, label, image, link], index) => (
+            <a
+              href={link}
+              key={title}
+              className={glass rounded-2xl overflow-hidden card-hover block ${
+                index === 0 ? "sm:col-span-2" : ""
+              }}
+            >
+              <div
+                className={
+                  index === 0 ? "h-52" : "h-36"
+                }
+              >
+                <ImagePlaceholder
+                  src={image}
+                  alt={title}
+                />
               </div>
 
-              <aside className="glass rounded-2xl p-5 h-fit">
-                <div className="flex items-center gap-2 font-black">
-                  <Trophy
-                    size={18}
-                    className="text-green-400"
-                  />
-                  À suivre
+              <div className="p-5">
+                <div className="text-xs text-green-400 font-bold uppercase">
+                  {category}
                 </div>
 
-                <div className="mt-4 space-y-1">
-                  {Object.keys(leagueIds)
-                    .slice(0, 6)
-                    .map((league) => (
-                      <a
-                        href="#calendrier"
-                        key={league}
-                        className="flex justify-between p-3 rounded-xl hover:bg-white/5"
-                      >
-                        <span>{league}</span>
+                <h3 className="font-black text-lg mt-1">
+                  {title}
+                </h3>
 
-                        <ChevronRight
-                          size={16}
-                          className="text-zinc-600"
-                        />
-                      </a>
-                    ))}
+                <div className="flex items-center gap-2 text-xs text-zinc-500 mt-3">
+                  <Clock3 size={13} />
+                  {label}
                 </div>
-              </aside>
-            </div>
-          </div>
-        </section>
+              </div>
+            </a>
+          )
+        )}
+      </div>
+
+      <aside className="glass rounded-2xl p-5 h-fit">
+        <div className="flex items-center gap-2 font-black">
+          <Trophy
+            size={18}
+            className="text-green-400"
+          />
+          À suivre
+        </div>
+
+        <div className="mt-4 space-y-1">
+          {Object.keys(leagueIds)
+            .slice(0, 6)
+            .map((league) => (
+              <a
+                href="#calendrier"
+                key={league}
+                className="flex justify-between p-3 rounded-xl hover:bg-white/5"
+              >
+                <span>{league}</span>
+
+                <ChevronRight
+                  size={16}
+                  className="text-zinc-600"
+                />
+              </a>
+            ))}
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
 
         {/* =========================
             6. FOOTBALL AFRICAIN
