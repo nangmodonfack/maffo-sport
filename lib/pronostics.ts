@@ -1,4 +1,4 @@
-import type { ApiFootballFixture } from "./api-football";
+Import type { ApiFootballFixture } from "./api-football";
 
 export type Pronostic = {
   fixture: ApiFootballFixture;
