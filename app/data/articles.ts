@@ -2,13 +2,25 @@ export type Article = {
   slug: string;
   title: string;
   category: string;
-  excerpt: string;
+  excerpt?: string;
   image: string;
   date: string;
   author: string;
   content: string[];
-}; 
+};
 
+export function generateExcerpt(content: string[]) {
+  const text = content.join(" ").trim();
+
+  if (text.length <= 280) {
+    return text;
+  }
+
+  const shortened = text.slice(0, 280);
+  const lastSpace = shortened.lastIndexOf(" ");
+
+  return shortened.slice(0, lastSpace) + "...";
+}
 export const articles: Article[] = [
   {
     slug: "comment-analyser-un-match-de-football",
