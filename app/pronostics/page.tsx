@@ -232,7 +232,7 @@ export default async function PronosticsPage() {
                 </h2>
 
                 <p className="text-sm text-zinc-400 mt-2 leading-6 max-w-xl">
-                  Retrouvez les nouvelles sélections et les mises à jour de
+                  Actualités, analyses et pronostics sélectionnés. Et les mises à jour de
                   Maffo Sport directement sur notre canal Telegram.
                 </p>
               </div>
