@@ -116,7 +116,7 @@ export default function Header() {
             Pronostics
           </a>
 
-          <a href="#resultats">
+          <a href="/#resultats">
             Résultats
           </a>
 
@@ -309,7 +309,7 @@ export default function Header() {
           </a>
 
           <a
-            href="#resultats"
+            href="/#resultats"
             onClick={closeMobileMenu}
             className="block py-3 border-b border-white/5"
           >
