@@ -1,12 +1,98 @@
 "use client";
 
+import { useState } from "react";
 import {
   Facebook,
   Youtube,
   Send,
+  Link2,
+  Share2,
+  MessageCircle,
 } from "lucide-react";
 
 export default function Footer() {
+  const [copied, setCopied] = useState(false);
+
+  const getShareUrl = () => {
+    if (typeof window === "undefined") {
+      return "";
+    }
+
+    return window.location.href;
+  };
+
+  const shareFacebook = () => {
+    const url = encodeURIComponent(getShareUrl());
+
+    window.open(
+      `https://www.facebook.com/sharer/sharer.php?u=${url}`,
+      "_blank",
+      "noopener,noreferrer"
+    );
+  };
+
+  const shareWhatsApp = () => {
+    const url = encodeURIComponent(getShareUrl());
+
+    window.open(
+      `https://wa.me/?text=${url}`,
+      "_blank",
+      "noopener,noreferrer"
+    );
+  };
+
+  const shareTelegram = () => {
+    const url = encodeURIComponent(getShareUrl());
+
+    window.open(
+      `https://t.me/share/url?url=${url}`,
+      "_blank",
+      "noopener,noreferrer"
+    );
+  };
+
+  const shareX = () => {
+    const url = encodeURIComponent(getShareUrl());
+
+    window.open(
+      `https://twitter.com/intent/tweet?url=${url}`,
+      "_blank",
+      "noopener,noreferrer"
+    );
+  };
+
+  const copyLink = async () => {
+    const url = getShareUrl();
+
+    try {
+      await navigator.clipboard.writeText(url);
+      setCopied(true);
+
+      setTimeout(() => {
+        setCopied(false);
+      }, 2000);
+    } catch {
+      window.prompt("Copiez le lien de cette page :", url);
+    }
+  };
+
+  const nativeShare = async () => {
+    const url = getShareUrl();
+
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: document.title,
+          url,
+        });
+      } catch {
+        // L'utilisateur a simplement fermé la fenêtre de partage.
+      }
+    } else {
+      copyLink();
+    }
+  };
+
   return (
     <footer
       id="footer"
@@ -201,6 +287,100 @@ export default function Footer() {
               <Send size={17} />
               Telegram
             </a>
+
+          </div>
+        </div>
+      </div>
+
+      {/* PARTAGER LA PAGE */}
+      <div className="container-x py-6 border-t border-white/5">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+          
+          <div>
+            <div className="font-bold text-sm">
+              Partager cette page
+            </div>
+
+            <p className="text-xs text-zinc-600 mt-1">
+              Partagez cet article ou cette page avec vos proches.
+            </p>
+          </div>
+
+          <div className="flex flex-wrap items-center gap-2">
+
+            {/* FACEBOOK */}
+            <button
+              type="button"
+              onClick={shareFacebook}
+              aria-label="Partager sur Facebook"
+              title="Partager sur Facebook"
+              className="w-10 h-10 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center hover:bg-white/10 hover:text-white text-zinc-400 transition"
+            >
+              <Facebook size={18} />
+            </button>
+
+            {/* WHATSAPP */}
+            <button
+              type="button"
+              onClick={shareWhatsApp}
+              aria-label="Partager sur WhatsApp"
+              title="Partager sur WhatsApp"
+              className="w-10 h-10 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center hover:bg-white/10 hover:text-white text-zinc-400 transition"
+            >
+              <MessageCircle size={18} />
+            </button>
+
+            {/* TELEGRAM */}
+            <button
+              type="button"
+              onClick={shareTelegram}
+              aria-label="Partager sur Telegram"
+              title="Partager sur Telegram"
+              className="w-10 h-10 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center hover:bg-white/10 hover:text-white text-zinc-400 transition"
+            >
+              <Send size={18} />
+            </button>
+
+            {/* X */}
+            <button
+              type="button"
+              onClick={shareX}
+              aria-label="Partager sur X"
+              title="Partager sur X"
+              className="w-10 h-10 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center hover:bg-white/10 hover:text-white text-zinc-400 transition"
+            >
+              <span className="font-bold text-sm">
+                𝕏
+              </span>
+            </button>
+
+            {/* PARTAGE NATIF */}
+            <button
+              type="button"
+              onClick={nativeShare}
+              aria-label="Partager"
+              title="Partager"
+              className="w-10 h-10 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center hover:bg-white/10 hover:text-white text-zinc-400 transition"
+            >
+              <Share2 size={18} />
+            </button>
+
+            {/* COPIER LE LIEN */}
+            <button
+              type="button"
+              onClick={copyLink}
+              aria-label="Copier le lien"
+              title="Copier le lien"
+              className="w-10 h-10 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center hover:bg-white/10 hover:text-white text-zinc-400 transition"
+            >
+              <Link2 size={18} />
+            </button>
+
+            {copied && (
+              <span className="text-xs text-green-400 ml-1">
+                Lien copié !
+              </span>
+            )}
 
           </div>
         </div>
