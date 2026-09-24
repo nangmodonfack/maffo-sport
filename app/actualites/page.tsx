@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { articles } from "../data/articles";
+import { articles, generateExcerpt } from "../data/articles";
 import { ArrowRight, Clock3, Flame } from "lucide-react";
 
 export default function ActualitesPage() {
@@ -54,7 +54,7 @@ export default function ActualitesPage() {
               </h2>
 
               <p className="text-sm text-zinc-400 mt-3 leading-relaxed">
-                {article.excerpt}
+                {generateExcerpt(article.content)}
               </p>
 
               <div className="flex items-center gap-2 text-xs text-zinc-500 mt-4">
