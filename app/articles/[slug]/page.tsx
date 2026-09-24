@@ -1,4 +1,4 @@
-import { notFound } from "next/navigation";    
+import { notFound } from "next/navigation";
 import { articles } from "../../data/articles";
 
 type PageProps = {
@@ -34,19 +34,16 @@ export default async function ArticlePage({ params }: PageProps) {
           {article.date} · {article.author}
         </div>
 
-        {/* RÉSUMÉ */}
-        <p className="text-lg md:text-xl text-zinc-300 mt-6 leading-relaxed">
-          {article.excerpt}
-        </p>
-
         {/* IMAGE */}
-        <img
-          src={article.image}
-          alt={article.title}
-          className="w-full rounded-2xl mt-8"
-        />
+        {article.image && (
+          <img
+            src={article.image}
+            alt={article.title}
+            className="w-full rounded-2xl mt-8"
+          />
+        )}
 
-        {/* CONTENU */}
+        {/* CONTENU COMPLET */}
         <div className="mt-10 space-y-6 text-zinc-300 leading-8 text-base md:text-lg">
           {article.content.map((paragraph, index) => (
             <p key={index}>{paragraph}</p>
