@@ -2,7 +2,7 @@ import {
   getTeamStatistics,
   type ApiFootballFixture,
   type ApiFootballTeamStatistics,
-} from "./api-football";
+} from "./api-football"; 
 
 export type Pronostic = {
   fixture: ApiFootballFixture;
