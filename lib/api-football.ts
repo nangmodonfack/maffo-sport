@@ -4,56 +4,116 @@ export type ApiFootballFixture = {
   fixture: {
     id: number;
     date: string;
-    status: { short: string; long: string; elapsed: number | null };
+    status: {
+      short: string;
+      long: string;
+      elapsed: number | null;
+    };
   };
-  league: { id: number; name: string; country: string; logo?: string; season: number };
+  league: {
+    id: number;
+    name: string;
+    country: string;
+    logo?: string;
+    season: number;
+  };
   teams: {
-    home: { id: number; name: string; logo?: string; winner?: boolean | null };
-    away: { id: number; name: string; logo?: string; winner?: boolean | null };
+    home: {
+      id: number;
+      name: string;
+      logo?: string;
+      winner?: boolean | null;
+    };
+    away: {
+      id: number;
+      name: string;
+      logo?: string;
+      winner?: boolean | null;
+    };
   };
-  goals: { home: number | null; away: number | null };
+  goals: {
+    home: number | null;
+    away: number | null;
+  };
 };
 
 export type ApiFootballStanding = {
   rank: number;
-  team: { id: number; name: string; logo?: string };
+  team: {
+    id: number;
+    name: string;
+    logo?: string;
+  };
   points: number;
   goalsDiff: number;
   form: string | null;
-  all: { played: number; win: number; draw: number; lose: number };
+  all: {
+    played: number;
+    win: number;
+    draw: number;
+    lose: number;
+  };
 };
 
-async function apiFootball<T>(path: string, revalidate = 600): Promise<T> {
+async function apiFootball<T>(
+  path: string,
+  revalidate = 600
+): Promise<T> {
   const key = process.env.API_FOOTBALL_KEY;
-  if (!key) throw new Error("API_FOOTBALL_KEY is not configured");
 
-  const response = await fetch(`${BASE_URL}${path}`, {
-    headers: { "x-apisports-key": key },
-    next: { revalidate },
+  if (!key) {
+    throw new Error("API_FOOTBALL_KEY is not configured");
+  }
+
+  const response = await fetch(${BASE_URL}${path}, {
+    headers: {
+      "x-apisports-key": key,
+    },
+    next: {
+      revalidate,
+    },
   });
 
   if (!response.ok) {
     const text = await response.text();
-    throw new Error(`API-Football ${response.status}: ${text.slice(0, 300)}`);
+
+    throw new Error(
+      API-Football ${response.status}: ${text.slice(0, 300)}
+    );
   }
 
   const data = await response.json();
+
   if (data.errors && Object.keys(data.errors).length) {
-    throw new Error(`API-Football: ${JSON.stringify(data.errors)}`);
+    throw new Error(
+      API-Football: ${JSON.stringify(data.errors)}
+    );
   }
+
   return data.response as T;
 }
 
 export async function getFixtures(date: string) {
   return apiFootball<ApiFootballFixture[]>(
-    `/fixtures?date=${encodeURIComponent(date)}&timezone=Africa%2FDouala`,
+    /fixtures?date=${encodeURIComponent(
+      date
+    )}&timezone=Africa%2FDouala,
     300
   );
 }
 
-export async function getStandings(leagueId: number, season: number) {
-  return apiFootball<Array<{ league: { standings: ApiFootballStanding[][] } }>>(
-    `/standings?league=${leagueId}&season=${season}`,
+export async function getStandings(
+  leagueId: number,
+  season: number
+) {
+  return apiFootball<
+    Array<{
+      league: {
+        standings: ApiFootballStanding[][];
+      };
+    }>
+  >(
+    /standings?league=${leagueId}&season=${season},
     3600
   );
 }
