@@ -351,7 +351,7 @@ export default function Home() {
 
 if (!response.ok) {
   throw new Error(
-    "API-Football non indisponible."
+    "API-Football indisponible."
   );
 }
 
