@@ -1,4 +1,4 @@
-import Link from "next/link";
+Import Link from "next/link";
 import {
   ArrowRight,
   CalendarDays,
@@ -8,8 +8,55 @@ import {
   TrendingUp,
 } from "lucide-react";
 import NewsletterForm from "../components/NewsletterForm";
+import { getFixtures } from "@/lib/api-football";
+import { generatePronostics } from "@/lib/pronostics";
 
-export default function PronosticsPage() {
+function getDoualaDate() {
+  const parts = new Intl.DateTimeFormat("en-GB", {
+    timeZone: "Africa/Douala",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  }).formatToParts(new Date());
+
+  const get = (type: string) =>
+    parts.find((part) => part.type === type)?.value ?? "";
+
+  return `${get("year")}-${get("month")}-${get("day")}`;
+}
+
+function formatDate(date: string) {
+  return new Intl.DateTimeFormat("fr-FR", {
+    timeZone: "Africa/Douala",
+    weekday: "long",
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  }).format(new Date(`${date}T12:00:00`));
+}
+
+function formatTime(date: string) {
+  return new Intl.DateTimeFormat("fr-FR", {
+    timeZone: "Africa/Douala",
+    hour: "2-digit",
+    minute: "2-digit",
+  }).format(new Date(date));
+}
+
+export const revalidate = 3600;
+
+export default async function PronosticsPage() {
+  const date = getDoualaDate();
+
+  let pronostics = [];
+
+  try {
+    const fixtures = await getFixtures(date);
+    pronostics = generatePronostics(fixtures);
+  } catch (error) {
+    console.error("Erreur pronostics:", error);
+  }
+
   return (
     <main className="container-x py-12 md:py-16">
       {/* EN-TÊTE */}
@@ -29,13 +76,20 @@ export default function PronosticsPage() {
           différents marchés sont pris en compte avant chaque sélection.
         </p>
 
-        <div className="flex items-center gap-2 text-sm text-zinc-500 mt-5">
-          <CalendarDays size={16} />
-          <span>Pronostics de la journée</span>
+        <div className="flex flex-wrap items-center gap-4 text-sm text-zinc-500 mt-5">
+          <div className="flex items-center gap-2">
+            <CalendarDays size={16} />
+            <span className="capitalize">{formatDate(date)}</span>
+          </div>
+
+          <div className="flex items-center gap-2">
+            <Clock3 size={15} />
+            <span>Mise à jour quotidienne</span>
+          </div>
         </div>
       </div>
 
-      {/* PRONOSTICS DU JOUR */}
+      {/* PRONOSTICS */}
       <section>
         <div className="flex items-center justify-between gap-4 mb-6">
           <div>
@@ -44,38 +98,120 @@ export default function PronosticsPage() {
             </h2>
 
             <p className="text-sm text-zinc-500 mt-2">
-              Les rencontres seront affichées ici dès que les données du jour
-              seront disponibles.
+              Les rencontres sont regroupées sur cette seule page.
             </p>
           </div>
-
-          <div className="hidden sm:flex items-center gap-2 text-xs text-zinc-500">
-            <Clock3 size={14} />
-            Mise à jour quotidienne
-          </div>
         </div>
 
-        {/* ÉTAT TEMPORAIRE AVANT BRANCHEMENT API */}
-        <div className="glass rounded-2xl p-6 md:p-8">
-          <div className="flex items-start gap-4">
-            <div className="w-11 h-11 rounded-xl bg-green-400/10 flex items-center justify-center shrink-0">
-              <Flame className="text-green-400" size={20} />
-            </div>
+        {pronostics.length === 0 ? (
+          <div className="glass rounded-2xl p-6 md:p-8">
+            <div className="flex items-start gap-4">
+              <div className="w-11 h-11 rounded-xl bg-green-400/10 flex items-center justify-center shrink-0">
+                <Flame className="text-green-400" size={20} />
+              </div>
 
-            <div>
-              <h3 className="font-black text-lg">
-                Les pronostics du jour arrivent
-              </h3>
+              <div>
+                <h3 className="font-black text-lg">
+                  Aucun match disponible pour le moment
+                </h3>
 
-              <p className="text-sm text-zinc-400 mt-2 leading-6 max-w-2xl">
-                Cette page regroupera les principales sélections de la journée
-                dans un seul espace. Les rencontres seront accompagnées de
-                leurs statistiques, du marché sélectionné et d'une analyse
-                synthétique.
-              </p>
+                <p className="text-sm text-zinc-400 mt-2 leading-6">
+                  Les rencontres disponibles aujourd'hui apparaîtront ici
+                  automatiquement dès que les données seront disponibles.
+                </p>
+              </div>
             </div>
           </div>
-        </div>
+        ) : (
+          <div className="grid gap-5">
+            {pronostics.map((pronostic) => (
+              <article
+                key={pronostic.fixture.fixture.id}
+                className="glass rounded-2xl p-5 md:p-6"
+              >
+                <div className="flex flex-wrap items-center justify-between gap-3">
+                  <div>
+                    <div className="text-xs uppercase tracking-widest text-green-400 font-bold">
+                      {pronostic.fixture.league.name}
+                    </div>
+
+                    <div className="text-xs text-zinc-500 mt-1">
+                      {pronostic.fixture.league.country}
+                    </div>
+                  </div>
+
+                  <div className="flex items-center gap-2 text-xs text-zinc-500">
+                    <Clock3 size={14} />
+                    {formatTime(pronostic.fixture.fixture.date)}
+                  </div>
+                </div>
+
+                <div className="grid md:grid-cols-[1fr_auto_1fr] items-center gap-5 mt-6">
+                  <div className="flex items-center gap-3">
+                    {pronostic.fixture.teams.home.logo && (
+                      <img
+                        src={pronostic.fixture.teams.home.logo}
+                        alt=""
+                        className="w-10 h-10 object-contain"
+                      />
+                    )}
+
+                    <span className="font-bold">
+                      {pronostic.fixture.teams.home.name}
+                    </span>
+                  </div>
+
+                  <div className="text-center">
+                    <span className="text-xs text-zinc-600 uppercase">
+                      VS
+                    </span>
+                  </div>
+
+                  <div className="flex items-center gap-3 md:justify-end">
+                    <span className="font-bold">
+                      {pronostic.fixture.teams.away.name}
+                    </span>
+
+                    {pronostic.fixture.teams.away.logo && (
+                      <img
+                        src={pronostic.fixture.teams.away.logo}
+                        alt=""
+                        className="w-10 h-10 object-contain"
+                      />
+                    )}
+                  </div>
+                </div>
+
+                <div className="mt-6 border-t border-white/5 pt-5">
+                  <div className="text-xs uppercase tracking-widest text-zinc-500">
+                    Pronostic
+                  </div>
+
+                  <div className="mt-2 flex flex-wrap items-center justify-between gap-4">
+                    <div>
+                      <div className="text-lg font-black">
+                        {pronostic.prediction}
+                      </div>
+
+                      <p className="text-sm text-zinc-400 mt-2 leading-6">
+                        {pronostic.reason}
+                      </p>
+                    </div>
+
+                    {pronostic.confidence > 0 && (
+                      <div className="text-sm text-zinc-400">
+                        Confiance{" "}
+                        <span className="font-bold text-green-400">
+                          {pronostic.confidence}%
+                        </span>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </article>
+            ))}
+          </div>
+        )}
       </section>
 
       {/* TELEGRAM */}
@@ -111,6 +247,7 @@ export default function PronosticsPage() {
           </div>
         </div>
       </section>
+
       {/* NEWSLETTER */}
       <section className="mt-8">
         <div className="glass rounded-2xl p-6 md:p-8">
