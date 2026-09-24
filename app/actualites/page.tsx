@@ -1,5 +1,6 @@
-import { notFound } from "next/navigation";
-import { articles } from "../../data/articles";
+import Link from "next/link";
+import { articles } from "../data/articles";
+import { ArrowRight, Clock3, Flame } from "lucide-react";
 
 type PageProps = {
   params: Promise<{
