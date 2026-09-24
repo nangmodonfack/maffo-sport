@@ -112,7 +112,7 @@ export default function Header() {
           </div>
 
           {/* PRONOSTICS */}
-          <a href="#pronostics">
+          <a href="/pronostics">
             Pronostics
           </a>
 
