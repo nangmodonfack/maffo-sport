@@ -12,6 +12,14 @@ import {
 export default function Header() {
   const [open, setOpen] = useState(false);
   const [search, setSearch] = useState(false);
+  const [mobileFootball, setMobileFootball] = useState(false);
+  const [mobileParis, setMobileParis] = useState(false);
+
+  const closeMobileMenu = () => {
+    setOpen(false);
+    setMobileFootball(false);
+    setMobileParis(false);
+  };
 
   return (
     <header className="sticky top-0 z-50 bg-[#07090d]/90 backdrop-blur-xl border-b border-white/10">
@@ -134,7 +142,13 @@ export default function Header() {
           </button>
 
           <button
-            onClick={() => setOpen(!open)}
+            onClick={() => {
+              setOpen(!open);
+              if (open) {
+                setMobileFootball(false);
+                setMobileParis(false);
+              }
+            }}
             className="p-2 rounded-lg hover:bg-white/10 lg:hidden"
             aria-label="Menu"
           >
@@ -168,7 +182,7 @@ export default function Header() {
         <nav className="lg:hidden border-t border-white/10 bg-[#090c12] px-4 py-4 space-y-1">
           <a
             href="/"
-            onClick={() => setOpen(false)}
+            onClick={closeMobileMenu}
             className="block py-3 border-b border-white/5"
           >
             Accueil
@@ -176,31 +190,119 @@ export default function Header() {
 
           <a
             href="/actualites"
-            onClick={() => setOpen(false)}
+            onClick={closeMobileMenu}
             className="block py-3 border-b border-white/5"
           >
             Actualités
           </a>
 
-          <a
-            href="#football"
-            onClick={() => setOpen(false)}
-            className="block py-3 border-b border-white/5"
-          >
-            Football
-          </a>
+          {/* FOOTBALL MOBILE */}
+          <div className="border-b border-white/5">
+            <button
+              onClick={() => {
+                setMobileFootball(!mobileFootball);
+                setMobileParis(false);
+              }}
+              className="w-full flex items-center justify-between py-3"
+            >
+              <span>Football</span>
+              <ChevronDown
+                size={18}
+                className={`transition-transform duration-200 ${
+                  mobileFootball ? "rotate-180" : ""
+                }`}
+              />
+            </button>
 
-          <a
-            href="#paris"
-            onClick={() => setOpen(false)}
-            className="block py-3 border-b border-white/5"
-          >
-            Paris sportifs
-          </a>
+            {mobileFootball && (
+              <div className="pb-2 pl-4">
+                {[
+                  "Actualités football",
+                  "Guides football",
+                  "Compétitions",
+                  "Équipes & joueurs",
+                  "Records & histoire",
+                  "Football africain",
+                ].map((item) => (
+                  <a
+                    key={item}
+                    href="#football"
+                    onClick={closeMobileMenu}
+                    className="block py-2.5 text-sm text-zinc-400"
+                  >
+                    {item}
+                  </a>
+                ))}
+              </div>
+            )}
+          </div>
+
+          {/* PARIS SPORTIFS MOBILE */}
+          <div className="border-b border-white/5">
+            <button
+              onClick={() => {
+                setMobileParis(!mobileParis);
+                setMobileFootball(false);
+              }}
+              className="w-full flex items-center justify-between py-3"
+            >
+              <span>Paris sportifs</span>
+              <ChevronDown
+                size={18}
+                className={`transition-transform duration-200 ${
+                  mobileParis ? "rotate-180" : ""
+                }`}
+              />
+            </button>
+
+            {mobileParis && (
+              <div className="pb-2 pl-4">
+                <a
+                  href="/analyses-guides"
+                  onClick={closeMobileMenu}
+                  className="block py-2.5 text-sm text-zinc-400"
+                >
+                  Analyses et guides
+                </a>
+
+                <a
+                  href="#paris"
+                  onClick={closeMobileMenu}
+                  className="block py-2.5 text-sm text-zinc-400"
+                >
+                  Types de paris
+                </a>
+
+                <a
+                  href="#paris"
+                  onClick={closeMobileMenu}
+                  className="block py-2.5 text-sm text-zinc-400"
+                >
+                  Stratégies et conseils
+                </a>
+
+                <a
+                  href="#paris"
+                  onClick={closeMobileMenu}
+                  className="block py-2.5 text-sm text-zinc-400"
+                >
+                  Bookmakers
+                </a>
+
+                <a
+                  href="#paris"
+                  onClick={closeMobileMenu}
+                  className="block py-2.5 text-sm text-zinc-400"
+                >
+                  Comparatifs
+                </a>
+              </div>
+            )}
+          </div>
 
           <a
             href="#pronostics"
-            onClick={() => setOpen(false)}
+            onClick={closeMobileMenu}
             className="block py-3 border-b border-white/5"
           >
             Pronostics
@@ -208,7 +310,7 @@ export default function Header() {
 
           <a
             href="#resultats"
-            onClick={() => setOpen(false)}
+            onClick={closeMobileMenu}
             className="block py-3 border-b border-white/5"
           >
             Résultats
@@ -216,7 +318,7 @@ export default function Header() {
 
           <a
             href="#calendrier"
-            onClick={() => setOpen(false)}
+            onClick={closeMobileMenu}
             className="block py-3 border-b border-white/5"
           >
             Calendrier
