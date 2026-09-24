@@ -13,10 +13,6 @@ export default async function ArticlePage({ params }: PageProps) {
 
   const article = articles.find((item) => item.slug === slug);
 
-  if (!article) {
-    notFound();
-  }
-
   return (
     <main className="container-x py-12">
       <article className="max-w-4xl mx-auto">
