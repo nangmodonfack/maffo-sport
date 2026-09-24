@@ -74,7 +74,7 @@ export default function Footer() {
 
           <div className="space-y-2 text-sm text-zinc-500">
             <a
-              href="#pronostics"
+              href="/pronostics"
               className="block hover:text-white"
             >
               Pronostics
