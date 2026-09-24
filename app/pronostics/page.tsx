@@ -55,7 +55,7 @@ export default async function PronosticsPage() {
 
   try {
     const fixtures = await getFixtures(date);
-    pronostics = generatePronostics(fixtures);
+    pronostics = await generatePronostics(fixtures);
   } catch (error) {
     console.error("Erreur pronostics:", error);
   }
