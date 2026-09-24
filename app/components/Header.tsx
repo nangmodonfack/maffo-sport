@@ -120,7 +120,7 @@ export default function Header() {
             Résultats
           </a>
 
-          <a href="#calendrier">
+          <a href="/#calendrier">
             Calendrier
           </a>
         </nav>
@@ -317,7 +317,7 @@ export default function Header() {
           </a>
 
           <a
-            href="#calendrier"
+            href="/#calendrier"
             onClick={closeMobileMenu}
             className="block py-3 border-b border-white/5"
           >
