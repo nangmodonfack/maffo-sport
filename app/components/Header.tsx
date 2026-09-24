@@ -1,4 +1,4 @@
-"use client"; 
+"use client";
 
 import { useState } from "react";
 import {
@@ -25,62 +25,87 @@ export default function Header() {
             Accueil
           </a>
 
-          <a href="#actus">
+          <a href="/actualites">
             Actualités
           </a>
 
+          {/* FOOTBALL */}
           <div className="relative group">
-            <button className="flex items-center gap-1">
+            <button className="flex items-center gap-1 py-5">
               Football <ChevronDown size={14} />
             </button>
 
-            <div className="absolute top-7 left-0 invisible opacity-0 group-hover:visible group-hover:opacity-100 transition glass rounded-xl p-2 w-56">
-              {[
-                "Actualités football",
-                "Guides football",
-                "Compétitions",
-                "Équipes & joueurs",
-                "Records & histoire",
-                "Football africain",
-              ].map((item) => (
-                <a
-                  key={item}
-                  href="#football"
-                  className="block px-3 py-2 rounded-lg hover:bg-white/5"
-                >
-                  {item}
-                </a>
-              ))}
+            <div className="absolute top-full left-0 pt-1 invisible opacity-0 group-hover:visible group-hover:opacity-100 transition-opacity duration-150">
+              <div className="glass rounded-xl p-2 w-56">
+                {[
+                  "Actualités football",
+                  "Guides football",
+                  "Compétitions",
+                  "Équipes & joueurs",
+                  "Records & histoire",
+                  "Football africain",
+                ].map((item) => (
+                  <a
+                    key={item}
+                    href="#football"
+                    className="block px-3 py-2 rounded-lg hover:bg-white/5"
+                  >
+                    {item}
+                  </a>
+                ))}
+              </div>
             </div>
           </div>
 
+          {/* PARIS SPORTIFS */}
           <div className="relative group">
-            <button className="flex items-center gap-1">
+            <button className="flex items-center gap-1 py-5">
               Paris sportifs <ChevronDown size={14} />
             </button>
 
-            <div className="absolute top-7 left-0 invisible opacity-0 group-hover:visible group-hover:opacity-100 transition glass rounded-xl p-2 w-56">
-              {[
-                "Pronostics",
-                "Guides paris sportifs",
-                "Types de paris",
-                "Stratégies & conseils",
-                "Bookmakers",
-                "Comparatifs",
-              ].map((item) => (
+            <div className="absolute top-full left-0 pt-1 invisible opacity-0 group-hover:visible group-hover:opacity-100 transition-opacity duration-150">
+              <div className="glass rounded-xl p-2 w-56">
                 <a
-                  key={item}
+                  href="/analyses-guides"
+                  className="block px-3 py-2 rounded-lg hover:bg-white/5"
+                >
+                  Analyses et guides
+                </a>
+
+                <a
                   href="#paris"
                   className="block px-3 py-2 rounded-lg hover:bg-white/5"
                 >
-                  {item}
+                  Types de paris
                 </a>
-              ))}
+
+                <a
+                  href="#paris"
+                  className="block px-3 py-2 rounded-lg hover:bg-white/5"
+                >
+                  Stratégies et conseils
+                </a>
+
+                <a
+                  href="#paris"
+                  className="block px-3 py-2 rounded-lg hover:bg-white/5"
+                >
+                  Bookmakers
+                </a>
+
+                <a
+                  href="#paris"
+                  className="block px-3 py-2 rounded-lg hover:bg-white/5"
+                >
+                  Comparatifs
+                </a>
+              </div>
             </div>
           </div>
 
-          <a href="#analyses">
-            Analyses
+          {/* PRONOSTICS */}
+          <a href="#pronostics">
+            Pronostics
           </a>
 
           <a href="#resultats">
@@ -118,6 +143,7 @@ export default function Header() {
         </div>
       </div>
 
+      {/* RECHERCHE */}
       {search && (
         <div className="border-t border-white/10">
           <div className="container-x py-3">
@@ -137,25 +163,64 @@ export default function Header() {
         </div>
       )}
 
+      {/* MENU MOBILE */}
       {open && (
         <nav className="lg:hidden border-t border-white/10 bg-[#090c12] px-4 py-4 space-y-1">
-          {[
-            ["Actualités", "#actus"],
-            ["Football", "#football"],
-            ["Paris sportifs", "#paris"],
-            ["Analyses", "#analyses"],
-            ["Résultats", "#resultats"],
-            ["Calendrier", "#calendrier"],
-          ].map(([name, href]) => (
-            <a
-              key={name}
-              href={href}
-              onClick={() => setOpen(false)}
-              className="block py-3 border-b border-white/5"
-            >
-              {name}
-            </a>
-          ))}
+          <a
+            href="/"
+            onClick={() => setOpen(false)}
+            className="block py-3 border-b border-white/5"
+          >
+            Accueil
+          </a>
+
+          <a
+            href="/actualites"
+            onClick={() => setOpen(false)}
+            className="block py-3 border-b border-white/5"
+          >
+            Actualités
+          </a>
+
+          <a
+            href="#football"
+            onClick={() => setOpen(false)}
+            className="block py-3 border-b border-white/5"
+          >
+            Football
+          </a>
+
+          <a
+            href="#paris"
+            onClick={() => setOpen(false)}
+            className="block py-3 border-b border-white/5"
+          >
+            Paris sportifs
+          </a>
+
+          <a
+            href="#pronostics"
+            onClick={() => setOpen(false)}
+            className="block py-3 border-b border-white/5"
+          >
+            Pronostics
+          </a>
+
+          <a
+            href="#resultats"
+            onClick={() => setOpen(false)}
+            className="block py-3 border-b border-white/5"
+          >
+            Résultats
+          </a>
+
+          <a
+            href="#calendrier"
+            onClick={() => setOpen(false)}
+            className="block py-3 border-b border-white/5"
+          >
+            Calendrier
+          </a>
         </nav>
       )}
     </header>
