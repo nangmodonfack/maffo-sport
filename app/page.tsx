@@ -354,7 +354,7 @@ export default function Home() {
 
   throw new Error(
     errorData?.error ||
-      Erreur API (${response.status})
+      `Erreur API (${response.status})`
   );
 }
 
