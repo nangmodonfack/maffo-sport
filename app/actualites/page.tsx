@@ -1,4 +1,4 @@
-Import { notFound } from "next/navigation";
+import { notFound } from "next/navigation";
 import { articles } from "../../data/articles";
 
 type PageProps = {
