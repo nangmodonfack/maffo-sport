@@ -411,45 +411,45 @@ export default function Home() {
   return (
     <div className="min-h-screen">
       <main>
-        {/* =========================
-            1. À LA UNE
-        ========================== */}
-        <section className="hero-grid border-b border-white/10">
-          <div className="container-x py-10 md:py-16 grid lg:grid-cols-[1.35fr_.65fr] gap-5">
-            <article className="relative overflow-hidden rounded-3xl min-h-[390px] border border-white/10">
-              <ImagePlaceholder
-                src="/images/home/hero.jpg"
-                alt="Actualité sportive"
-              />
+     {/* =========================
+    1. À LA UNE
+========================== */}
+<section className="hero-grid border-b border-white/10">
+  <div className="container-x py-10 md:py-16 grid lg:grid-cols-[1.35fr_.65fr] gap-5">
+    <a
+      href="/actualites"
+      className="relative overflow-hidden rounded-3xl min-h-[390px] border border-white/10 block"
+    >
+      <ImagePlaceholder
+        src="/images/home/hero.jpg"
+        alt="Actualité sportive"
+      />
 
-              <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
+      <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
 
-              <div className="absolute bottom-0 p-6 md:p-9 max-w-3xl">
-                <div className="flex items-center gap-2 text-xs font-bold text-green-400 uppercase tracking-widest">
-                  <Flame size={15} />
-                  À la une
-                </div>
+      <div className="absolute bottom-0 p-6 md:p-9 max-w-3xl">
+        <div className="flex items-center gap-2 text-xs font-bold text-green-400 uppercase tracking-widest">
+          <Flame size={15} />
+          À la une
+        </div>
 
-                <h1 className="text-3xl md:text-5xl font-black leading-tight mt-3">
-                  Toute l’actualité sportive, les analyses et les rendez-vous à ne pas manquer
-                </h1>
+        <h1 className="text-3xl md:text-5xl font-black leading-tight mt-3">
+          Toute l’actualité sportive, les analyses et les rendez-vous à ne pas manquer
+        </h1>
 
-                <p className="text-zinc-300 mt-3 max-w-2xl">
-                  Un regard clair sur le football, les grandes compétitions,
-                  les statistiques et les paris sportifs.
-                </p>
+        <p className="text-zinc-300 mt-3 max-w-2xl">
+          Un regard clair sur le football, les grandes compétitions,
+          les statistiques et les paris sportifs.
+        </p>
 
-                <a
-                  href="#actus"
-                  className="inline-flex items-center mt-5 bg-green-500 text-black font-bold px-5 py-3 rounded-xl hover:bg-green-400 transition"
-                >
-                  Voir les actualités
-                  <ArrowRight className="ml-1" size={17} />
-                </a>
-              </div>
-            </article>
+        <span className="inline-flex items-center mt-5 bg-green-500 text-black font-bold px-5 py-3 rounded-xl hover:bg-green-400 transition">
+          Voir les actualités
+          <ArrowRight className="ml-1" size={17} />
+        </span>
+      </div>
+    </a>
 
-            <div className="grid sm:grid-cols-2 lg:grid-cols-1 gap-5">
+    <div className="grid sm:grid-cols-2 lg:grid-cols-1 gap-5">
              {[
   [
     "Analyse",
