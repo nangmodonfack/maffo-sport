@@ -301,7 +301,7 @@ export default function Header() {
           </div>
 
           <a
-            href="#pronostics"
+            href="/pronostics"
             onClick={closeMobileMenu}
             className="block py-3 border-b border-white/5"
           >
