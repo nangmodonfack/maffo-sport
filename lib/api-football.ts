@@ -65,7 +65,7 @@ async function apiFootball<T>(
     throw new Error("API_FOOTBALL_KEY is not configured");
   }
 
-  const response = await fetch(${BASE_URL}${path}, {
+  const response = await fetch(`${BASE_URL}${path}`, {
     headers: {
       "x-apisports-key": key,
     },
@@ -78,7 +78,7 @@ async function apiFootball<T>(
     const text = await response.text();
 
     throw new Error(
-      API-Football ${response.status}: ${text.slice(0, 300)}
+      `API-Football ${response.status}: ${text.slice(0, 300)}`
     );
   }
 
@@ -86,7 +86,7 @@ async function apiFootball<T>(
 
   if (data.errors && Object.keys(data.errors).length) {
     throw new Error(
-      API-Football: ${JSON.stringify(data.errors)}
+      `API-Football: ${JSON.stringify(data.errors)}`
     );
   }
 
@@ -95,9 +95,9 @@ async function apiFootball<T>(
 
 export async function getFixtures(date: string) {
   return apiFootball<ApiFootballFixture[]>(
-    /fixtures?date=${encodeURIComponent(
+    `/fixtures?date=${encodeURIComponent(
       date
-    )}&timezone=Africa%2FDouala,
+    )}&timezone=Africa%2FDouala`,
     300
   );
 }
@@ -113,7 +113,7 @@ export async function getStandings(
       };
     }>
   >(
-    /standings?league=${leagueId}&season=${season},
+    `/standings?league=${leagueId}&season=${season}`,
     3600
   );
 }
