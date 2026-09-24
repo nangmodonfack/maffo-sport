@@ -16,12 +16,12 @@ export default function Footer() {
 
         {/* MARQUE */}
         <div>
-          <div className="font-black text-xl">
+          <a href="/" className="font-black text-xl">
             MAFFO{" "}
             <span className="text-green-400">
               SPORT
             </span>
-          </div>
+          </a>
 
           <p className="text-sm text-zinc-500 mt-3 leading-6">
             Actualités, analyses, résultats, calendrier
@@ -36,19 +36,31 @@ export default function Footer() {
           </div>
 
           <div className="space-y-2 text-sm text-zinc-500">
-            <a href="#actus" className="block hover:text-white">
+            <a
+              href="/actualites"
+              className="block hover:text-white"
+            >
               Actualités
             </a>
 
-            <a href="#football" className="block hover:text-white">
+            <a
+              href="#football"
+              className="block hover:text-white"
+            >
               Football
             </a>
 
-            <a href="#analyses" className="block hover:text-white">
+            <a
+              href="/analyses-guides"
+              className="block hover:text-white"
+            >
               Analyses
             </a>
 
-            <a href="#resultats" className="block hover:text-white">
+            <a
+              href="#resultats"
+              className="block hover:text-white"
+            >
               Résultats
             </a>
           </div>
@@ -61,19 +73,31 @@ export default function Footer() {
           </div>
 
           <div className="space-y-2 text-sm text-zinc-500">
-            <a href="#paris" className="block hover:text-white">
+            <a
+              href="#pronostics"
+              className="block hover:text-white"
+            >
               Pronostics
             </a>
 
-            <a href="#paris" className="block hover:text-white">
+            <a
+              href="/analyses-guides"
+              className="block hover:text-white"
+            >
               Guides
             </a>
 
-            <a href="#paris" className="block hover:text-white">
+            <a
+              href="#paris"
+              className="block hover:text-white"
+            >
               Types de paris
             </a>
 
-            <a href="#paris" className="block hover:text-white">
+            <a
+              href="#paris"
+              className="block hover:text-white"
+            >
               Bookmakers
             </a>
           </div>
@@ -86,11 +110,17 @@ export default function Footer() {
           </div>
 
           <div className="space-y-2 text-sm text-zinc-500">
-            <a href="/a-propos" className="block hover:text-white">
+            <a
+              href="/a-propos"
+              className="block hover:text-white"
+            >
               À propos
             </a>
 
-            <a href="/contact" className="block hover:text-white">
+            <a
+              href="/contact"
+              className="block hover:text-white"
+            >
               Contact
             </a>
 
@@ -150,6 +180,16 @@ export default function Footer() {
             >
               <Youtube size={17} />
               YouTube
+            </a>
+
+            <a
+              href="https://tiktok.com/@maffosport"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 hover:text-white"
+            >
+              <span className="font-bold text-[15px]">♪</span>
+              TikTok
             </a>
 
             <a
