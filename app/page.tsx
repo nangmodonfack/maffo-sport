@@ -349,11 +349,14 @@ export default function Home() {
         }
       );
 
-      if (!response.ok) {
-        throw new Error(
-          "API-Football non configurée ou indisponible."
-        );
-      }
+     if (!response.ok) {
+  const errorData = await response.json().catch(() => null);
+
+  throw new Error(
+    errorData?.error ||
+      Erreur API (${response.status})
+  );
+}
 
       const data = await response.json();
 
