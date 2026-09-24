@@ -109,14 +109,6 @@ export type ApiFootballTeamStatistics = {
   };
 };
 
-export type ApiFootballTeam = {
-  team: {
-    id: number;
-    name: string;
-    logo?: string;
-  };
-};
-
 export type ApiFootballH2H = {
   fixture: {
     id: number;
@@ -160,7 +152,7 @@ async function apiFootball<T>(
     throw new Error("API_FOOTBALL_KEY is not configured");
   }
 
-  const response = await fetch(${BASE_URL}${path}, {
+  const response = await fetch(`${BASE_URL}${path}`, {
     headers: {
       "x-apisports-key": key,
     },
@@ -170,42 +162,33 @@ async function apiFootball<T>(
   });
 
   if (!response.ok) {
-    const text = await response.text();
+    const responseText = await response.text();
 
     throw new Error(
-      API-Football ${response.status}: ${text.slice(0, 300)}
+      `API-Football ${response.status}: ${responseText.slice(0, 300)}`
     );
   }
 
   const data = await response.json();
 
-  if (data.errors && Object.keys(data.errors).length) {
+  if (data.errors && Object.keys(data.errors).length > 0) {
     throw new Error(
-      API-Football: ${JSON.stringify(data.errors)}
+      `API-Football: ${JSON.stringify(data.errors)}`
     );
   }
 
   return data.response as T;
 }
 
-/**
- * Matchs du jour.
- * Utilisé notamment par la page d'accueil et la page Pronostics.
- */
 export async function getFixtures(date: string) {
   return apiFootball<ApiFootballFixture[]>(
-    /fixtures?date=${encodeURIComponent(
+    `/fixtures?date=${encodeURIComponent(
       date
-    )}&timezone=Africa%2FDouala,
+    )}&timezone=Africa%2FDouala`,
     300
   );
 }
 
-/**
- * Classement d'une compétition.
- * Utilisé par la page d'accueil et pourra être utilisé
- * par le moteur de pronostics.
- */
 export async function getStandings(
   leagueId: number,
   season: number
@@ -217,36 +200,29 @@ export async function getStandings(
       };
     }>
   >(
-    /standings?league=${leagueId}&season=${season},
+    `/standings?league=${leagueId}&season=${season}`,
     3600
   );
 }
-/**
- * Statistiques d'une équipe dans une compétition.
- * Cache long pour éviter les appels inutiles.
- */
+
 export async function getTeamStatistics(
   teamId: number,
   leagueId: number,
   season: number
 ) {
   return apiFootball<ApiFootballTeamStatistics>(
-    /teams/statistics?team=${teamId}&league=${leagueId}&season=${season},
+    `/teams/statistics?team=${teamId}&league=${leagueId}&season=${season}`,
     3600
   );
 }
 
-/**
- * Historique des confrontations entre deux équipes.
- * Limité aux dernières confrontations demandées.
- */
 export async function getHeadToHead(
   homeTeamId: number,
   awayTeamId: number,
   last = 5
 ) {
   return apiFootball<ApiFootballH2H[]>(
-    /fixtures/headtohead?h2h=${homeTeamId}-${awayTeamId}&last=${last},
+    `/fixtures/headtohead?h2h=${homeTeamId}-${awayTeamId}&last=${last}`,
     3600
   );
 }
