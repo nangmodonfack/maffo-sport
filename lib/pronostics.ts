@@ -8,6 +8,20 @@ export type Pronostic = {
   reason: string;
 };
 
+/**
+ * Compétitions analysées en priorité par Maffo Sport.
+ */
+const PRIORITY_LEAGUES = new Set([
+  39,  // Premier League
+  140, // La Liga
+  61,  // Ligue 1
+  135, // Serie A
+  78,  // Bundesliga
+  2,   // Champions League
+  3,   // Europa League
+  12,  // CAF Champions League
+]);
+
 function getPredictionFromFixture(
   fixture: ApiFootballFixture
 ): Pronostic | null {
@@ -43,6 +57,9 @@ export function generatePronostics(
         "PST",
         "ABD",
       ].includes(status);
+    })
+    .filter((fixture) => {
+      return PRIORITY_LEAGUES.has(fixture.league.id);
     })
     .map(getPredictionFromFixture)
     .filter(
