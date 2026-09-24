@@ -349,12 +349,9 @@ export default function Home() {
         }
       );
 
-     if (!response.ok) {
-  const errorData = await response.json().catch(() => null);
-
+if (!response.ok) {
   throw new Error(
-    errorData?.error ||
-      `Erreur API (${response.status})`
+    "API-Football non indisponible."
   );
 }
 
