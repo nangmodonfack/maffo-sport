@@ -481,4 +481,4 @@ export async function getMatchEvents(
       cacheTtl: DETAILS_CACHE_TTL,
     },
   );
-}n
+}
