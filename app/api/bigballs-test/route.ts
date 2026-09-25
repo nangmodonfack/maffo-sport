@@ -1,4 +1,4 @@
-import { NextResponse } from "next/server";
+Import { NextResponse } from "next/server";
 import { getMatches } from "@/lib/bigballs";
 
 export async function GET() {
@@ -12,12 +12,14 @@ export async function GET() {
 
     const matches = await getMatches({
       date: todayDouala,
+      tz: "Africa/Douala",
       limit: 200,
     });
 
     return NextResponse.json({
       success: true,
       date: todayDouala,
+      timezone: "Africa/Douala",
       count: matches.length,
       matches,
     });
