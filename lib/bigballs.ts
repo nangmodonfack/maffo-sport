@@ -113,7 +113,7 @@ function buildUrl(
   path: string,
   params?: Record<string, string | number | undefined | null>,
 ): string {
-  const url = new URL(`${BASE_URL}${path}`);
+  const url = new URL(${BASE_URL}${path});
 
   if (params) {
     for (const [key, value] of Object.entries(params)) {
@@ -197,7 +197,6 @@ async function fetchBigBalls<T>(
   const cacheKey =
     options.cacheKey ??
     buildUrl(path, params);
-
   const cached = getCached<T>(cacheKey);
 
   if (cached !== null) {
@@ -230,7 +229,7 @@ async function fetchBigBalls<T>(
           const response = await fetch(url, {
             method: "GET",
             headers: {
-              Authorization: `Bearer ${apiKey}`,
+              Authorization: Bearer ${apiKey},
               Accept: "application/json",
             },
             cache: "no-store",
@@ -241,7 +240,7 @@ async function fetchBigBalls<T>(
 
             if (body.error) {
               throw new Error(
-                `Big Balls API error: ${JSON.stringify(body.error)}`,
+                Big Balls API error: ${JSON.stringify(body.error)},
               );
             }
 
@@ -274,7 +273,7 @@ async function fetchBigBalls<T>(
           const errorText = await response.text();
 
           lastError = new Error(
-            `Big Balls API returned ${response.status}: ${errorText}`,
+            Big Balls API returned ${response.status}: ${errorText},
           );
 
           break;
@@ -331,15 +330,20 @@ async function fetchBigBalls<T>(
  * - Résultats
  * - Calendrier
  * - Pronostics
+ *
+ * tz permet à Big Balls d'interpréter correctement la date
+ * selon le fuseau horaire demandé.
  */
 export async function getMatches(params: {
   date?: string;
+  tz?: string;
   league?: string;
   status?: string;
   limit?: number;
 } = {}): Promise<Match[]> {
   const {
     date,
+    tz,
     league,
     status,
     limit = 100,
@@ -348,6 +352,7 @@ export async function getMatches(params: {
   const cacheKey = buildUrl("/v1/matches", {
     sport: "football",
     date,
+    tz,
     league,
     status,
     limit,
@@ -358,6 +363,7 @@ export async function getMatches(params: {
     {
       sport: "football",
       date,
+      tz,
       league,
       status,
       limit,
@@ -368,7 +374,6 @@ export async function getMatches(params: {
     },
   );
 }
-
 /**
  * Récupère le classement d'une compétition.
  *
@@ -409,14 +414,14 @@ export async function getTeamForm(
   limit = 10,
 ): Promise<FormMatch[]> {
   const cacheKey = buildUrl(
-    `/v1/teams/${encodeURIComponent(teamId)}/form`,
+    /v1/teams/${encodeURIComponent(teamId)}/form,
     {
       limit,
     },
   );
 
   return fetchBigBalls<FormMatch[]>(
-    `/v1/teams/${encodeURIComponent(teamId)}/form`,
+    /v1/teams/${encodeURIComponent(teamId)}/form,
     {
       limit,
     },
@@ -442,14 +447,14 @@ export async function getMatchDetails(
     : undefined;
 
   const cacheKey = buildUrl(
-    `/v1/matches/${encodeURIComponent(matchId)}`,
+    /v1/matches/${encodeURIComponent(matchId)},
     {
       fields: fieldsParam,
     },
   );
 
   return fetchBigBalls<unknown>(
-    `/v1/matches/${encodeURIComponent(matchId)}`,
+    /v1/matches/${encodeURIComponent(matchId)},
     {
       fields: fieldsParam,
     },
@@ -470,11 +475,11 @@ export async function getMatchEvents(
   matchId: string,
 ): Promise<unknown[]> {
   const cacheKey = buildUrl(
-    `/v1/matches/${encodeURIComponent(matchId)}/events`,
+    /v1/matches/${encodeURIComponent(matchId)}/events,
   );
 
   return fetchBigBalls<unknown[]>(
-    `/v1/matches/${encodeURIComponent(matchId)}/events`,
+    /v1/matches/${encodeURIComponent(matchId)}/events,
     {},
     {
       cacheKey,
