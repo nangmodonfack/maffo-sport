@@ -12,7 +12,7 @@ export async function GET() {
 
     const matches = await getMatches({
       date: todayDouala,
-      limit: 100,
+      limit: 200,
     });
 
     return NextResponse.json({
