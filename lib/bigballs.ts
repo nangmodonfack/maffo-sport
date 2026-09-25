@@ -113,7 +113,7 @@ function buildUrl(
   path: string,
   params?: Record<string, string | number | undefined | null>,
 ): string {
-  const url = new URL(${BASE_URL}${path});
+  const url = new URL(`${BASE_URL}${path}`);
 
   if (params) {
     for (const [key, value] of Object.entries(params)) {
