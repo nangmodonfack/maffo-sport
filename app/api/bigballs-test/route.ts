@@ -1,16 +1,33 @@
 import { NextResponse } from "next/server";
-import { getMatches } from "@/lib/bigballs";
 
 export async function GET() {
   try {
-    const matches = await getMatches({
-      limit: 10,
-    });
+    const apiKey = process.env.BIGBALLS_API_KEY;
 
-    return NextResponse.json({
-      success: true,
-      count: matches.length,
-      matches,
+    if (!apiKey) {
+      return NextResponse.json(
+        {
+          success: false,
+          error: "BIGBALLS_API_KEY manquante",
+        },
+        { status: 500 },
+      );
+    }
+
+    const response = await fetch(
+      "https://api.bigballsdata.com/v1/leagues?sport=football",
+      {
+        headers: {
+          Authorization: `Bearer ${apiKey}`,
+          Accept: "application/json",
+        },
+      },
+    );
+
+    const data = await response.json();
+
+    return NextResponse.json(data, {
+      status: response.status,
     });
   } catch (error) {
     return NextResponse.json(
