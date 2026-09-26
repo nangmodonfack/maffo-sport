@@ -6,15 +6,18 @@ export async function GET(request: Request) {
     const { searchParams } = new URL(request.url);
 
     const league = searchParams.get("league") || undefined;
+    const date = searchParams.get("date") || undefined;
 
     const matches = await getMatches({
       league,
+      date,
       limit: 100,
     });
 
     return NextResponse.json({
       success: true,
       league: league ?? "all",
+      date: date ?? "all",
       count: matches.length,
       matches,
     });
