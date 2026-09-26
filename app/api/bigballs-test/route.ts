@@ -1,4 +1,4 @@
-Import { NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 import { getMatches } from "@/lib/bigballs";
 
 export async function GET() {
