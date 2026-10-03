@@ -1,21 +1,45 @@
 import { NextResponse } from "next/server";
-import { getFixtures } from "@/lib/api-football";
+import { supabase } from "@/lib/supabase";
 
 export const runtime = "nodejs";
-export const revalidate = 300;
 
-export async function GET(request: Request) {
-  const { searchParams } = new URL(request.url);
-  const date = searchParams.get("date") || (() => {
-    const parts = new Intl.DateTimeFormat("en-GB", { timeZone: "Africa/Douala", year: "numeric", month: "2-digit", day: "2-digit" }).formatToParts(new Date());
-    const get = (type: string) => parts.find((p) => p.type === type)?.value || "";
-    return `${get("year")}-${get("month")}-${get("day")}`;
-  })();
-
+export async function GET() {
   try {
-    const fixtures = await getFixtures(date);
-    return NextResponse.json({ date, fixtures });
+    const { data, error } = await supabase
+      .from("football_cache")
+      .select("data, updated_at")
+      .eq("cache_key", "fixtures_today")
+      .maybeSingle();
+
+    if (error) {
+      console.error("Erreur Supabase :", error.message);
+
+      return NextResponse.json(
+        { error: "Impossible de récupérer les fixtures." },
+        { status: 500 }
+      );
+    }
+
+    if (!data) {
+      return NextResponse.json(
+        {
+          error: "Aucune donnée de fixtures disponible.",
+          fixtures: [],
+        },
+        { status: 404 }
+      );
+    }
+
+    return NextResponse.json({
+      fixtures: data.data?.response ?? [],
+      updated_at: data.updated_at,
+    });
   } catch (error) {
-    return NextResponse.json({ error: error instanceof Error ? error.message : "API error" }, { status: 502 });
+    console.error("Erreur route fixtures :", error);
+
+    return NextResponse.json(
+      { error: "Erreur interne." },
+      { status: 500 }
+    );
   }
 }
