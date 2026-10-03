@@ -355,17 +355,7 @@ if (!response.ok) {
   );
 }
 
-      const data = await response.json();
-
-      const allowed = new Set(Object.keys(leagueIds));
-
-      const realMatches: Match[] = (
-        data.fixtures || []
-      )
-        .filter((fixture: any) =>
-          allowed.has(fixture.league?.name)
-        )
-        .map((fixture: any) => ({
+      const data = await response.json(); const realMatches: Match[] = (data.fixtures || []).map((fixture: any) => ({
           id: fixture.fixture.id,
           league: fixture.league.name,
           home: fixture.teams.home.name,
@@ -912,3 +902,4 @@ if (!response.ok) {
     </div>
   );
 }
+
