@@ -185,12 +185,6 @@ function CountryProfilePanel({
         avant de t’inscrire.
       </p>
 
-      <a
-        href={`/bookmakers/${bookmaker.slug}`}
-        className="mt-5 inline-flex w-full items-center justify-center rounded-xl bg-emerald-400 px-4 py-3 text-sm font-extrabold text-slate-950 transition hover:bg-emerald-300"
-      >
-        En savoir plus sur {bookmaker.name} →
-      </a>
     </section>
   );
 }
