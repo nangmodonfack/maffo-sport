@@ -23,46 +23,9 @@ type Bookmaker = {
   affiliateUrl: string;
   advantages: string[];
   disadvantages: string[];
-  restrictedCountries: string[];
-  restrictionNote: string;
   paymentMethods: PaymentGroup[]; // 👈 Spécifique à chaque bookmaker
 };
 
-const marketCountries: CountryGroup[] = [
-  {
-    region: "Afrique centrale",
-    countries: [
-      "Cameroun",
-      "Gabon",
-      "République du Congo",
-      "République démocratique du Congo",
-    ],
-  },
-  {
-    region: "Afrique de l’Ouest",
-    countries: [
-      "Côte d’Ivoire",
-      "Sénégal",
-      "Bénin",
-      "Togo",
-      "Mali",
-      "Guinée",
-    ],
-  },
-  {
-    region: "Autres marchés à examiner",
-    countries: [
-      "Madagascar",
-      "Inde",
-      "Philippines",
-      "Brésil",
-      "Argentine",
-      "Colombie",
-      "Ukraine",
-      "Turquie",
-    ],
-  },
-];
 
 const bookmakers: Bookmaker[] = [
   {
@@ -85,20 +48,7 @@ const bookmakers: Bookmaker[] = [
       "Conditions du bonus à vérifier",
       "Disponibilité variable selon le pays",
     ],
-    restrictedCountries: [
-      "Australie",
-      "Curaçao",
-      "France",
-      "Pays-Bas",
-      "Espagne",
-      "États-Unis et dépendances",
-      "Royaume-Uni",
-      "Aruba",
-      "Bonaire",
-      "Saba",
-    ],
-    restrictionNote:
-      "Ces territoires figurent dans les restrictions des conditions de 1xBet consultées. Vérifie toujours les conditions officielles applicables à ton pays.",
+   
     paymentMethods: [
       {
         title: "Mobile Money & Paiements locaux",
@@ -133,30 +83,8 @@ const bookmakers: Bookmaker[] = [
       "Conditions du bonus à vérifier",
       "Disponibilité à confirmer dans ton pays",
     ],
-    restrictedCountries: [
-      "États-Unis",
-      "Canada",
-      "Royaume-Uni",
-      "Espagne",
-      "Lettonie",
-      "Lituanie",
-      "Pays-Bas",
-      "France",
-      "Italie",
-      "Suisse",
-      "Albanie",
-      "Pakistan",
-      "Syrie",
-      "Soudan du Sud",
-      "Îles Caïmans",
-      "Haïti",
-      "Jamaïque",
-      "Corée du Nord",
-      "Malte",
-      "Panama",
-    ],
-    restrictionNote:
-      "Cette liste est indicative et repose sur des conditions publiées pour un marché localisé. Elle ne remplace pas les conditions officielles applicables à ton pays.",
+    
+
     paymentMethods: [
       {
         title: "Mobile Money & Paiements locaux",
@@ -187,9 +115,7 @@ const bookmakers: Bookmaker[] = [
       "Conditions de dépôt et de retrait à vérifier",
       "Offre variable selon le pays",
     ],
-    restrictedCountries: [],
-    restrictionNote:
-      "Aucune liste exhaustive de pays restreints n’a été confirmée pour cette fiche. Cela ne signifie pas que le service est disponible partout.",
+  
     paymentMethods: [
       {
         title: "Mobile Money & Paiements locaux",
@@ -246,7 +172,7 @@ function BonusPanel({
   );
 }
 
-function CountryProfilePanel({
+Function CountryProfilePanel({
   bookmaker,
 }: {
   bookmaker: Bookmaker;
@@ -258,66 +184,17 @@ function CountryProfilePanel({
       </h4>
 
       <p className="mt-2 text-sm leading-6 text-slate-400">
-        Les pays ci-dessous sont des marchés à examiner, pas une
-        confirmation d’accès ni une autorisation légale. La disponibilité
-        dépend des règles de l’opérateur et de la législation locale.
+        Les conditions d’inscription, les restrictions géographiques
+        et les moyens de paiement varient selon le pays.
+        Consulte la fiche détaillée avant de t’inscrire.
       </p>
 
-      <div className="mt-5">
-        <h5 className="font-bold text-emerald-300">
-          Marchés à vérifier
-        </h5>
-
-        <div className="mt-3 space-y-4">
-          {marketCountries.map((group) => (
-            <div key={group.region}>
-              <p className="mb-2 text-sm font-semibold text-slate-200">
-                {group.region}
-              </p>
-
-              <div className="flex flex-wrap gap-2">
-                {group.countries.map((country) => (
-                  <span
-                    key={country}
-                    className="rounded-lg border border-emerald-400/20 bg-emerald-400/[0.07] px-3 py-2 text-xs text-slate-200"
-                  >
-                    {country}
-                  </span>
-                ))}
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      <div className="mt-6">
-        <h5 className="font-bold text-red-300">
-          Pays ou territoires signalés comme restreints
-        </h5>
-
-        {bookmaker.restrictedCountries.length > 0 ? (
-          <>
-            <div className="mt-3 flex flex-wrap gap-2">
-              {bookmaker.restrictedCountries.map((country) => (
-                <span
-                  key={country}
-                  className="rounded-lg border border-red-400/20 bg-red-400/[0.07] px-3 py-2 text-xs text-slate-200"
-                >
-                  {country}
-                </span>
-              ))}
-            </div>
-
-            <p className="mt-3 text-xs leading-5 text-slate-400">
-              {bookmaker.restrictionNote}
-            </p>
-          </>
-        ) : (
-          <p className="mt-2 text-sm leading-6 text-slate-400">
-            {bookmaker.restrictionNote}
-          </p>
-        )}
-      </div>
+      <a
+        href={`/bookmakers/${bookmaker.slug}`}
+        className="mt-5 inline-flex w-full items-center justify-center rounded-xl bg-emerald-400 px-4 py-3 text-sm font-extrabold text-slate-950 transition hover:bg-emerald-300"
+      >
+        En savoir plus sur {bookmaker.name} →
+      </a>
     </section>
   );
 }
@@ -703,7 +580,7 @@ export default function BookmakersPage() {
             Respecte l’âge légal et la réglementation de ton pays. Utilise
             uniquement les services autorisés dans ton pays de résidence.
           </p>
-        </div>
+        </div>  
       </section>
 
       <footer className="mx-auto max-w-7xl px-4 pb-8 pt-4 sm:px-6 lg:px-8">
