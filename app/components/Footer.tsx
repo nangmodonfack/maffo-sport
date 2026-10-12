@@ -180,12 +180,12 @@ export default function Footer() {
               Types de paris
             </a>
 
-            <a
-              href="#paris"
-              className="block hover:text-white"
-            >
-              Bookmakers
-            </a>
+           <a
+  href="/bookmakers"
+  className="block hover:text-white"
+>
+  Bookmakers
+</a>
           </div>
         </div>
 
