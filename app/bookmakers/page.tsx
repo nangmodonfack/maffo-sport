@@ -2,11 +2,6 @@
 
 import { useState } from "react";
 
-type CountryGroup = {
-  region: string;
-  countries: string[];
-};
-
 type PaymentGroup = {
   title: string;
   description: string;
@@ -23,9 +18,8 @@ type Bookmaker = {
   affiliateUrl: string;
   advantages: string[];
   disadvantages: string[];
-  paymentMethods: PaymentGroup[]; // 👈 Spécifique à chaque bookmaker
+  paymentMethods: PaymentGroup[];
 };
-
 
 const bookmakers: Bookmaker[] = [
   {
@@ -48,11 +42,11 @@ const bookmakers: Bookmaker[] = [
       "Conditions du bonus à vérifier",
       "Disponibilité variable selon le pays",
     ],
-   
     paymentMethods: [
       {
         title: "Mobile Money & Paiements locaux",
-        description: "Orange Money, MTN MoMo, Wave, Moov Money, Airtel Money.",
+        description:
+          "Orange Money, MTN MoMo, Wave, Moov Money, Airtel Money.",
       },
       {
         title: "Cartes & Virements",
@@ -60,7 +54,8 @@ const bookmakers: Bookmaker[] = [
       },
       {
         title: "E-wallets & Cryptomonnaies",
-        description: "Skrill, Neteller, Perfect Money, Bitcoin, USDT.",
+        description:
+          "Skrill, Neteller, Perfect Money, Bitcoin, USDT.",
       },
     ],
   },
@@ -83,16 +78,16 @@ const bookmakers: Bookmaker[] = [
       "Conditions du bonus à vérifier",
       "Disponibilité à confirmer dans ton pays",
     ],
-    
-
     paymentMethods: [
       {
         title: "Mobile Money & Paiements locaux",
-        description: "Orange Money, MTN MoMo, Wave, Perfect Money.",
+        description:
+          "Orange Money, MTN MoMo, Wave, Perfect Money.",
       },
       {
         title: "Cartes & Crypto",
-        description: "Visa, Mastercard, Cryptomonnaies (USDT, BTC).",
+        description:
+          "Visa, Mastercard, Cryptomonnaies (USDT, BTC).",
       },
     ],
   },
@@ -115,15 +110,16 @@ const bookmakers: Bookmaker[] = [
       "Conditions de dépôt et de retrait à vérifier",
       "Offre variable selon le pays",
     ],
-  
     paymentMethods: [
       {
         title: "Mobile Money & Paiements locaux",
-        description: "Orange Money, MTN MoMo, Wave, Moov Money, M-Pesa.",
+        description:
+          "Orange Money, MTN MoMo, Wave, Moov Money, M-Pesa.",
       },
       {
         title: "Autres options",
-        description: "Visa, Mastercard, Skrill, Neteller, Crypto.",
+        description:
+          "Visa, Mastercard, Skrill, Neteller, Crypto.",
       },
     ],
   },
@@ -172,7 +168,7 @@ function BonusPanel({
   );
 }
 
-Function CountryProfilePanel({
+function CountryProfilePanel({
   bookmaker,
 }: {
   bookmaker: Bookmaker;
@@ -184,9 +180,9 @@ Function CountryProfilePanel({
       </h4>
 
       <p className="mt-2 text-sm leading-6 text-slate-400">
-        Les conditions d’inscription, les restrictions géographiques
-        et les moyens de paiement varient selon le pays.
-        Consulte la fiche détaillée avant de t’inscrire.
+        Les conditions d’inscription et les restrictions géographiques
+        varient selon le pays. Consulte les informations officielles
+        avant de t’inscrire.
       </p>
 
       <a
@@ -418,7 +414,7 @@ export default function BookmakersPage() {
                       rel="sponsored nofollow noopener noreferrer"
                       className="inline-flex rounded-lg bg-emerald-400 px-4 py-2 text-sm font-bold text-slate-950 hover:bg-emerald-300"
                     >
-                      Découvrir l’offre ↗
+                      Découvrir l’offre ↗️
                     </a>
                   </td>
                 </tr>
@@ -507,8 +503,9 @@ export default function BookmakersPage() {
 
               <CountryProfilePanel bookmaker={bookmaker} />
 
-              {/* Les moyens de paiement sont maintenant propres à ce bookmaker */}
-              <PaymentMethodsPanel paymentMethods={bookmaker.paymentMethods} />
+              <PaymentMethodsPanel
+                paymentMethods={bookmaker.paymentMethods}
+              />
 
               <a
                 href={bookmaker.affiliateUrl}
@@ -516,7 +513,7 @@ export default function BookmakersPage() {
                 rel="sponsored nofollow noopener noreferrer"
                 className="mt-6 block rounded-xl bg-emerald-400 px-5 py-3 text-center font-extrabold text-slate-950 hover:bg-emerald-300"
               >
-                Découvrir {bookmaker.name} ↗
+                Découvrir {bookmaker.name} ↗️
               </a>
             </article>
           ))}
@@ -557,7 +554,7 @@ export default function BookmakersPage() {
             rel="noopener noreferrer"
             className="rounded-xl bg-emerald-400 px-5 py-3 font-bold text-slate-950 hover:bg-emerald-300"
           >
-            Rejoindre Telegram ↗
+            Rejoindre Telegram ↗️
           </a>
         </div>
       </section>
@@ -580,7 +577,7 @@ export default function BookmakersPage() {
             Respecte l’âge légal et la réglementation de ton pays. Utilise
             uniquement les services autorisés dans ton pays de résidence.
           </p>
-        </div>  
+        </div>
       </section>
 
       <footer className="mx-auto max-w-7xl px-4 pb-8 pt-4 sm:px-6 lg:px-8">
