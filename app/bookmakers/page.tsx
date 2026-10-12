@@ -361,18 +361,25 @@ export default function BookmakersPage() {
                   className="border-t border-white/10 hover:bg-slate-900/70"
                 >
                   <td className="px-5 py-5">
-                    <div className="flex items-center gap-3">
-                      <img
-                        src={bookmaker.logo}
-                        alt={`Logo ${bookmaker.name}`}
-                        width={44}
-                        height={44}
-                        className="h-11 w-11 rounded-lg bg-white object-contain p-1"
-                      />
-                      <span className="font-bold">
-                        {bookmaker.name}
-                      </span>
-                    </div>
+                    <a
+  href={bookmaker.affiliateUrl}
+  target="_blank"
+  rel="sponsored nofollow noopener noreferrer"
+  aria-label={`Visiter ${bookmaker.name} via notre lien affilié`}
+  className="inline-flex items-center gap-3"
+>
+  <img
+    src={bookmaker.logo}
+    alt=""
+    width={44}
+    height={44}
+    className="h-11 w-11 rounded-lg bg-white object-contain p-1 transition hover:scale-105"
+  />
+
+  <span className="font-bold text-white transition hover:text-emerald-300">
+    {bookmaker.name}
+  </span>
+</a>
                   </td>
 
                   <td className="px-5 py-5">
@@ -436,22 +443,39 @@ export default function BookmakersPage() {
               className="flex flex-col rounded-2xl border border-white/10 bg-slate-900/60 p-5 sm:p-6"
             >
               <div className="flex items-center gap-4">
-                <img
-                  src={bookmaker.logo}
-                  alt={`Logo ${bookmaker.name}`}
-                  width={64}
-                  height={64}
-                  className="h-16 w-16 rounded-xl bg-white object-contain p-2"
-                />
-                <div>
-                  <h3 className="text-xl font-extrabold">
-                    {bookmaker.name}
-                  </h3>
-                  <p className="mt-1 text-sm text-slate-400">
-                    {bookmaker.bonus}
-                  </p>
-                </div>
-              </div>
+  <a
+    href={bookmaker.affiliateUrl}
+    target="_blank"
+    rel="sponsored nofollow noopener noreferrer"
+    aria-label={`Visiter ${bookmaker.name} via notre lien affilié`}
+    className="shrink-0"
+  >
+    <img
+      src={bookmaker.logo}
+      alt=""
+      width={64}
+      height={64}
+      className="h-16 w-16 rounded-xl bg-white object-contain p-2 transition hover:scale-105"
+    />
+  </a>
+
+  <div>
+    <h3 className="text-xl font-extrabold">
+      <a
+        href={bookmaker.affiliateUrl}
+        target="_blank"
+        rel="sponsored nofollow noopener noreferrer"
+        className="transition hover:text-emerald-300"
+      >
+        {bookmaker.name}
+      </a>
+    </h3>
+
+    <p className="mt-1 text-sm text-slate-400">
+      {bookmaker.bonus}
+    </p>
+  </div>
+</div>
 
               <p className="mt-5 text-sm leading-7 text-slate-300">
                 {bookmaker.description}
