@@ -2,64 +2,599 @@
 
 import { useState } from "react";
 
-type ZoneKey = | "centralAfrica" | "westAfrica" | "easternEurope" | "latinAmerica" | "westernEurope";
+type ZoneKey =
+  | "centralAfrica"
+  | "westAfrica"
+  | "easternEurope"
+  | "latinAmerica"
+  | "westernEurope";
 
 type AvailabilityStatus = "verify" | "available" | "restricted";
 
-type AvailabilityMap = Record<ZoneKey, AvailabilityStatus>;
+type Bookmaker = {
+  name: string;
+  slug: string;
+  logo: string;
+  bonus: string;
+  bonusPercentage: string;
+  bonusCode: string;
+  description: string;
+  affiliateUrl: string;
+  advantages: string[];
+  disadvantages: string[];
+  availability: Record<ZoneKey, AvailabilityStatus>;
+};
 
-type AvailabilityZone = { key: ZoneKey; name: string; countries: string; };
+const zones: { key: ZoneKey; name: string; countries: string }[] = [
+  {
+    key: "centralAfrica",
+    name: "Afrique centrale",
+    countries: "Cameroun, Gabon, Congo",
+  },
+  {
+    key: "westAfrica",
+    name: "Afrique de l’Ouest",
+    countries: "Côte d’Ivoire, Sénégal, Bénin",
+  },
+  {
+    key: "easternEurope",
+    name: "Europe de l’Est",
+    countries: "Roumanie, Bulgarie",
+  },
+  {
+    key: "latinAmerica",
+    name: "Amérique latine",
+    countries: "Brésil, Argentine",
+  },
+  {
+    key: "westernEurope",
+    name: "Europe de l’Ouest",
+    countries: "France, Belgique",
+  },
+];
 
-type Bookmaker = { name: string; slug: string; logo: string; bonus: string; bonusPercentage: string; bonusCode: string; description: string; rating: string; mobile: boolean; football: boolean; payments: string[]; availability: AvailabilityMap; advantages: string[]; disadvantages: string[]; affiliateUrl: string; };
+const bookmakers: Bookmaker[] = [
+  {
+    name: "1xBet",
+    slug: "1xbet",
+    logo: "/images/bookmakers/1xbet.png",
+    bonus: "Bonus de premier dépôt",
+    bonusPercentage: "Jusqu’à 120 %*",
+    bonusCode: "UBET10",
+    description:
+      "Une plateforme de paris sportifs proposant de nombreux marchés de football et différentes compétitions.",
+    affiliateUrl:
+      "https://reffpa.com/L?tag=d_6116212m_97c_&site=6116212&ad=97",
+    advantages: [
+      "Nombreux marchés de football",
+      "Large choix de compétitions",
+      "Utilisation sur mobile",
+    ],
+    disadvantages: [
+      "Conditions du bonus à vérifier",
+      "Disponibilité variable selon le pays",
+    ],
+    availability: {
+      centralAfrica: "verify",
+      westAfrica: "verify",
+      easternEurope: "verify",
+      latinAmerica: "verify",
+      westernEurope: "verify",
+    },
+  },
+  {
+    name: "1win",
+    slug: "1win",
+    logo: "/images/bookmakers/1win.png",
+    bonus: "Bonus de bienvenue",
+    bonusPercentage: "Jusqu’à 500 %*",
+    bonusCode: "400MC",
+    description:
+      "Une plateforme proposant des paris sportifs, notamment sur le football, avec une offre de bienvenue annoncée.",
+    affiliateUrl: "https://r1wtvmb.life/?p=8kkp",
+    advantages: [
+      "Offre de bienvenue annoncée",
+      "Paris sur différentes compétitions",
+      "Utilisation sur mobile",
+    ],
+    disadvantages: [
+      "Conditions du bonus à vérifier",
+      "Disponibilité à confirmer dans ton pays",
+    ],
+    availability: {
+      centralAfrica: "verify",
+      westAfrica: "verify",
+      easternEurope: "verify",
+      latinAmerica: "verify",
+      westernEurope: "verify",
+    },
+  },
+  {
+    name: "Betwinner",
+    slug: "betwinner",
+    logo: "/images/bookmakers/betwinner.png",
+    bonus: "Bonus de premier dépôt",
+    bonusPercentage: "Jusqu’à 100 %*",
+    bonusCode: "400MC",
+    description:
+      "Une plateforme de paris sportifs qui propose plusieurs marchés, dont les paris sur les matchs de football.",
+    affiliateUrl: "https://bwredir.com/3ev6",
+    advantages: [
+      "Différents marchés de football",
+      "Offre de bienvenue annoncée",
+      "Accès sur mobile",
+    ],
+    disadvantages: [
+      "Conditions de dépôt et de retrait à vérifier",
+      "Offre variable selon le pays",
+    ],
+    availability: {
+      centralAfrica: "verify",
+      westAfrica: "verify",
+      easternEurope: "verify",
+      latinAmerica: "verify",
+      westernEurope: "verify",
+    },
+  },
+];
 
-const availabilityZones: AvailabilityZone[] = [ { key: "centralAfrica", name: "Afrique centrale", countries: "Cameroun, Gabon, Congo", }, { key: "westAfrica", name: "Afrique de l’Ouest", countries: "Côte d’Ivoire, Sénégal, Bénin", }, { key: "easternEurope", name: "Europe de l’Est", countries: "Roumanie, Bulgarie, autres pays selon la réglementation", }, { key: "latinAmerica", name: "Amérique latine", countries: "Brésil, Argentine, autres pays selon la réglementation", }, { key: "westernEurope", name: "Europe de l’Ouest", countries: "France, Belgique, autres pays selon la réglementation", }, ];
+function StatusLabel({ status }: { status: AvailabilityStatus }) {
+  const labels: Record<AvailabilityStatus, string> = {
+    verify: "À vérifier",
+    available: "Confirmé",
+    restricted: "Restreint",
+  };
 
-const bookmakers: Bookmaker[] = [ { name: "1xBet", slug: "1xbet", logo: "/images/bookmakers/1xbet.png", bonus: "Bonus de premier dépôt", bonusPercentage: "Jusqu’à 120 %", bonusCode: "UBET10", description: "Une plateforme de paris sportifs avec de nombreux marchés de football et différentes options de paris.", rating: "À évaluer selon vos critères", mobile: true, football: true, payments: ["Moyens de paiement variables selon le pays"], availability: { centralAfrica: "verify", westAfrica: "verify", easternEurope: "verify", latinAmerica: "verify", westernEurope: "verify", }, advantages: [ "Nombreux marchés de football", "Large choix de compétitions", "Interface utilisable sur mobile", ], disadvantages: [ "Conditions du bonus à lire attentivement", "Disponibilité et moyens de paiement variables selon le pays", ], affiliateUrl: "https://reffpa.com/L?tag=d_6116212m_97c_&site=6116212&ad=97", }, { name: "1win", slug: "1win", logo: "/images/bookmakers/1win.png", bonus: "Bonus de bienvenue", bonusPercentage: "Jusqu’à 500 %", bonusCode: "400MC", description: "Une plateforme proposant des paris sportifs, notamment sur le football, avec une offre de bienvenue annoncée.", rating: "À évaluer selon vos critères", mobile: true, football: true, payments: ["Moyens de paiement variables selon le pays"], availability: { centralAfrica: "verify", westAfrica: "verify", easternEurope: "verify", latinAmerica: "verify", westernEurope: "verify", }, advantages: [ "Offre de bienvenue annoncée", "Paris sur différentes compétitions de football", "Utilisation sur mobile", ], disadvantages: [ "Un bonus élevé peut comporter des conditions importantes", "Disponibilité à vérifier dans le pays de résidence", ], affiliateUrl: "https://r1wtvmb.life/?p=8kkp", }, { name: "Betwinner", slug: "betwinner", logo: "/images/bookmakers/betwinner.png", bonus: "Bonus de premier dépôt", bonusPercentage: "Jusqu’à 100 %*", bonusCode: "400MC", description: "Une plateforme de paris sportifs qui propose plusieurs marchés, dont des paris sur les matchs de football.", rating: "À évaluer selon vos critères", mobile: true, football: true, payments: ["Moyens de paiement variables selon le pays"], availability: { centralAfrica: "verify", westAfrica: "verify", easternEurope: "verify", latinAmerica: "verify", westernEurope: "verify", }, advantages: [ "Différents marchés de football", "Offre de bienvenue annoncée", "Accès sur mobile", ], disadvantages: [ "Conditions de dépôt et de retrait à vérifier", "Offre et accès variables selon le pays", ], affiliateUrl: "https://bwredir.com/3ev6", }, ];
+  const colors: Record<AvailabilityStatus, string> = {
+    verify: "bg-amber-500/15 text-amber-300",
+    available: "bg-emerald-500/15 text-emerald-300",
+    restricted: "bg-red-500/15 text-red-300",
+  };
 
-function StatusLabel({ status }: { status: AvailabilityStatus }) { if (status === "available") { return ( Accès confirmé ); }
-
-if (status === "restricted") { return ( Accès restreint ); }
-
-return ( À vérifier ); }
-
-function AvailabilityZoneCard({ bookmaker, }: { bookmaker: Bookmaker; }) { return ( 
-
-{availabilityZones.map((zone) => ( 
-
-{zone.name}
-
-{zone.countries} 
-
-))} 
-
-); } 
-
-function KeyFeatures({ bookmaker }: { bookmaker: Bookmaker }) { return ( 
-
-{bookmaker.football && ( ⚽ Paris football )} {bookmaker.mobile && ( <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-slate-300"> 📱 Application mobile </span> )} </div> 
-
-); }
-
-function BonusPanel({ bookmaker, copiedCode, onCopy, }: { bookmaker: Bookmaker; copiedCode: string | null; onCopy: (code: string) => void; }) { const isCopied = copiedCode === bookmaker.slug;
-
-return ( 
-
-{bookmaker.bonus}
-
-<p className="mt-1 text-2xl font-extrabold text-emerald-300"> {bookmaker.bonusPercentage} </p> <div className="mt-4 flex flex-wrap items-center justify-between gap-3 rounded-xl border border-white/10 bg-slate-950/70 p-3"> <div> <p className="text-xs text-slate-400">Code d’inscription</p> <p className="mt-1 text-lg font-extrabold tracking-wider text-white"> {bookmaker.bonusCode} </p> </div> <button type="button" onClick={() => onCopy(bookmaker.slug)} className="rounded-lg bg-emerald-400 px-4 py-2 text-sm font-bold text-slate-950 transition hover:bg-emerald-300 focus:outline-none focus:ring-2 focus:ring-emerald-200" aria-label={`Copier le code ${bookmaker.bonusCode} de ${bookmaker.name}`} > {isCopied ? "Copié ✓" : "Copier le code"} </button> </div> <p className="mt-3 text-xs leading-5 text-slate-400"> * Offre annoncée, soumise aux conditions du bookmaker. Vérifie l’éligibilité, les conditions de mise et les restrictions applicables à ton pays avant de déposer de l’argent. </p> </div> 
-
-); }
-
-export default function BookmakersPage() { const [copiedCode, setCopiedCode] = useState<string | null>(null); const [copyError, setCopyError] = useState<string | null>(null);
-
-async function copyBonusCode(slug: string) { const bookmaker = bookmakers.find((item) => item.slug === slug);
-
-if (!bookmaker) return; setCopyError(null); try { if (navigator.clipboard && window.isSecureContext) { await navigator.clipboard.writeText(bookmaker.bonusCode); } else { const textArea = document.createElement("textarea"); textArea.value = bookmaker.bonusCode; textArea.style.position = "fixed"; textArea.style.left = "-9999px"; textArea.setAttribute("readonly", ""); document.body.appendChild(textArea); textArea.select(); const success = document.execCommand("copy"); document.body.removeChild(textArea); if (!success) { throw new Error("Copie non disponible"); } } setCopiedCode(slug); window.setTimeout(() => { setCopiedCode((current) => (current === slug ? null : current)); }, 2200); } catch { setCopyError( `La copie automatique a échoué. Sélectionne manuellement le code ${bookmaker.bonusCode}.`, ); } 
-
+  return (
+    <span
+      className={`inline-flex rounded-full px-3 py-1 text-xs font-semibold ${colors[status]}`}
+    >
+      {labels[status]}
+    </span>
+  );
 }
 
-return ( {/* HERO */} 
+function AvailabilityZoneCard({ bookmaker }: { bookmaker: Bookmaker }) {
+  return (
+    <div className="mt-3 grid gap-3 sm:grid-cols-2">
+      {zones.map((zone) => (
+        <div
+          key={zone.key}
+          className="rounded-xl border border-white/10 bg-slate-950/60 p-3"
+        >
+          <div className="flex flex-wrap items-center justify-between gap-2">
+            <h5 className="font-semibold text-white">{zone.name}</h5>
+            <StatusLabel status={bookmaker.availability[zone.key]} />
+          </div>
+          <p className="mt-2 text-sm text-slate-400">{zone.countries}</p>
+        </div>
+      ))}
+    </div>
+  );
+}
 
-<div className="relative mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8"> <span className="inline-flex rounded-full border border-emerald-400/25 bg-emerald-400/10 px-4 py-2 text-sm font-semibold text-emerald-300"> Guide Maffo Sport </span> <h1 className="mt-6 max-w-4xl text-4xl font-black leading-tight tracking-tight sm:text-5xl lg:text-6xl"> Bookmakers : compare les offres et les codes bonus </h1> <p className="mt-6 max-w-3xl text-base leading-8 text-slate-300 sm:text-lg"> Compare les offres de bienvenue, retrouve les codes d’inscription et vérifie les conditions avant de choisir une plateforme. Un bonus annoncé ne garantit ni gain ni rentabilité. </p> <div className="mt-8 flex flex-wrap gap-3"> <a href="#comparatif" className="rounded-xl bg-emerald-400 px-6 py-3 font-bold text-slate-950 transition hover:bg-emerald-300" > Comparer les offres </a> <a href="#jeu-responsable" className="rounded-xl border border-white/15 px-6 py-3 font-semibold text-white transition hover:bg-white/5" > Jouer responsable </a> </div> <p className="mt-5 text-xs leading-6 text-slate-400"> Accès réservé aux personnes ayant l’âge légal applicable dans leur pays. Les paris sportifs comportent un risque de perte. </p> </div> </section> {/* INTRO */} <section className="mx-auto grid max-w-7xl gap-4 px-4 py-10 sm:grid-cols-3 sm:px-6 lg:px-8"> <div className="rounded-2xl border border-white/10 bg-slate-900/60 p-5"> <div className="text-2xl">🎁</div> <h2 className="mt-3 font-bold">Bonus affichés clairement</h2> <p className="mt-2 text-sm leading-6 text-slate-400"> Consulte le pourcentage annoncé et les conditions avant toute inscription. </p> </div> <div className="rounded-2xl border border-white/10 bg-slate-900/60 p-5"> <div className="text-2xl">🏷️</div> <h2 className="mt-3 font-bold">Codes faciles à retrouver</h2> <p className="mt-2 text-sm leading-6 text-slate-400"> Le code correspondant à chaque bookmaker est placé à côté de son offre. </p> </div> <div className="rounded-2xl border border-white/10 bg-slate-900/60 p-5"> <div className="text-2xl">🔎</div> <h2 className="mt-3 font-bold">Conditions à vérifier</h2> <p className="mt-2 text-sm leading-6 text-slate-400"> Les offres et les restrictions peuvent varier selon le pays, le compte et la promotion. </p> </div> </section> {/* COMPARATIF */} <section id="comparatif" className="mx-auto max-w-7xl scroll-mt-6 px-4 py-8 sm:px-6 lg:px-8" > <div className="mb-6"> <p className="text-sm font-bold uppercase tracking-[0.2em] text-emerald-300"> Comparatif </p> <h2 className="mt-2 text-3xl font-black"> Les offres en un coup d’œil </h2> <p className="mt-3 max-w-3xl leading-7 text-slate-400"> Les pourcentages ci-dessous correspondent aux offres que tu as fournies. Consulte les conditions officielles pour savoir si le bonus et le code sont valables dans ton pays. </p> </div> <div className="overflow-x-auto rounded-2xl border border-white/10"> <table className="w-full min-w-[700px] border-collapse text-left"> <thead className="bg-slate-900"> <tr> <th className="px-5 py-4 text-sm font-bold">Bookmaker</th> <th className="px-5 py-4 text-sm font-bold">Bonus annoncé</th> <th className="px-5 py-4 text-sm font-bold">Code</th> <th className="px-5 py-4 text-sm font-bold">Accès à l’offre</th> </tr> </thead> <tbody> {bookmakers.map((bookmaker) => ( <tr key={bookmaker.slug} className="border-t border-white/10 bg-slate-950 transition hover:bg-slate-900/70" > <td className="px-5 py-5"> <div className="flex items-center gap-3"> <img src={bookmaker.logo} alt={`Logo ${bookmaker.name}`} width={44} height={44} className="h-11 w-11 rounded-lg bg-white object-contain p-1" /> <span className="font-bold">{bookmaker.name}</span> </div> </td> <td className="px-5 py-5"> <p className="font-extrabold text-emerald-300"> {bookmaker.bonusPercentage} </p> <p className="mt-1 text-xs text-slate-400"> {bookmaker.bonus} </p> </td> <td className="px-5 py-5"> <div className="flex items-center gap-3"> <code className="rounded-lg border border-white/10 bg-slate-900 px-3 py-2 font-bold tracking-wider text-white"> {bookmaker.bonusCode} </code> <button type="button" onClick={() => copyBonusCode(bookmaker.slug)} className="text-sm font-semibold text-emerald-300 hover:text-emerald-200" > {copiedCode === bookmaker.slug ? "Copié ✓" : "Copier"} </button> </div> </td> <td className="px-5 py-5"> <a href={bookmaker.affiliateUrl} target="_blank" rel="sponsored nofollow noopener noreferrer" className="inline-flex rounded-lg bg-emerald-400 px-4 py-2 text-sm font-bold text-slate-950 transition hover:bg-emerald-300" > Découvrir l’offre ↗ </a> </td> </tr> ))} </tbody> </table> </div> {copyError && ( <p role="status" className="mt-4 rounded-xl border border-amber-400/20 bg-amber-400/10 p-3 text-sm text-amber-200" > {copyError} </p> )} </section> {/* FICHES DÉTAILLÉES */} <section className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8"> <div className="mb-8"> <p className="text-sm font-bold uppercase tracking-[0.2em] text-emerald-300"> Fiches détaillées </p> <h2 className="mt-2 text-3xl font-black"> Choisir une plateforme </h2> </div> <div className="grid gap-6 lg:grid-cols-3"> {bookmakers.map((bookmaker) => ( <article key={bookmaker.slug} className="flex flex-col rounded-2xl border border-white/10 bg-slate-900/60 p-5 sm:p-6" > <div className="flex items-center gap-4"> <img src={bookmaker.logo} alt={`Logo ${bookmaker.name}`} width={64} height={64} className="h-16 w-16 rounded-xl bg-white object-contain p-2" /> <div> <h3 className="text-xl font-extrabold"> {bookmaker.name} </h3> <p className="mt-1 text-sm text-slate-400"> {bookmaker.bonus} </p> </div> </div> <KeyFeatures bookmaker={bookmaker} /> <p className="mt-5 text-sm leading-7 text-slate-300"> {bookmaker.description} </p> <div className="mt-5"> <BonusPanel bookmaker={bookmaker} copiedCode={copiedCode} onCopy={copyBonusCode} /> </div> <div className="mt-6"> <h4 className="font-bold text-white">Points à retenir</h4> <ul className="mt-3 space-y-2"> {bookmaker.advantages.map((item) => ( <li key={item} className="flex gap-2 text-sm leading-6 text-slate-300" > <span className="text-emerald-300">✓</span> <span>{item}</span> </li> ))} </ul> </div> <div className="mt-5"> <h4 className="font-bold text-white">À vérifier</h4> <ul className="mt-3 space-y-2"> {bookmaker.disadvantages.map((item) => ( <li key={item} className="flex gap-2 text-sm leading-6 text-slate-400" > <span className="text-amber-300">•</span> <span>{item}</span> </li> ))} </ul> </div> <div className="mt-6"> <h4 className="font-bold text-white"> Disponibilité géographique </h4> <p className="mt-2 text-xs leading-6 text-slate-400"> Ces indications sont des points de vérification, pas une confirmation de disponibilité légale dans chaque pays. </p> <div className="mt-3"> <AvailabilityZoneCard bookmaker={bookmaker} /> </div> </div> <a href={bookmaker.affiliateUrl} target="_blank" rel="sponsored nofollow noopener noreferrer" className="mt-6 block rounded-xl bg-emerald-400 px-5 py-3 text-center font-extrabold text-slate-950 transition hover:bg-emerald-300" > Découvrir {bookmaker.name} ↗ </a> <p className="mt-3 text-center text-xs leading-5 text-slate-500"> Consulte les règles du bonus et les restrictions de ton pays avant de t’inscrire. </p> </article> ))} </div> </section> {/* LÉGENDE */} <section className="mx-auto max-w-7xl px-4 pb-8 sm:px-6 lg:px-8"> <div className="rounded-2xl border border-white/10 bg-slate-900/50 p-5"> <h2 className="font-bold">Comment lire les disponibilités ?</h2> <div className="mt-4 flex flex-wrap gap-4 text-sm text-slate-300"> <div className="flex items-center gap-2"> <StatusLabel status="available" /> <span>Information confirmée</span> </div> <div className="flex items-center gap-2"> <StatusLabel status="verify" /> <span>Vérification nécessaire</span> </div> <div className="flex items-center gap-2"> <StatusLabel status="restricted" /> <span>Accès restreint</span> </div> </div> <p className="mt-4 text-sm leading-6 text-slate-400"> Les fiches sont actuellement marquées « À vérifier » : les conditions d’accès, l’âge légal, les moyens de paiement et les offres doivent être contrôlés pour le pays concerné. </p> </div> </section> {/* TRANSPARENCE */} <section className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8"> <div className="rounded-2xl border border-white/10 bg-slate-900/60 p-6 sm:p-8"> <h2 className="text-2xl font-black"> Comment Maffo Sport fonctionne </h2> <p className="mt-4 max-w-4xl text-sm leading-7 text-slate-300"> Certains liens de cette page sont des liens affiliés. Si tu t’inscris via ces liens, Maffo Sport peut recevoir une commission, sans frais supplémentaires de notre côté pour toi. Cela ne garantit pas que l’offre soit adaptée à ta situation et ne remplace pas la lecture des conditions du bookmaker. </p> </div> </section> {/* TELEGRAM */} <section className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8"> <div className="flex flex-col items-start justify-between gap-5 rounded-2xl border border-emerald-400/20 bg-emerald-400/[0.07] p-6 sm:flex-row sm:items-center sm:p-8"> <div> <p className="text-sm font-bold uppercase tracking-[0.2em] text-emerald-300"> Maffo Sport </p> <h2 className="mt-2 text-2xl font-black"> Analyses et actualités sportives </h2> <p className="mt-3 max-w-2xl text-sm leading-7 text-slate-300"> Retrouve les publications et les analyses de Maffo Sport sur notre canal Telegram. </p> </div> <a href="https://t.me/maffoparissportifs" target="_blank" rel="noopener noreferrer" className="shrink-0 rounded-xl bg-emerald-400 px-5 py-3 font-bold text-slate-950 transition hover:bg-emerald-300" > Rejoindre Telegram ↗ </a> </div> </section> {/* JEU RESPONSABLE */} <section id="jeu-responsable" className="mx-auto max-w-7xl scroll-mt-6 px-4 py-8 sm:px-6 lg:px-8" > <div className="rounded-2xl border border-amber-400/20 bg-amber-400/[0.06] p-6 sm:p-8"> <h2 className="text-2xl font-black text-amber-200"> Jouer responsable </h2> <p className="mt-4 text-sm leading-7 text-slate-300"> Les paris sportifs comportent un risque de perte financière. Un bonus ne garantit aucun gain. Ne mise jamais l’argent nécessaire à tes dépenses essentielles, ne cherche pas à récupérer tes pertes et fixe-toi une limite avant de jouer. </p> <p className="mt-3 text-sm leading-7 text-slate-300"> Accès strictement réservé aux personnes ayant l’âge légal applicable dans leur pays de résidence. Selon la juridiction, cet âge peut être de 18 ans ou de 21 ans. Respecte la législation locale et n’utilise que les services autorisés dans ton pays. </p> </div> </section> {/* DISCLAIMER FINAL */} <section className="mx-auto max-w-7xl px-4 pb-12 pt-4 sm:px-6 lg:px-8"> <p className="text-xs leading-6 text-slate-500"> Les pourcentages et codes présentés correspondent aux informations fournies pour cette page et ne constituent pas une garantie d’éligibilité. Les offres, conditions de mise, limites, restrictions et moyens de paiement peuvent évoluer et varier selon le pays ou la promotion. Vérifie les conditions officielles avant toute inscription ou tout dépôt. Maffo Sport ne garantit aucun résultat de pari. </p> </section> </main> 
+function BonusPanel({
+  bookmaker,
+  copied,
+  onCopy,
+}: {
+  bookmaker: Bookmaker;
+  copied: boolean;
+  onCopy: () => void;
+}) {
+  return (
+    <div className="rounded-2xl border border-emerald-400/25 bg-emerald-400/[0.07] p-4">
+      <p className="text-sm text-slate-300">{bookmaker.bonus}</p>
 
-); }
+      <p className="mt-1 text-2xl font-extrabold text-emerald-300">
+        {bookmaker.bonusPercentage}
+      </p>
+
+      <div className="mt-4 flex flex-wrap items-center justify-between gap-3 rounded-xl border border-white/10 bg-slate-950/70 p-3">
+        <div>
+          <p className="text-xs text-slate-400">Code d’inscription</p>
+          <p className="mt-1 text-lg font-extrabold tracking-wider text-white">
+            {bookmaker.bonusCode}
+          </p>
+        </div>
+
+        <button
+          type="button"
+          onClick={onCopy}
+          className="rounded-lg bg-emerald-400 px-4 py-2 text-sm font-bold text-slate-950 transition hover:bg-emerald-300"
+        >
+          {copied ? "Copié ✓" : "Copier le code"}
+        </button>
+      </div>
+
+      <p className="mt-3 text-xs leading-5 text-slate-400">
+        * Offre annoncée, soumise aux conditions du bookmaker et aux
+        restrictions applicables dans ton pays. Vérifie les conditions
+        avant tout dépôt.
+      </p>
+    </div>
+  );
+}
+
+export default function BookmakersPage() {
+  const [copiedSlug, setCopiedSlug] = useState<string | null>(null);
+  const [copyError, setCopyError] = useState<string | null>(null);
+
+  async function copyBonusCode(bookmaker: Bookmaker) {
+    setCopyError(null);
+
+    try {
+      if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(bookmaker.bonusCode);
+      } else {
+        const textArea = document.createElement("textarea");
+        textArea.value = bookmaker.bonusCode;
+        textArea.style.position = "fixed";
+        textArea.style.left = "-9999px";
+        document.body.appendChild(textArea);
+        textArea.select();
+
+        const success = document.execCommand("copy");
+        document.body.removeChild(textArea);
+
+        if (!success) {
+          throw new Error("Copie impossible");
+        }
+      }
+
+      setCopiedSlug(bookmaker.slug);
+
+      window.setTimeout(() => {
+        setCopiedSlug((current) =>
+          current === bookmaker.slug ? null : current
+        );
+      }, 2200);
+    } catch {
+      setCopyError(
+        `Copie impossible. Sélectionne manuellement le code ${bookmaker.bonusCode}.`
+      );
+    }
+  }
+
+  return (
+    <main className="min-h-screen bg-slate-950 text-white">
+      <section className="border-b border-white/10 bg-[radial-gradient(ellipse_at_top_right,rgba(16,185,129,0.16),transparent_55%)]">
+        <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
+          <span className="inline-flex rounded-full border border-emerald-400/25 bg-emerald-400/10 px-4 py-2 text-sm font-semibold text-emerald-300">
+            Guide Maffo Sport
+          </span>
+
+          <h1 className="mt-6 max-w-4xl text-4xl font-black leading-tight sm:text-5xl lg:text-6xl">
+            Bookmakers : compare les offres et les codes bonus
+          </h1>
+
+          <p className="mt-6 max-w-3xl text-base leading-8 text-slate-300 sm:text-lg">
+            Compare les offres de bienvenue, retrouve les codes
+            d’inscription et vérifie les conditions avant de choisir une
+            plateforme. Un bonus ne garantit aucun gain.
+          </p>
+
+          <div className="mt-8 flex flex-wrap gap-3">
+            <a
+              href="#comparatif"
+              className="rounded-xl bg-emerald-400 px-6 py-3 font-bold text-slate-950 hover:bg-emerald-300"
+            >
+              Comparer les offres
+            </a>
+
+            <a
+              href="#jeu-responsable"
+              className="rounded-xl border border-white/15 px-6 py-3 font-semibold hover:bg-white/5"
+            >
+              Jouer responsable
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section className="mx-auto grid max-w-7xl gap-4 px-4 py-10 sm:grid-cols-3 sm:px-6 lg:px-8">
+        {[
+          {
+            icon: "🎁",
+            title: "Bonus affichés clairement",
+            text: "Consulte les offres annoncées et leurs conditions.",
+          },
+          {
+            icon: "🏷️",
+            title: "Codes faciles à retrouver",
+            text: "Copie le code directement depuis sa fiche.",
+          },
+          {
+            icon: "🔎",
+            title: "Conditions à vérifier",
+            text: "Les offres et les restrictions varient selon le pays.",
+          },
+        ].map((item) => (
+          <div
+            key={item.title}
+            className="rounded-2xl border border-white/10 bg-slate-900/60 p-5"
+          >
+            <div className="text-2xl">{item.icon}</div>
+            <h2 className="mt-3 font-bold">{item.title}</h2>
+            <p className="mt-2 text-sm leading-6 text-slate-400">
+              {item.text}
+            </p>
+          </div>
+        ))}
+      </section>
+
+      <section
+        id="comparatif"
+        className="mx-auto max-w-7xl scroll-mt-6 px-4 py-8 sm:px-6 lg:px-8"
+      >
+        <h2 className="text-3xl font-black">
+          Comparatif des bookmakers
+        </h2>
+
+        <p className="mt-3 max-w-3xl leading-7 text-slate-400">
+          Les pourcentages sont indicatifs et ne garantissent pas
+          l’éligibilité à l’offre. Vérifie les conditions officielles
+          avant de t’inscrire.
+        </p>
+
+        <div className="mt-6 overflow-x-auto rounded-2xl border border-white/10">
+          <table className="w-full min-w-[700px] border-collapse text-left">
+            <thead className="bg-slate-900">
+              <tr>
+                <th className="px-5 py-4">Bookmaker</th>
+                <th className="px-5 py-4">Bonus annoncé</th>
+                <th className="px-5 py-4">Code</th>
+                <th className="px-5 py-4">Lien</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              {bookmakers.map((bookmaker) => (
+                <tr
+                  key={bookmaker.slug}
+                  className="border-t border-white/10 hover:bg-slate-900/70"
+                >
+                  <td className="px-5 py-5">
+                    <div className="flex items-center gap-3">
+                      <img
+                        src={bookmaker.logo}
+                        alt={`Logo ${bookmaker.name}`}
+                        width={44}
+                        height={44}
+                        className="h-11 w-11 rounded-lg bg-white object-contain p-1"
+                      />
+                      <span className="font-bold">{bookmaker.name}</span>
+                    </div>
+                  </td>
+
+                  <td className="px-5 py-5">
+                    <p className="font-extrabold text-emerald-300">
+                      {bookmaker.bonusPercentage}
+                    </p>
+                    <p className="mt-1 text-xs text-slate-400">
+                      {bookmaker.bonus}
+                    </p>
+                  </td>
+
+                  <td className="px-5 py-5">
+                    <div className="flex items-center gap-3">
+                      <code className="font-bold tracking-wider">
+                        {bookmaker.bonusCode}
+                      </code>
+                      <button
+                        type="button"
+                        onClick={() => copyBonusCode(bookmaker)}
+                        className="text-sm font-semibold text-emerald-300"
+                      >
+                        {copiedSlug === bookmaker.slug ? "Copié ✓" : "Copier"}
+                      </button>
+                    </div>
+                  </td>
+
+                  <td className="px-5 py-5">
+                    <a
+                      href={bookmaker.affiliateUrl}
+                      target="_blank"
+                      rel="sponsored nofollow noopener noreferrer"
+                      className="inline-flex rounded-lg bg-emerald-400 px-4 py-2 text-sm font-bold text-slate-950 hover:bg-emerald-300"
+                    >
+                      Découvrir l’offre ↗
+                    </a>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        {copyError && (
+          <p role="status" className="mt-4 text-sm text-amber-300">
+            {copyError}
+          </p>
+        )}
+      </section>
+
+      <section className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
+        <h2 className="mb-8 text-3xl font-black">
+          Découvrir chaque bookmaker
+        </h2>
+
+        <div className="grid gap-6 lg:grid-cols-3">
+          {bookmakers.map((bookmaker) => (
+            <article
+              key={bookmaker.slug}
+              className="flex flex-col rounded-2xl border border-white/10 bg-slate-900/60 p-5 sm:p-6"
+            >
+              <div className="flex items-center gap-4">
+                <img
+                  src={bookmaker.logo}
+                  alt={`Logo ${bookmaker.name}`}
+                  width={64}
+                  height={64}
+                  className="h-16 w-16 rounded-xl bg-white object-contain p-2"
+                />
+                <div>
+                  <h3 className="text-xl font-extrabold">
+                    {bookmaker.name}
+                  </h3>
+                  <p className="mt-1 text-sm text-slate-400">
+                    {bookmaker.bonus}
+                  </p>
+                </div>
+              </div>
+
+              <p className="mt-5 text-sm leading-7 text-slate-300">
+                {bookmaker.description}
+              </p>
+
+              <div className="mt-5">
+                <BonusPanel
+                  bookmaker={bookmaker}
+                  copied={copiedSlug === bookmaker.slug}
+                  onCopy={() => copyBonusCode(bookmaker)}
+                />
+              </div>
+
+              <div className="mt-6">
+                <h4 className="font-bold">Points à retenir</h4>
+                <ul className="mt-3 space-y-2">
+                  {bookmaker.advantages.map((item) => (
+                    <li
+                      key={item}
+                      className="text-sm leading-6 text-slate-300"
+                    >
+                      <span className="mr-2 text-emerald-300">✓</span>
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <div className="mt-5">
+                <h4 className="font-bold">À vérifier</h4>
+                <ul className="mt-3 space-y-2">
+                  {bookmaker.disadvantages.map((item) => (
+                    <li
+                      key={item}
+                      className="text-sm leading-6 text-slate-400"
+                    >
+                      <span className="mr-2 text-amber-300">•</span>
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <div className="mt-6">
+                <h4 className="font-bold">Disponibilité géographique</h4>
+                <p className="mt-2 text-xs leading-6 text-slate-400">
+                  Ces informations ne confirment pas la disponibilité
+                  légale dans chaque pays.
+                </p>
+                <AvailabilityZoneCard bookmaker={bookmaker} />
+              </div>
+
+              <a
+                href={bookmaker.affiliateUrl}
+                target="_blank"
+                rel="sponsored nofollow noopener noreferrer"
+                className="mt-6 block rounded-xl bg-emerald-400 px-5 py-3 text-center font-extrabold text-slate-950 hover:bg-emerald-300"
+              >
+                Découvrir {bookmaker.name} ↗
+              </a>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-7xl px-4 pb-8 sm:px-6 lg:px-8">
+        <div className="rounded-2xl border border-white/10 bg-slate-900/50 p-5">
+          <h2 className="font-bold">
+            Comprendre les indications de disponibilité
+          </h2>
+          <p className="mt-3 text-sm leading-6 text-slate-400">
+            Toutes les zones sont actuellement marquées « À vérifier ».
+            Il faut contrôler les règles du bookmaker et la législation
+            locale avant de s’inscrire.
+          </p>
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+        <div className="rounded-2xl border border-white/10 bg-slate-900/60 p-6 sm:p-8">
+          <h2 className="text-2xl font-black">
+            Transparence sur l’affiliation
+          </h2>
+          <p className="mt-4 text-sm leading-7 text-slate-300">
+            Certains liens sont affiliés. Maffo Sport peut recevoir une
+            commission si tu t’inscris via ces liens, sans frais
+            supplémentaires pour toi. Cela ne garantit ni gain ni
+            pertinence de l’offre pour ta situation.
+          </p>
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+        <div className="flex flex-col items-start justify-between gap-5 rounded-2xl border border-emerald-400/20 bg-emerald-400/[0.07] p-6 sm:flex-row sm:items-center sm:p-8">
+          <div>
+            <p className="text-sm font-bold uppercase tracking-[0.2em] text-emerald-300">
+              Maffo Sport
+            </p>
+            <h2 className="mt-2 text-2xl font-black">
+              Analyses et actualités sportives
+            </h2>
+            <p className="mt-3 text-sm leading-7 text-slate-300">
+              Retrouve les publications de Maffo Sport sur Telegram.
+            </p>
+          </div>
+
+          <a
+            href="https://t.me/maffoparissportifs"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="rounded-xl bg-emerald-400 px-5 py-3 font-bold text-slate-950 hover:bg-emerald-300"
+          >
+            Rejoindre Telegram ↗
+          </a>
+        </div>
+      </section>
+
+      <section
+        id="jeu-responsable"
+        className="mx-auto max-w-7xl scroll-mt-6 px-4 py-8 sm:px-6 lg:px-8"
+      >
+        <div className="rounded-2xl border border-amber-400/20 bg-amber-400/[0.06] p-6 sm:p-8">
+          <h2 className="text-2xl font-black text-amber-200">
+            Jouer responsable
+          </h2>
+          <p className="mt-4 text-sm leading-7 text-slate-300">
+            Les paris sportifs comportent un risque de perte financière.
+            Un bonus ne garantit aucun gain. Ne mise pas l’argent nécessaire
+            à tes dépenses essentielles et ne cherche pas à récupérer tes
+            pertes.
+          </p>
+          <p className="mt-3 text-sm leading-7 text-slate-300">
+            Respecte l’âge légal et la réglementation de ton pays. Utilise
+            uniquement les services autorisés dans ton pays de résidence.
+          </p>
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-7xl px-4 pb-12 pt-4 sm:px-6 lg:px-8">
+        <p className="text-xs leading-6 text-slate-500">
+          Les bonus et les codes sont soumis aux conditions des opérateurs.
+          Les offres, les conditions de mise et les moyens de paiement
+          peuvent changer selon le pays et la promotion. Vérifie les
+          conditions officielles avant toute inscription ou tout dépôt.
+          Maffo Sport ne garantit aucun résultat de pari.
+        </p>
+      </section>
+    </main>
+  );
+}
