@@ -95,14 +95,14 @@ export default function Header() {
                 </a>
 
                 <a
-                  href="#paris"
+                    href="/bookmakers"
                   className="block px-3 py-2 rounded-lg hover:bg-white/5"
                 >
                   Bookmakers
                 </a>
 
                 <a
-                  href="#paris"
+                   href="/bookmakers"
                   className="block px-3 py-2 rounded-lg hover:bg-white/5"
                 >
                   Comparatifs
