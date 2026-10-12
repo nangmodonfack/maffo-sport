@@ -185,7 +185,7 @@ export default function Footer() {
   className="block hover:text-white"
 >
   Bookmakers
-</a>
+</a> 
           </div>
         </div>
 
