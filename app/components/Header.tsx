@@ -74,6 +74,19 @@ export default function Header() {
             <div className="absolute top-full left-0 pt-1 invisible opacity-0 group-hover:visible group-hover:opacity-100 transition-opacity duration-150">
               <div className="glass rounded-xl p-2 w-56">
                 <a
+                    href="/bookmakers"
+                  className="block px-3 py-2 rounded-lg hover:bg-white/5"
+                >
+                  Bookmakers
+                </a>
+
+                <a
+                   href="/bookmakers"
+                  className="block px-3 py-2 rounded-lg hover:bg-white/5"
+                >
+                  Comparatifs
+                </a>
+                <a
                   href="/analyses-guides"
                   className="block px-3 py-2 rounded-lg hover:bg-white/5"
                 >
@@ -94,19 +107,7 @@ export default function Header() {
                   Stratégies et conseils
                 </a>
 
-                <a
-                    href="/bookmakers"
-                  className="block px-3 py-2 rounded-lg hover:bg-white/5"
-                >
-                  Bookmakers
-                </a>
-
-                <a
-                   href="/bookmakers"
-                  className="block px-3 py-2 rounded-lg hover:bg-white/5"
-                >
-                  Comparatifs
-                </a>
+                
               </div>
             </div>
           </div>
