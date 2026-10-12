@@ -2,14 +2,15 @@
 
 import { useState } from "react";
 
-type ZoneKey =
-  | "centralAfrica"
-  | "westAfrica"
-  | "easternEurope"
-  | "latinAmerica"
-  | "westernEurope";
+type CountryGroup = {
+  region: string;
+  countries: string[];
+};
 
-type AvailabilityStatus = "verify" | "available" | "restricted";
+type PaymentGroup = {
+  title: string;
+  description: string;
+};
 
 type Bookmaker = {
   name: string;
@@ -22,34 +23,44 @@ type Bookmaker = {
   affiliateUrl: string;
   advantages: string[];
   disadvantages: string[];
-  availability: Record<ZoneKey, AvailabilityStatus>;
+  restrictedCountries: string[];
+  restrictionNote: string;
+  paymentMethods: PaymentGroup[]; // 👈 Spécifique à chaque bookmaker
 };
 
-const zones: { key: ZoneKey; name: string; countries: string }[] = [
+const marketCountries: CountryGroup[] = [
   {
-    key: "centralAfrica",
-    name: "Afrique centrale",
-    countries: "Cameroun, Gabon, Congo",
+    region: "Afrique centrale",
+    countries: [
+      "Cameroun",
+      "Gabon",
+      "République du Congo",
+      "République démocratique du Congo",
+    ],
   },
   {
-    key: "westAfrica",
-    name: "Afrique de l’Ouest",
-    countries: "Côte d’Ivoire, Sénégal, Bénin",
+    region: "Afrique de l’Ouest",
+    countries: [
+      "Côte d’Ivoire",
+      "Sénégal",
+      "Bénin",
+      "Togo",
+      "Mali",
+      "Guinée",
+    ],
   },
   {
-    key: "easternEurope",
-    name: "Europe de l’Est",
-    countries: "Roumanie, Bulgarie",
-  },
-  {
-    key: "latinAmerica",
-    name: "Amérique latine",
-    countries: "Brésil, Argentine",
-  },
-  {
-    key: "westernEurope",
-    name: "Europe de l’Ouest",
-    countries: "France, Belgique",
+    region: "Autres marchés à examiner",
+    countries: [
+      "Madagascar",
+      "Inde",
+      "Philippines",
+      "Brésil",
+      "Argentine",
+      "Colombie",
+      "Ukraine",
+      "Turquie",
+    ],
   },
 ];
 
@@ -74,13 +85,34 @@ const bookmakers: Bookmaker[] = [
       "Conditions du bonus à vérifier",
       "Disponibilité variable selon le pays",
     ],
-    availability: {
-      centralAfrica: "verify",
-      westAfrica: "verify",
-      easternEurope: "verify",
-      latinAmerica: "verify",
-      westernEurope: "verify",
-    },
+    restrictedCountries: [
+      "Australie",
+      "Curaçao",
+      "France",
+      "Pays-Bas",
+      "Espagne",
+      "États-Unis et dépendances",
+      "Royaume-Uni",
+      "Aruba",
+      "Bonaire",
+      "Saba",
+    ],
+    restrictionNote:
+      "Ces territoires figurent dans les restrictions des conditions de 1xBet consultées. Vérifie toujours les conditions officielles applicables à ton pays.",
+    paymentMethods: [
+      {
+        title: "Mobile Money & Paiements locaux",
+        description: "Orange Money, MTN MoMo, Wave, Moov Money, Airtel Money.",
+      },
+      {
+        title: "Cartes & Virements",
+        description: "Visa, Mastercard.",
+      },
+      {
+        title: "E-wallets & Cryptomonnaies",
+        description: "Skrill, Neteller, Perfect Money, Bitcoin, USDT.",
+      },
+    ],
   },
   {
     name: "1win",
@@ -101,13 +133,40 @@ const bookmakers: Bookmaker[] = [
       "Conditions du bonus à vérifier",
       "Disponibilité à confirmer dans ton pays",
     ],
-    availability: {
-      centralAfrica: "verify",
-      westAfrica: "verify",
-      easternEurope: "verify",
-      latinAmerica: "verify",
-      westernEurope: "verify",
-    },
+    restrictedCountries: [
+      "États-Unis",
+      "Canada",
+      "Royaume-Uni",
+      "Espagne",
+      "Lettonie",
+      "Lituanie",
+      "Pays-Bas",
+      "France",
+      "Italie",
+      "Suisse",
+      "Albanie",
+      "Pakistan",
+      "Syrie",
+      "Soudan du Sud",
+      "Îles Caïmans",
+      "Haïti",
+      "Jamaïque",
+      "Corée du Nord",
+      "Malte",
+      "Panama",
+    ],
+    restrictionNote:
+      "Cette liste est indicative et repose sur des conditions publiées pour un marché localisé. Elle ne remplace pas les conditions officielles applicables à ton pays.",
+    paymentMethods: [
+      {
+        title: "Mobile Money & Paiements locaux",
+        description: "Orange Money, MTN MoMo, Wave, Perfect Money.",
+      },
+      {
+        title: "Cartes & Crypto",
+        description: "Visa, Mastercard, Cryptomonnaies (USDT, BTC).",
+      },
+    ],
   },
   {
     name: "Betwinner",
@@ -128,56 +187,21 @@ const bookmakers: Bookmaker[] = [
       "Conditions de dépôt et de retrait à vérifier",
       "Offre variable selon le pays",
     ],
-    availability: {
-      centralAfrica: "verify",
-      westAfrica: "verify",
-      easternEurope: "verify",
-      latinAmerica: "verify",
-      westernEurope: "verify",
-    },
+    restrictedCountries: [],
+    restrictionNote:
+      "Aucune liste exhaustive de pays restreints n’a été confirmée pour cette fiche. Cela ne signifie pas que le service est disponible partout.",
+    paymentMethods: [
+      {
+        title: "Mobile Money & Paiements locaux",
+        description: "Orange Money, MTN MoMo, Wave, Moov Money, M-Pesa.",
+      },
+      {
+        title: "Autres options",
+        description: "Visa, Mastercard, Skrill, Neteller, Crypto.",
+      },
+    ],
   },
 ];
-
-function StatusLabel({ status }: { status: AvailabilityStatus }) {
-  const labels: Record<AvailabilityStatus, string> = {
-    verify: "À vérifier",
-    available: "Confirmé",
-    restricted: "Restreint",
-  };
-
-  const colors: Record<AvailabilityStatus, string> = {
-    verify: "bg-amber-500/15 text-amber-300",
-    available: "bg-emerald-500/15 text-emerald-300",
-    restricted: "bg-red-500/15 text-red-300",
-  };
-
-  return (
-    <span
-      className={`inline-flex rounded-full px-3 py-1 text-xs font-semibold ${colors[status]}`}
-    >
-      {labels[status]}
-    </span>
-  );
-}
-
-function AvailabilityZoneCard({ bookmaker }: { bookmaker: Bookmaker }) {
-  return (
-    <div className="mt-3 grid gap-3 sm:grid-cols-2">
-      {zones.map((zone) => (
-        <div
-          key={zone.key}
-          className="rounded-xl border border-white/10 bg-slate-950/60 p-3"
-        >
-          <div className="flex flex-wrap items-center justify-between gap-2">
-            <h5 className="font-semibold text-white">{zone.name}</h5>
-            <StatusLabel status={bookmaker.availability[zone.key]} />
-          </div>
-          <p className="mt-2 text-sm text-slate-400">{zone.countries}</p>
-        </div>
-      ))}
-    </div>
-  );
-}
 
 function BonusPanel({
   bookmaker,
@@ -219,6 +243,115 @@ function BonusPanel({
         avant tout dépôt.
       </p>
     </div>
+  );
+}
+
+function CountryProfilePanel({
+  bookmaker,
+}: {
+  bookmaker: Bookmaker;
+}) {
+  return (
+    <section className="mt-6 rounded-2xl border border-white/10 bg-slate-950/60 p-4">
+      <h4 className="text-lg font-extrabold text-white">
+        Disponibilité par pays
+      </h4>
+
+      <p className="mt-2 text-sm leading-6 text-slate-400">
+        Les pays ci-dessous sont des marchés à examiner, pas une
+        confirmation d’accès ni une autorisation légale. La disponibilité
+        dépend des règles de l’opérateur et de la législation locale.
+      </p>
+
+      <div className="mt-5">
+        <h5 className="font-bold text-emerald-300">
+          Marchés à vérifier
+        </h5>
+
+        <div className="mt-3 space-y-4">
+          {marketCountries.map((group) => (
+            <div key={group.region}>
+              <p className="mb-2 text-sm font-semibold text-slate-200">
+                {group.region}
+              </p>
+
+              <div className="flex flex-wrap gap-2">
+                {group.countries.map((country) => (
+                  <span
+                    key={country}
+                    className="rounded-lg border border-emerald-400/20 bg-emerald-400/[0.07] px-3 py-2 text-xs text-slate-200"
+                  >
+                    {country}
+                  </span>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div className="mt-6">
+        <h5 className="font-bold text-red-300">
+          Pays ou territoires signalés comme restreints
+        </h5>
+
+        {bookmaker.restrictedCountries.length > 0 ? (
+          <>
+            <div className="mt-3 flex flex-wrap gap-2">
+              {bookmaker.restrictedCountries.map((country) => (
+                <span
+                  key={country}
+                  className="rounded-lg border border-red-400/20 bg-red-400/[0.07] px-3 py-2 text-xs text-slate-200"
+                >
+                  {country}
+                </span>
+              ))}
+            </div>
+
+            <p className="mt-3 text-xs leading-5 text-slate-400">
+              {bookmaker.restrictionNote}
+            </p>
+          </>
+        ) : (
+          <p className="mt-2 text-sm leading-6 text-slate-400">
+            {bookmaker.restrictionNote}
+          </p>
+        )}
+      </div>
+    </section>
+  );
+}
+
+function PaymentMethodsPanel({
+  paymentMethods,
+}: {
+  paymentMethods: PaymentGroup[];
+}) {
+  return (
+    <section className="mt-6 rounded-2xl border border-white/10 bg-slate-950/60 p-4">
+      <h4 className="text-lg font-extrabold text-white">
+        Moyens de paiement
+      </h4>
+
+      <div className="mt-4 space-y-4">
+        {paymentMethods.map((group) => (
+          <div key={group.title}>
+            <h5 className="font-semibold text-emerald-300">
+              {group.title}
+            </h5>
+            <p className="mt-1 text-sm leading-6 text-slate-300">
+              {group.description}
+            </p>
+          </div>
+        ))}
+      </div>
+
+      <p className="mt-4 rounded-xl border border-amber-400/15 bg-amber-400/[0.05] p-3 text-xs leading-5 text-amber-100/80">
+        Avant tout dépôt, consulte la caisse officielle de l’opérateur
+        pour vérifier les méthodes disponibles, les frais, les limites
+        et les conditions de retrait dans ton pays.
+      </p>
+    </section>
   );
 }
 
@@ -369,7 +502,9 @@ export default function BookmakersPage() {
                         height={44}
                         className="h-11 w-11 rounded-lg bg-white object-contain p-1"
                       />
-                      <span className="font-bold">{bookmaker.name}</span>
+                      <span className="font-bold">
+                        {bookmaker.name}
+                      </span>
                     </div>
                   </td>
 
@@ -392,7 +527,9 @@ export default function BookmakersPage() {
                         onClick={() => copyBonusCode(bookmaker)}
                         className="text-sm font-semibold text-emerald-300"
                       >
-                        {copiedSlug === bookmaker.slug ? "Copié ✓" : "Copier"}
+                        {copiedSlug === bookmaker.slug
+                          ? "Copié ✓"
+                          : "Copier"}
                       </button>
                     </div>
                   </td>
@@ -491,14 +628,10 @@ export default function BookmakersPage() {
                 </ul>
               </div>
 
-              <div className="mt-6">
-                <h4 className="font-bold">Disponibilité géographique</h4>
-                <p className="mt-2 text-xs leading-6 text-slate-400">
-                  Ces informations ne confirment pas la disponibilité
-                  légale dans chaque pays.
-                </p>
-                <AvailabilityZoneCard bookmaker={bookmaker} />
-              </div>
+              <CountryProfilePanel bookmaker={bookmaker} />
+
+              {/* Les moyens de paiement sont maintenant propres à ce bookmaker */}
+              <PaymentMethodsPanel paymentMethods={bookmaker.paymentMethods} />
 
               <a
                 href={bookmaker.affiliateUrl}
@@ -516,26 +649,13 @@ export default function BookmakersPage() {
       <section className="mx-auto max-w-7xl px-4 pb-8 sm:px-6 lg:px-8">
         <div className="rounded-2xl border border-white/10 bg-slate-900/50 p-5">
           <h2 className="font-bold">
-            Comprendre les indications de disponibilité
+            Comprendre la disponibilité par pays
           </h2>
           <p className="mt-3 text-sm leading-6 text-slate-400">
-            Toutes les zones sont actuellement marquées « À vérifier ».
-            Il faut contrôler les règles du bookmaker et la législation
-            locale avant de s’inscrire.
-          </p>
-        </div>
-      </section>
-
-      <section className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
-        <div className="rounded-2xl border border-white/10 bg-slate-900/60 p-6 sm:p-8">
-          <h2 className="text-2xl font-black">
-            Transparence sur l’affiliation
-          </h2>
-          <p className="mt-4 text-sm leading-7 text-slate-300">
-            Certains liens sont affiliés. Maffo Sport peut recevoir une
-            commission si tu t’inscris via ces liens, sans frais
-            supplémentaires pour toi. Cela ne garantit ni gain ni
-            pertinence de l’offre pour ta situation.
+            Une plateforme peut être accessible sur Internet sans être
+            autorisée à proposer ses services dans ton pays. Vérifie les
+            conditions de l’opérateur et la réglementation locale avant
+            toute inscription.
           </p>
         </div>
       </section>
@@ -586,7 +706,7 @@ export default function BookmakersPage() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-7xl px-4 pb-12 pt-4 sm:px-6 lg:px-8">
+      <footer className="mx-auto max-w-7xl px-4 pb-8 pt-4 sm:px-6 lg:px-8">
         <p className="text-xs leading-6 text-slate-500">
           Les bonus et les codes sont soumis aux conditions des opérateurs.
           Les offres, les conditions de mise et les moyens de paiement
@@ -594,7 +714,14 @@ export default function BookmakersPage() {
           conditions officielles avant toute inscription ou tout dépôt.
           Maffo Sport ne garantit aucun résultat de pari.
         </p>
-      </section>
+
+        <p className="mt-3 text-[10px] leading-5 text-slate-600">
+          Certains liens de cette page sont affiliés. Maffo Sport peut
+          recevoir une commission si tu t’inscris via ces liens, sans
+          frais supplémentaires pour toi. Cette rémunération ne garantit
+          ni gain ni pertinence de l’offre pour ta situation.
+        </p>
+      </footer>
     </main>
   );
 }
