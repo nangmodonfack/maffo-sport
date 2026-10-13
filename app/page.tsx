@@ -94,13 +94,13 @@ const evergreenArticles = [
   },
 ];
 const bettingArticles = [
-  {
-    category: "Types de paris",
-    title: "1N2, double chance, Over/Under : comprendre les bases",
-    description:
-      "Les principaux marchés de paris sportifs expliqués simplement.",
-    link: "/articles/1n2-double-chance-over-under-comprendre-les-bases",
-  },
+ {
+  category: "Types de paris",
+  title: "Les types de paris sportifs : le guide complet",
+  description:
+    "Comprendre le 1N2, la double chance, l’Over/Under, le BTTS et les handicaps.",
+  link: "/types-de-paris-sportifs",
+},
   {
     category: "Stratégie",
     title: "Comment analyser les cotes d'un match ?",
