@@ -45,20 +45,20 @@ export default function Header() {
 
             <div className="absolute top-full left-0 pt-1 invisible opacity-0 group-hover:visible group-hover:opacity-100 transition-opacity duration-150">
               <div className="glass rounded-xl p-2 w-56">
-                {[
-                  "Compétitions",
-                  "Équipes & joueurs",
-                  "Records & histoire",
-                  "Football africain",
-                ].map((item) => (
-                  <a
-                    key={item}
-                    href="#football"
-                    className="block px-3 py-2 rounded-lg hover:bg-white/5"
-                  >
-                    {item}
-                  </a>
-                ))}
+               {[
+  { label: "Compétitions", href: "/competitions" },
+  { label: "Équipes & joueurs", href: "/equipes-joueurs" },
+  { label: "Records & histoire", href: "/histoire-football" },
+  { label: "Football africain", href: "/football-africain" },
+].map((item) => (
+  <a
+    key={item.href}
+    href={item.href}
+    className="block px-3 py-2 rounded-lg hover:bg-white/5"
+  >
+    {item.label}
+  </a>
+))}
               </div>
             </div>
           </div>
@@ -215,21 +215,21 @@ export default function Header() {
 
             {mobileFootball && (
               <div className="pb-2 pl-4">
-                {[
-                  "Compétitions",
-                  "Équipes & joueurs",
-                  "Records & histoire",
-                  "Football africain",
-                ].map((item) => (
-                  <a
-                    key={item}
-                    href="#football"
-                    onClick={closeMobileMenu}
-                    className="block py-2.5 text-sm text-zinc-400"
-                  >
-                    {item}
-                  </a>
-                ))}
+               {[
+  { label: "Compétitions", href: "/competitions" },
+  { label: "Équipes & joueurs", href: "/equipes-joueurs" },
+  { label: "Records & histoire", href: "/histoire-football" },
+  { label: "Football africain", href: "/football-africain" },
+].map((item) => (
+  <a
+    key={item.href}
+    href={item.href}
+    onClick={closeMobileMenu}
+    className="block py-2.5 text-sm text-zinc-400"
+  >
+    {item.label}
+  </a>
+))} 
               </div>
             )}
           </div>
