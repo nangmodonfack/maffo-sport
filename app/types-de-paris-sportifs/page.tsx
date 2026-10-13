@@ -1,5 +1,7 @@
-import type { Metadata } from "next";
+Import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
+import type { ReactNode } from "react";
 
 export const metadata: Metadata = {
   title: "Types de paris sportifs : guide complet pour comprendre les marchés",
@@ -34,25 +36,32 @@ function ScreenshotSlot({
   number,
   title,
   description,
+  src,
+  alt,
 }: {
   number: string;
   title: string;
   description: string;
+  src: string;
+  alt: string;
 }) {
   return (
-    <figure className="my-8 overflow-hidden rounded-2xl border border-dashed border-green-400/40 bg-[#0b1017]">
-      <div className="flex min-h-48 flex-col items-center justify-center gap-3 px-6 py-8 text-center">
-        <span className="rounded-full border border-green-400/30 bg-green-400/10 px-3 py-1 text-xs font-bold uppercase tracking-widest text-green-300">
-          Capture {number} à intégrer
-        </span>
-        <div className="text-lg font-bold text-white">{title}</div>
-        <p className="max-w-xl text-sm leading-6 text-zinc-400">
+    <figure className="my-8 overflow-hidden rounded-2xl border border-white/10 bg-[#0b1017]">
+      <Image
+        src={src}
+        alt={alt}
+        width={1200}
+        height={675}
+        className="h-auto w-full object-contain"
+        sizes="(max-width: 768px) 100vw, 800px"
+      />
+      <figcaption className="border-t border-white/10 px-4 py-3">
+        <p className="text-sm font-bold text-white">
+          Illustration {number} — {title}
+        </p>
+        <p className="mt-1 text-xs leading-5 text-zinc-400">
           {description}
         </p>
-      </div>
-      <figcaption className="border-t border-white/5 px-4 py-3 text-xs leading-5 text-zinc-500">
-        Emplacement éditorial réservé à une capture réelle. Ajouter une légende
-        descriptive et un texte alternatif lors de l’intégration de l’image.
       </figcaption>
     </figure>
   );
@@ -65,7 +74,7 @@ function MarketCard({
 }: {
   title: string;
   badge: string;
-  children: React.ReactNode;
+  children: ReactNode;
 }) {
   return (
     <article className="rounded-2xl border border-white/10 bg-white/[0.025] p-5 md:p-6">
@@ -85,27 +94,27 @@ const faqs = [
   },
   {
     q: "Quelle est la différence entre victoire ou nul et double chance ?",
-    a: "Le résultat du match propose généralement trois issues : victoire de l’équipe à domicile, match nul ou victoire de l’équipe à l’extérieur. La double chance regroupe deux de ces issues dans une seule sélection, par exemple victoire à domicile ou nul.",
+    a: "Le résultat du match propose généralement trois issues : victoire à domicile, match nul ou victoire à l'extérieur. La double chance regroupe deux de ces issues dans une seule sélection, par exemple victoire à domicile ou nul.",
   },
   {
     q: "Que signifie Over 2,5 buts ?",
-    a: "Over 2,5 signifie que le total des buts inscrits par les deux équipes doit être supérieur à 2,5. Comme un match ne peut pas se terminer avec un demi-but, il faut donc au moins trois buts pour que cette sélection soit gagnante.",
+    a: "Over 2,5 signifie que le total des buts inscrits par les deux équipes doit être supérieur à 2,5. Il faut donc au moins trois buts pour que cette sélection soit gagnante.",
   },
   {
     q: "Que signifie Under 2,5 buts ?",
-    a: "Under 2,5 signifie que le total des buts doit être inférieur à 2,5. La sélection est donc gagnante si le match se termine avec zéro, un ou deux buts, selon les règles habituelles de ce marché.",
+    a: "Under 2,5 signifie que le total des buts doit être inférieur à 2,5. La sélection est généralement gagnante si le match se termine avec zéro, un ou deux buts.",
   },
   {
     q: "Que signifie BTTS ou les deux équipes marquent ?",
-    a: "BTTS signifie « Both Teams To Score ». La sélection Oui gagne lorsque chaque équipe marque au moins un but. La sélection Non gagne si au moins une équipe ne marque aucun but, selon les règles du marché proposé.",
+    a: "BTTS signifie « Both Teams To Score ». La sélection Oui gagne lorsque chaque équipe marque au moins un but. La sélection Non gagne si au moins une équipe ne marque aucun but, selon les règles du marché.",
   },
   {
     q: "Comment fonctionne le handicap au football ?",
-    a: "Le handicap ajoute un avantage ou un désavantage fictif à une équipe pour le règlement du pari. Le résultat réel est ajusté selon le handicap choisi. Il faut vérifier s’il s’agit d’un handicap européen ou asiatique, car le règlement et les possibilités de remboursement peuvent différer.",
+    a: "Le handicap ajoute un avantage ou un désavantage fictif à une équipe pour le règlement du pari. Il faut vérifier s'il s'agit d'un handicap européen ou asiatique, car les règles et possibilités de remboursement peuvent différer.",
   },
   {
     q: "La double chance est-elle un pari sûr ?",
-    a: "Non. Elle couvre deux issues possibles sur trois dans le marché classique du résultat, mais elle peut perdre. Les cotes, les circonstances du match et les règles du bookmaker doivent être examinées, sans considérer ce marché comme une garantie.",
+    a: "Non. Elle couvre deux issues possibles sur trois dans le marché classique du résultat, mais elle peut perdre. Aucune sélection ne garantit un gain.",
   },
   {
     q: "Peut-on gagner à coup sûr avec un type de pari ?",
@@ -248,10 +257,9 @@ export default function TypesDeParisSportifsPage() {
             </p>
             <p className="mt-4 leading-8 text-zinc-400">
               Deux sélections peuvent porter sur la même rencontre sans poser
-              exactement la même question. Par exemple, miser sur une double
-              chance ne revient pas à miser sur le nombre de buts. Pour bien
-              comprendre un ticket, il faut identifier le marché, la sélection
-              choisie et les règles de règlement qui s’y appliquent.
+              exactement la même question. Pour comprendre un ticket, il faut
+              identifier le marché, la sélection choisie et les règles de
+              règlement qui s’y appliquent.
             </p>
 
             <div className="mt-6 grid gap-4 sm:grid-cols-2">
@@ -283,10 +291,9 @@ export default function TypesDeParisSportifsPage() {
               Comment fonctionne un marché de paris ?
             </h2>
             <p className="leading-8 text-zinc-300">
-              Avant de choisir une sélection, il est utile de lire le libellé
-              exact du marché et de vérifier les règles du bookmaker. Les
-              termes peuvent se ressembler, mais ils ne portent pas toujours
-              sur le même événement.
+              Avant de choisir une sélection, lisez le libellé exact du marché
+              et vérifiez les règles du bookmaker. Les termes peuvent se
+              ressembler, mais ne portent pas toujours sur le même événement.
             </p>
             <ol className="mt-5 list-decimal space-y-3 pl-6 leading-7 text-zinc-400 marker:font-bold marker:text-green-300">
               <li>
@@ -303,15 +310,17 @@ export default function TypesDeParisSportifsPage() {
               </li>
               <li>
                 <strong className="text-white">Lire le règlement :</strong>{" "}
-                certains handicaps ou marchés spécifiques peuvent avoir des
-                règles particulières en cas de nul, de prolongation ou de
-                match interrompu.
+                certains marchés peuvent avoir des règles particulières en cas
+                de nul, de prolongation ou de match interrompu.
               </li>
             </ol>
+
             <ScreenshotSlot
               number="1"
-              title="Exemple de l’écran des marchés d’un match"
-              description="Capturer un écran réel où les catégories Résultat, Total de buts, Les deux équipes marquent et Handicap sont visibles. Masquer les données personnelles et le solde du compte."
+              title="Les marchés disponibles sur un match"
+              description="Présentation des principales catégories de marchés de paris football."
+              src="/images/types-de-paris/resultat-1n2.png"
+              alt="Exemple des marchés de paris sur un match de football"
             />
           </section>
 
@@ -325,6 +334,7 @@ export default function TypesDeParisSportifsPage() {
               domicile, N au match nul et 2 à la victoire de l’équipe à
               l’extérieur. Dans ce marché, les trois issues sont séparées.
             </p>
+
             <div className="my-6 overflow-x-auto rounded-xl border border-white/10">
               <table className="w-full min-w-[450px] text-left text-sm">
                 <thead className="bg-white/5 text-zinc-300">
@@ -353,17 +363,19 @@ export default function TypesDeParisSportifsPage() {
                 </tbody>
               </table>
             </div>
+
             <p className="leading-8 text-zinc-400">
-              Il faut distinguer une sélection « victoire à domicile » d’une
-              sélection « victoire ou nul à domicile ». La première perd
-              normalement si le match se termine par un nul ; la seconde
-              regroupe deux issues et appartient à la famille de la double
-              chance.
+              Une sélection « victoire à domicile » perd normalement si le
+              match se termine par un nul. Une sélection « victoire ou nul à
+              domicile » couvre deux issues et relève de la double chance.
             </p>
+
             <ScreenshotSlot
               number="2"
-              title="Le marché 1N2 sur une rencontre"
-              description="Prévoir une capture montrant les trois choix 1, N et 2, avec les intitulés lisibles. Ajouter une légende expliquant le sens de chaque code."
+              title="Le marché 1N2"
+              description="Les trois issues possibles du résultat du match."
+              src="/images/types-de-paris/cotes-1n2.png"
+              alt="Exemple du marché 1N2 avec domicile, nul et extérieur"
             />
           </section>
 
@@ -376,6 +388,7 @@ export default function TypesDeParisSportifsPage() {
               marché du résultat. Elle ne signifie pas que le pari est certain :
               une des issues non couvertes peut toujours se produire.
             </p>
+
             <div className="mt-6 grid gap-4 sm:grid-cols-3">
               <MarketCard title="1X" badge="Domicile ou nul">
                 La sélection est gagnante si l’équipe à domicile gagne ou si la
@@ -390,24 +403,25 @@ export default function TypesDeParisSportifsPage() {
                 match. Elle perd si le résultat est un nul.
               </MarketCard>
             </div>
+
             <h3 className="mt-7 text-xl font-bold">Exemple simple</h3>
             <p className="mt-3 leading-8 text-zinc-400">
               Imaginons un match entre Club A et Club B. Une sélection 1X couvre
               la victoire du Club A et le nul. Si Club B gagne, la sélection
-              échoue. L’intérêt pédagogique de cet exemple est de montrer que
-              la double chance couvre plusieurs issues, mais pas toutes.
+              échoue. La double chance couvre plusieurs issues, mais pas toutes.
             </p>
             <p className="mt-4 leading-8 text-zinc-400">
               La cote proposée dépend notamment de l’évaluation du risque par
-              le bookmaker. Couvrir deux issues peut être associé à une cote
-              différente de celle d’une seule issue, mais cela ne permet pas de
-              conclure qu’une sélection est rentable ou adaptée à chaque
-              rencontre.
+              le bookmaker. Couvrir deux issues ne permet pas de conclure qu’une
+              sélection est rentable ou adaptée à chaque rencontre.
             </p>
+
             <ScreenshotSlot
               number="3"
-              title="Les trois options de double chance"
-              description="Capture d’écran du marché 1X, X2 et 12. Les trois options doivent être lisibles, sans afficher de données privées du compte."
+              title="Les options de double chance"
+              description="Présentation des sélections 1X, X2 et 12."
+              src="/images/types-de-paris/double-chance.png"
+              alt="Exemple du marché de double chance 1X, X2 et 12"
             />
           </section>
 
@@ -417,16 +431,16 @@ export default function TypesDeParisSportifsPage() {
             </h2>
             <p className="leading-8 text-zinc-300">
               Over/Under est un marché portant sur le total d’un événement
-              pendant une rencontre. Dans les paris de football, il concerne
-              souvent le nombre total de buts inscrits par les deux équipes.
-              « Over » signifie au-dessus de la ligne ; « Under » signifie
-              en dessous.
+              pendant une rencontre. Au football, il concerne souvent le nombre
+              total de buts inscrits par les deux équipes. « Over » signifie
+              au-dessus de la ligne ; « Under » signifie en dessous.
             </p>
             <p className="mt-4 leading-8 text-zinc-400">
               Une ligne de 2,5 buts permet de comprendre facilement la
-              différence. Le demi-but évite qu’un total entier soit exactement
-              égal à la ligne.
+              différence : il faut au moins trois buts pour dépasser cette
+              ligne.
             </p>
+
             <div className="my-6 overflow-x-auto rounded-xl border border-white/10">
               <table className="w-full min-w-[520px] text-left text-sm">
                 <thead className="bg-white/5 text-zinc-300">
@@ -460,26 +474,27 @@ export default function TypesDeParisSportifsPage() {
                 </tbody>
               </table>
             </div>
+
             <h3 className="mt-7 text-xl font-bold">
               Pourquoi la ligne compte-t-elle autant ?
             </h3>
             <p className="mt-3 leading-8 text-zinc-400">
-              Over 1,5 et Over 2,5 ne demandent pas le même nombre de buts.
-              Une rencontre qui se termine 1–1 atteint le seuil d’Over 1,5,
-              mais pas celui d’Over 2,5. Il est donc important de lire le
-              chiffre qui accompagne Over ou Under au lieu de se fier
-              uniquement au nom du marché.
+              Over 1,5 et Over 2,5 n’ont pas la même condition. Un score de 1–1
+              atteint le seuil d’Over 1,5, mais pas celui d’Over 2,5. Il faut
+              donc lire le chiffre qui accompagne Over ou Under.
             </p>
             <p className="mt-4 leading-8 text-zinc-400">
               Certains bookmakers proposent également des totaux pour une
               équipe, une mi-temps, les corners ou les cartons. Les règles
-              diffèrent selon le marché : vérifiez toujours l’intitulé exact
-              avant de comparer deux sélections.
+              diffèrent selon le marché : vérifiez toujours l’intitulé exact.
             </p>
+
             <ScreenshotSlot
               number="4"
-              title="Exemple d’un marché Over/Under"
-              description="Capture réelle des lignes Over 1,5, Over 2,5, Under 1,5 et Under 2,5 si elles sont disponibles. Les cotes peuvent être floutées si elles risquent de rendre la capture rapidement obsolète."
+              title="Le marché Over/Under"
+              description="Exemple des lignes de total de buts."
+              src="/images/types-de-paris/over-under.png"
+              alt="Exemple du marché Over/Under sur le total de buts"
             />
           </section>
 
@@ -489,10 +504,10 @@ export default function TypesDeParisSportifsPage() {
             </h2>
             <p className="leading-8 text-zinc-300">
               BTTS vient de l’expression anglaise « Both Teams To Score ». Ce
-              marché ne cherche pas directement à déterminer le vainqueur du
-              match : il porte sur le fait que les deux équipes inscrivent ou
-              non au moins un but.
+              marché porte sur le fait que les deux équipes inscrivent ou non
+              au moins un but, pas directement sur le vainqueur du match.
             </p>
+
             <div className="mt-6 grid gap-4 sm:grid-cols-2">
               <MarketCard title="BTTS — Oui" badge="Chaque équipe marque">
                 Un score de 1–1, 2–1 ou 2–2 répond à la condition, puisque les
@@ -503,23 +518,25 @@ export default function TypesDeParisSportifsPage() {
                 une équipe n’a pas marqué.
               </MarketCard>
             </div>
+
             <p className="mt-5 leading-8 text-zinc-400">
               Une sélection BTTS Oui peut être gagnante même si une équipe
-              perd. Par exemple, un résultat de 2–1 répond à la condition,
-              alors que le marché du résultat et le BTTS ne posent pas la
-              même question.
+              perd. Un résultat de 2–1 répond à cette condition, alors que le
+              marché du résultat pose une question différente.
             </p>
             <p className="mt-4 leading-8 text-zinc-400">
-              Pour comprendre ce marché, on peut étudier les buts marqués et
-              encaissés, les performances à domicile et à l’extérieur ainsi
-              que les absences connues. Ces informations peuvent aider à
-              décrire le contexte, mais elles ne permettent pas de prédire avec
+              Les buts marqués et encaissés, les performances à domicile et à
+              l’extérieur ainsi que les absences connues donnent du contexte.
+              Ces informations ne permettent toutefois pas de prédire avec
               certitude le prochain score.
             </p>
+
             <ScreenshotSlot
               number="5"
-              title="Le marché BTTS Oui / Non"
-              description="Capture d’écran montrant les choix Oui et Non. Privilégier une image nette et recadrée sur le marché, sans compte personnel ni informations sensibles."
+              title="Les deux équipes marquent"
+              description="Présentation des options Oui et Non."
+              src="/images/types-de-paris/btts.png"
+              alt="Exemple du marché BTTS Oui ou Non au football"
             />
           </section>
 
@@ -530,40 +547,40 @@ export default function TypesDeParisSportifsPage() {
             <p className="leading-8 text-zinc-300">
               Le handicap ajuste fictivement le score d’une équipe pour le
               règlement du pari. Il permet de proposer des sélections autour
-              d’un écart de buts, mais le mot « handicap » ne désigne pas une
-              seule règle universelle.
+              d’un écart de buts, mais ne désigne pas une seule règle universelle.
             </p>
+
             <h3 className="mt-6 text-xl font-bold">Le handicap européen</h3>
             <p className="mt-3 leading-8 text-zinc-400">
               Le handicap européen ajoute un avantage ou un désavantage
-              déterminé au score retenu pour le marché. Il propose
-              généralement des issues qui tiennent compte de ce score ajusté,
-              y compris une possibilité de nul selon la ligne proposée.
-              Le règlement exact doit être lu sur le bookmaker concerné.
+              déterminé au score retenu pour le marché. Il propose généralement
+              trois issues qui tiennent compte du score ajusté, y compris une
+              possibilité de nul selon la ligne proposée.
             </p>
+
             <h3 className="mt-6 text-xl font-bold">Le handicap asiatique</h3>
             <p className="mt-3 leading-8 text-zinc-400">
               Le handicap asiatique utilise des lignes qui peuvent supprimer
               l’issue du nul ou prévoir un remboursement dans certaines
               situations. Les handicaps entiers et les quarts de but peuvent
-              avoir des règles de règlement différentes. Il est important de
-              comprendre la ligne choisie avant de considérer la sélection.
+              avoir des règles de règlement différentes.
             </p>
+
             <div className="my-6 rounded-2xl border border-yellow-400/20 bg-yellow-400/5 p-5">
-              <h3 className="font-bold text-yellow-200">
-                Point de vigilance
-              </h3>
+              <h3 className="font-bold text-yellow-200">Point de vigilance</h3>
               <p className="mt-2 text-sm leading-7 text-zinc-400">
-                Ne supposez pas que tous les handicaps sont réglés de la même
-                façon. Vérifiez le type de handicap, la ligne, le score pris en
-                compte et les règles de remboursement ou de demi-gain et
-                demi-perte lorsqu’elles existent.
+                Vérifiez le type de handicap, la ligne, le score pris en compte
+                et les règles de remboursement ou de demi-gain et demi-perte
+                lorsqu’elles existent.
               </p>
             </div>
+
             <ScreenshotSlot
               number="6"
-              title="Exemple de ligne de handicap"
-              description="Capture du marché handicap européen ou asiatique en indiquant clairement le type de marché. Ne pas juxtaposer deux marchés différents sans expliquer leur différence."
+              title="Le marché handicap"
+              description="Exemple d’un marché handicap européen ou asiatique."
+              src="/images/types-de-paris/handicap.png"
+              alt="Exemple d’un marché de handicap au football"
             />
           </section>
 
@@ -573,9 +590,10 @@ export default function TypesDeParisSportifsPage() {
             </h2>
             <p className="mb-5 leading-8 text-zinc-400">
               Ce tableau résume la question à laquelle répond chaque marché.
-              Il sert à choisir le bon vocabulaire, pas à déterminer le pari
-              qui serait le plus rentable.
+              Il sert à comprendre le vocabulaire, pas à déterminer le pari qui
+              serait le plus rentable.
             </p>
+
             <div className="overflow-x-auto rounded-2xl border border-white/10">
               <table className="w-full min-w-[650px] text-left text-sm">
                 <thead className="bg-white/5 text-zinc-300">
@@ -609,7 +627,7 @@ export default function TypesDeParisSportifsPage() {
                     <td className="p-4 font-bold text-white">BTTS</td>
                     <td className="p-4">Les deux équipes marquent-elles ?</td>
                     <td className="p-4">Oui ou Non</td>
-                    <td className="p-4">Condition de but pour chaque équipe</td>
+                    <td className="p-4">But de chaque équipe</td>
                   </tr>
                   <tr>
                     <td className="p-4 font-bold text-white">Handicap</td>
@@ -626,6 +644,7 @@ export default function TypesDeParisSportifsPage() {
             <h2 className="mb-4 text-2xl font-black md:text-3xl">
               Les erreurs à éviter lorsqu’on découvre les marchés
             </h2>
+
             <div className="space-y-4">
               {[
                 [
