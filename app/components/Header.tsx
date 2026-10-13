@@ -263,7 +263,7 @@ export default function Header() {
                 </a>
 
                 <a
-                  href="#paris"
+                  href="/types-de-paris-sportifs"
                   onClick={closeMobileMenu}
                   className="block py-2.5 text-sm text-zinc-400"
                 >
