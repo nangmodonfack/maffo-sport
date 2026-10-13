@@ -174,7 +174,7 @@ export default function Footer() {
             </a>
 
             <a
-              href="#paris"
+              href="/types-de-paris-sportifs"
               className="block hover:text-white"
             >
               Types de paris
