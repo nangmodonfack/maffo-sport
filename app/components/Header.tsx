@@ -101,7 +101,7 @@ export default function Header() {
                 </a>
 
                 <a
-                  href="#paris"
+                  href="strategies-conseils-paris-sportifs"
                   className="block px-3 py-2 rounded-lg hover:bg-white/5"
                 >
                   Stratégies et conseils
