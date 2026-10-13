@@ -46,8 +46,6 @@ export default function Header() {
             <div className="absolute top-full left-0 pt-1 invisible opacity-0 group-hover:visible group-hover:opacity-100 transition-opacity duration-150">
               <div className="glass rounded-xl p-2 w-56">
                 {[
-                  "Actualités football",
-                  "Guides football",
                   "Compétitions",
                   "Équipes & joueurs",
                   "Records & histoire",
