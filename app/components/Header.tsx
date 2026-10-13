@@ -94,7 +94,7 @@ export default function Header() {
                 </a>
 
                 <a
-                  href="#paris"
+                  href="/types-de-paris-sportifs"
                   className="block px-3 py-2 rounded-lg hover:bg-white/5"
                 >
                   Types de paris
