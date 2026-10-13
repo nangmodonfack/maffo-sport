@@ -1,4 +1,4 @@
-  import type { Metadata } from "next";
+  import type { Metadata } from "next"; 
 import EditorialHubPage from "../components/EditorialHubPage";
 
 const title = "Compétitions de football : calendriers, classements et résultats";
