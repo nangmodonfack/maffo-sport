@@ -216,8 +216,6 @@ export default function Header() {
             {mobileFootball && (
               <div className="pb-2 pl-4">
                 {[
-                  "Actualités football",
-                  "Guides football",
                   "Compétitions",
                   "Équipes & joueurs",
                   "Records & histoire",
@@ -273,7 +271,7 @@ export default function Header() {
                 </a>
 
                 <a
-                  href="#paris"
+                  href="strategies-conseils-paris-sportifs"
                   onClick={closeMobileMenu}
                   className="block py-2.5 text-sm text-zinc-400"
                 >
@@ -289,7 +287,7 @@ export default function Header() {
                 </a>
 
                 <a
-                  href="#paris"
+                  href="/bookmakers"
                   onClick={closeMobileMenu}
                   className="block py-2.5 text-sm text-zinc-400"
                 >
