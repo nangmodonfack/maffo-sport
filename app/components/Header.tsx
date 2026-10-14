@@ -80,17 +80,17 @@ export default function Header() {
             <div className="absolute top-full left-0 pt-1 invisible opacity-0 group-hover:visible group-hover:opacity-100 transition-all duration-150">
               <div className="rounded-xl border border-white/10 bg-[#0b1017] p-2 w-56 shadow-2xl backdrop-blur-xl">
                 <Link
-                  href="/analyses-guides"
-                  className="block px-3 py-2 rounded-lg hover:bg-white/5 text-zinc-300 hover:text-white transition"
-                >
-                  Analyses et guides
-                </Link>
-
-                <Link
                   href="/types-de-paris-sportifs"
                   className="block px-3 py-2 rounded-lg hover:bg-white/5 text-zinc-300 hover:text-white transition"
                 >
                   Types de paris
+                </Link>
+                
+                 <Link
+                  href="/analyses-guides"
+                  className="block px-3 py-2 rounded-lg hover:bg-white/5 text-zinc-300 hover:text-white transition"
+                >
+                  Analyses et guides
                 </Link>
 
                 <Link
@@ -252,19 +252,18 @@ export default function Header() {
             {mobileParis && (
               <div className="pb-2 pl-4 space-y-1">
                 <Link
-                  href="/analyses-guides"
-                  onClick={closeMobileMenu}
-                  className="block py-2 text-sm text-zinc-400 hover:text-white"
-                >
-                  Analyses et guides
-                </Link>
-
-                <Link
                   href="/types-de-paris-sportifs"
                   onClick={closeMobileMenu}
                   className="block py-2 text-sm text-zinc-400 hover:text-white"
                 >
                   Types de paris
+                </Link>
+                <Link
+                  href="/analyses-guides"
+                  onClick={closeMobileMenu}
+                  className="block py-2 text-sm text-zinc-400 hover:text-white"
+                >
+                  Analyses et guides
                 </Link>
 
                 <Link
