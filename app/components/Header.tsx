@@ -37,27 +37,9 @@ export default function Header() {
             Actualités
           </a>
 
-          {/* FOOTBALL */}
-          <div className="relative group">
-            <button className="flex items-center gap-1 py-5">
-              Football <ChevronDown size={14} />
-            </button>
-
-            <div className="absolute top-full left-0 pt-1 invisible opacity-0 group-hover:visible group-hover:opacity-100 transition-opacity duration-150">
-              <div className="glass rounded-xl p-2 w-56">
-               {[
-  { label: "Compétitions", href: "/competitions" },
-  { label: "Équipes & joueurs", href: "/equipes-joueurs" },
-  { label: "Records & histoire", href: "/histoire-football" },
-  { label: "Football africain", href: "/football-africain" },
-].map((item) => (
-  <a
-    key={item.href}
-    href={item.href}
-    className="block px-3 py-2 rounded-lg hover:bg-white/5"
-  >
-    {item.label}
-  </a>
+          <a href="/competitions">
+  Compétitions
+</a>
 ))}
               </div>
             </div>
