@@ -18,16 +18,63 @@ type: "website",
 locale: "fr_FR",
 },
 };
-
-const competitions = [
-{ title: "Premier League", label: "Angleterre", description: "Suivez la saison anglaise, les journées, les résultats et la lutte au classement. Les données de chaque journée doivent être vérifiées au moment de la consultation.", href: "/#calendrier" },
-{ title: "La Liga", label: "Espagne", description: "Retrouvez les informations de saison sur le championnat espagnol, ses équipes, ses résultats et son classement.", href: "/#calendrier" },
-{ title: "Ligue 1", label: "France", description: "Explorez les rencontres du championnat français, les résultats, les équipes et les évolutions du classement.", href: "/#calendrier" },
-{ title: "Serie A", label: "Italie", description: "Consultez les contenus consacrés au championnat italien, à ses rencontres et à ses principaux enjeux sportifs.", href: "/#calendrier" },
-{ title: "Bundesliga", label: "Allemagne", description: "Retrouvez les repères essentiels du championnat allemand et les informations relatives à la saison en cours.", href: "/#calendrier" },
-{ title: "Ligue des champions", label: "Europe", description: "Suivez la compétition européenne des clubs : phase de ligue ou de groupes selon le format de la saison, tours à élimination directe et finale.", href: "/#calendrier" },
-{ title: "Ligue Europa", label: "Europe", description: "Découvrez les rencontres, les étapes de la compétition et les équipes engagées en Ligue Europa.", href: "/#calendrier" },
-{ title: "Ligue des champions de la CAF", label: "Afrique", description: "Suivez la principale compétition interclubs de la CAF, les clubs participants et les différentes étapes de la saison.", href: "/football-africain" },
+Const competitions = [
+  {
+    title: "Premier League",
+    label: "Angleterre",
+    description:
+      "Suivez la saison anglaise, les journées, les résultats et la lutte au classement. Les données de chaque journée doivent être vérifiées au moment de la consultation.",
+    href: "/competitions/premier-league",
+  },
+  {
+    title: "La Liga",
+    label: "Espagne",
+    description:
+      "Retrouvez les informations de saison sur le championnat espagnol, ses équipes, ses résultats et son classement.",
+    href: "/competitions/liga",
+  },
+  {
+    title: "Ligue 1",
+    label: "France",
+    description:
+      "Explorez les rencontres du championnat français, les résultats, les équipes et les évolutions du classement.",
+    href: "/competitions/ligue-1",
+  },
+  {
+    title: "Serie A",
+    label: "Italie",
+    description:
+      "Consultez les contenus consacrés au championnat italien, à ses rencontres et à ses principaux enjeux sportifs.",
+    href: "/competitions/serie-a",
+  },
+  {
+    title: "Bundesliga",
+    label: "Allemagne",
+    description:
+      "Retrouvez les repères essentiels du championnat allemand et les informations relatives à la saison en cours.",
+    href: "/competitions/bundesliga",
+  },
+  {
+    title: "Ligue des champions",
+    label: "Europe",
+    description:
+      "Suivez la compétition européenne des clubs : phase de ligue, tours à élimination directe et finale.",
+    href: "/competitions/ligue-des-champions",
+  },
+  {
+    title: "Ligue Europa",
+    label: "Europe",
+    description:
+      "Découvrez les rencontres, les étapes de la compétition et les équipes engagées en Ligue Europa.",
+    href: "/competitions/ligue-europa",
+  },
+  {
+    title: "Ligue des champions de la CAF",
+    label: "Afrique",
+    description:
+      "Suivez la principale compétition interclubs de la CAF, les clubs participants et les différentes étapes de la saison.",
+    href: "/competitions/ligue-des-champions-caf",
+  },
 ];
 
 export default function CompetitionsPage() {
