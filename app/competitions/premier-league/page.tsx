@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata } from "next"; 
 import EditorialHubPage from "../../components/EditorialHubPage";
 import { competitionContent } from "../competitionContent";
 
