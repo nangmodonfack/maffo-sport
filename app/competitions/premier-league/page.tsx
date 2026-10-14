@@ -27,7 +27,10 @@ export default function CompetitionPage() {
       notice="Les calendriers, résultats et classements évoluent au fil de la saison. Vérifiez la date de mise à jour et les informations officielles en cas de changement."
       cardsHeading="Repères de la compétition"
       cards={[]}
-      sections={page.sections}
+      sections={page.sections.map(([heading, paragraphs]) => ({
+  heading,
+  paragraphs,
+}))}
       relatedHeading="Continuer sur Maffo Sport"
       relatedLinks={[
         { title: "Toutes les compétitions", description: "Retrouver les huit compétitions suivies par Maffo Sport.", href: "/competitions" },
