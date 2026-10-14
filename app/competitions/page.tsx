@@ -18,7 +18,7 @@ type: "website",
 locale: "fr_FR",
 },
 };
-Const competitions = [
+const competitions = [
   {
     title: "Premier League",
     label: "Angleterre",
