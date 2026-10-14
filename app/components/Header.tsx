@@ -42,11 +42,6 @@ export default function Header() {
             Compétitions
           </Link>
 
-          {/* FOOTBALL AFRIICAIN */}
-          <Link href="/football-africain" className="hover:text-green-300 transition">
-            Football Africain
-          </Link>
-
           {/* PARIS SPORTIFS DROPDOWN */}
           <div className="relative group">
             <button 
@@ -181,14 +176,7 @@ export default function Header() {
           >
             Compétitions
           </Link>
-
-          <Link
-            href="/football-africain"
-            onClick={closeMobileMenu}
-            className="block py-3 border-b border-white/5 text-sm font-semibold text-zinc-300"
-          >
-            Football Africain
-          </Link>
+          
 
           {/* ACCORDÉON PARIS SPORTIFS MOBILE */}
           <div className="border-b border-white/5">
