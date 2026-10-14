@@ -39,6 +39,15 @@ const leagueIds: Record<string, number> = {
   "Europa League": 3,
   "Ligue des champions CAF": 12,
 };
+const featuredCompetitions = [
+  { name: "Premier League", href: "/competitions/premier-league" },
+  { name: "La Liga", href: "/competitions/liga" },
+  { name: "Ligue 1", href: "/competitions/ligue-1" },
+  { name: "Serie A", href: "/competitions/serie-a" },
+  { name: "Bundesliga", href: "/competitions/bundesliga" },
+  { name: "Champions League", href: "/competitions/ligue-des-champions" },
+];
+
 
 const demoMatches: Match[] = [
   {
@@ -729,22 +738,17 @@ if (!response.ok) {
         </div>
 
         <div className="mt-4 space-y-1">
-          {Object.keys(leagueIds)
-            .slice(0, 6)
-            .map((league) => (
-              <a
-                href="#calendrier"
-                key={league}
-                className="flex justify-between p-3 rounded-xl hover:bg-white/5"
-              >
-                <span>{league}</span>
+         {featuredCompetitions.map((competition) => (
+  <a
+    href={competition.href}
+    key={competition.href}
+    className="flex justify-between p-3 rounded-xl hover:bg-white/5"
+  >
+    <span>{competition.name}</span>
+    <ChevronRight size={16} className="text-zinc-600" />
+  </a>
+))}
 
-                <ChevronRight
-                  size={16}
-                  className="text-zinc-600"
-                />
-              </a>
-            ))}
         </div>
       </aside>
     </div>
