@@ -73,19 +73,6 @@ export default function HistoireFootballPage() {
       title="Histoire du football : légendes, records et grandes équipes"
       intro="Comment le football est-il devenu le sport populaire que l'on connaît aujourd'hui ? Quels joueurs ont marqué son histoire ? Quels clubs ont dominé les compétitions européennes et quelles sélections ont écrit les plus belles pages du football mondial ? Des origines du football moderne aux grandes finales internationales, découvrez les dates, les personnages et les exploits qui ont façonné ce sport."
       notice="Les records et les statistiques historiques peuvent varier selon les compétitions et les critères de comptage. Les chiffres présentés doivent être rapprochés des archives des fédérations et des organisateurs concernés."
-      >
-    {/* PHOTO PRINCIPALE : HISTOIRE DU FOOTBALL */}
-    <figure className="mt-8 overflow-hidden rounded-2xl">
-      <img
-        src="/images/histoire-football.jpg"
-        alt="Les grandes étapes de l'histoire du football"
-        className="w-full max-h-[480px] object-cover"
-        loading="eager"
-      />
-      <figcaption className="mt-2 text-sm text-gray-400">
-        Les grandes compétitions et les moments qui ont marqué l'histoire du football.
-      </figcaption>
-    </figure>
       cardsHeading="Explorer l'histoire du football"
       cards={themes}
       sections={[
