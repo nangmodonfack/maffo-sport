@@ -130,7 +130,7 @@ export default function Footer() {
             </a>
 
             <a
-              href="#football"
+              href="/competitions"
               className="block hover:text-white"
             >
               Football
