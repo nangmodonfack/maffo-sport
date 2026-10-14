@@ -1,4 +1,4 @@
-export type CompetitionSection = [heading: string, paragraphs: string[]];
+export type CompetitionSection = [heading: string, paragraphs: string[]]; 
 export type CompetitionPageContent = {
   name: string; label: string; title: string; description: string; canonical: string;
   intro: string; sections: CompetitionSection[]; faqs: [string, string][];
