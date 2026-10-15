@@ -1,4 +1,4 @@
-Import { NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 import { getFootballDatabaseClient } from "@/lib/football-database/client";
 
 export const runtime = "nodejs";
