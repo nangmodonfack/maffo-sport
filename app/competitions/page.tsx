@@ -257,15 +257,11 @@ export default function CompetitionsPage() {
                   </span>
 
                   <img
-                    src={competition.logo}
-                    alt={`Logo ${competition.title}`}
-                    loading="lazy"
-                    decoding="async"
-                    className="relative z-10 h-24 w-full object-contain transition duration-300 group-hover:scale-105"
-                    onError={(event) => {
-                      event.currentTarget.style.display = "none";
-                    }}
-                  />
+  src={competition.logo}
+  alt={`Logo de ${competition.title}`}
+  loading="lazy"
+  className="relative z-10 h-24 w-full object-contain transition duration-300 group-hover:scale-105"
+/>
 
                   <span className="absolute bottom-3 right-3 rounded-full border border-white/10 bg-black/30 px-3 py-1 text-xs font-medium text-gray-300">
                     {competition.country}
