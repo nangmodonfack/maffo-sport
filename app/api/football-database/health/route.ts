@@ -8,7 +8,7 @@ export async function GET() {
   try {
     const supabase = getFootballDatabaseClient();
 
-    // Test de lecture, sans modification des données.
+    // Vérifie l'accès à la table, sans modifier ses données.
     const { error: readError } = await supabase
       .from("football_database_matches")
       .select("match_id")
@@ -25,53 +25,52 @@ export async function GET() {
       );
     }
 
-    // Vérifie les droits RPC sans appeler la fonction de réservation.
-    const { data: rpcInfo, error: rpcError } = await supabase
-      .rpc("does_not_exist_football_database_test");
+    // Teste la fonction de quota.
+    // Cela réserve une unité, mais n'appelle pas Big Balls Data.
+    const { data, error } = await supabase.rpc(
+      "reserve_football_database_call",
+      { p_max_calls: 180 }
+    );
 
-    if (rpcError) {
-      const message = rpcError.message.toLowerCase();
-
-      // Une erreur indiquant que la fonction de test n'existe pas
-      // montre que la requête RPC a atteint PostgreSQL/PostgREST.
-      if (
-        message.includes("could not find the function") ||
-        message.includes("schema cache") ||
-        message.includes("does_not_exist_football_database_test")
-      ) {
-        return NextResponse.json({
-          success: true,
-          supabaseRead: true,
-          rpcEndpointReachable: true,
-          quotaPermission: "not_yet_verified",
-          message:
-            "Supabase répond aux requêtes RPC. Les droits sur la fonction de quota restent à vérifier.",
-        });
-      }
-
+    if (error) {
       return NextResponse.json(
         {
           success: false,
-          step: "rpc_probe",
-          message: rpcError.message,
+          step: "quota_rpc",
+          message: error.message,
         },
         { status: 500 }
+      );
+    }
+
+    if (typeof data !== "number" || data < 1) {
+      return NextResponse.json(
+        {
+          success: false,
+          step: "quota_limit",
+          message:
+            "La fonction répond, mais aucune réservation n'a été accordée.",
+        },
+        { status: 429 }
       );
     }
 
     return NextResponse.json({
       success: true,
       supabaseRead: true,
-      rpcEndpointReachable: true,
-      quotaPermission: "not_yet_verified",
-      message: "Diagnostic terminé.",
-      details: rpcInfo,
+      quotaRpc: true,
+      reservedCallsToday: data,
+      dailyLimit: 180,
+      bigBallsApiCalled: false,
+      message:
+        "La connexion Supabase et la réservation du quota fonctionnent.",
     });
   } catch {
     return NextResponse.json(
       {
         success: false,
-        message: "Erreur pendant le diagnostic Supabase.",
+        message:
+          "Erreur de diagnostic. Vérifie les variables serveur.",
       },
       { status: 500 }
     );
