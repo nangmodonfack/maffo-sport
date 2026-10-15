@@ -6,6 +6,8 @@ const BIGBALLS_BASE_URL = "https://api.bigballsdata.com";
 
 const MAX_DAILY_CALLS = 180;
 const CACHE_TTL_MS = 15 * 60 * 1000;
+const LOCK_SECONDS = 120;
+const REQUEST_TIMEOUT_MS = 15000;
 
 type BigBallsTeam = {
   id?: string;
@@ -32,9 +34,11 @@ type BigBallsMatch = {
 
 type BigBallsResponse = {
   success?: boolean;
-  data?: BigBallsMatch[] | {
-    matches?: BigBallsMatch[];
-  };
+  data?:
+    | BigBallsMatch[]
+    | {
+        matches?: BigBallsMatch[];
+      };
   matches?: BigBallsMatch[];
 };
 
@@ -53,6 +57,10 @@ export type FootballDatabaseMatch = {
   [key: string]: unknown;
 };
 
+type CachedMatches = {
+  matches: FootballDatabaseMatch[];
+};
+
 function getBigBallsApiKey(): string {
   const apiKey = process.env.BIGBALLS_API_KEY;
 
@@ -63,6 +71,17 @@ function getBigBallsApiKey(): string {
   }
 
   return apiKey;
+}
+
+function getCacheKey(options?: {
+  date?: string;
+  league?: string;
+}): string {
+  return [
+    "matches",
+    options?.date ?? "all",
+    options?.league ?? "all",
+  ].join(":");
 }
 
 function normalizeMatch(
@@ -110,9 +129,50 @@ function extractMatches(
   return [];
 }
 
+function readCachedMatches(
+  payload: unknown
+): FootballDatabaseMatch[] | null {
+  if (
+    !payload ||
+    typeof payload !== "object" ||
+    !("matches" in payload)
+  ) {
+    return null;
+  }
+
+  const matches = (payload as CachedMatches).matches;
+
+  return Array.isArray(matches) ? matches : null;
+}
+
+function formatResult(
+  matches: FootballDatabaseMatch[],
+  extra: {
+    cached?: boolean;
+    stale?: boolean;
+    reservedCallsToday?: number;
+  } = {}
+) {
+  return {
+    success: true,
+    count: matches.length,
+    matches,
+    cached: extra.cached ?? false,
+    stale: extra.stale ?? false,
+    ...(extra.reservedCallsToday !== undefined
+      ? {
+          quota: {
+            reservedCallsToday: extra.reservedCallsToday,
+            dailyLimit: MAX_DAILY_CALLS,
+          },
+        }
+      : {}),
+  };
+}
+
 /**
- * Lit les matchs conservés dans Supabase.
- * Cette fonction ne déclenche aucun appel à Big Balls Data.
+ * Lit uniquement les matchs déjà stockés dans Supabase.
+ * Aucun appel à Big Balls Data n'est effectué ici.
  */
 export async function getStoredMatches(options?: {
   league?: string;
@@ -171,138 +231,286 @@ export async function getStoredMatches(options?: {
 }
 
 /**
- * Récupère les matchs depuis Big Balls Data et les enregistre
- * dans Supabase.
+ * Actualise le cache partagé.
  *
- * Le quota est réservé avant l'appel externe.
- * Une réservation refusée empêche tout nouvel appel API.
+ * 1. Lit le cache Supabase.
+ * 2. Si le cache est encore valide, ne fait aucun appel externe.
+ * 3. Réserve le renouvellement pour éviter les appels simultanés.
+ * 4. Vérifie le quota quotidien avant tout appel externe.
+ * 5. Enregistre les résultats et leur expiration.
  */
 export async function refreshFootballDatabaseMatches(options?: {
   date?: string;
   league?: string;
 }) {
-  const apiKey = getBigBallsApiKey();
   const supabase = getFootballDatabaseClient();
+  const cacheKey = getCacheKey(options);
 
-  // Réservation atomique d'un appel dans le quota quotidien.
-  const { data: reservedCount, error: quotaError } =
-    await supabase.rpc("reserve_football_database_call", {
-      p_max_calls: MAX_DAILY_CALLS,
-    });
+  const { data: initialCache, error: initialCacheError } =
+    await supabase
+      .from("football_database_cache")
+      .select(
+        "cache_key, payload, updated_at, expires_at, refresh_lock_until, refresh_token"
+      )
+      .eq("cache_key", cacheKey)
+      .maybeSingle();
 
-  if (quotaError) {
+  if (initialCacheError) {
     throw new Error(
-      `Impossible de vérifier le quota Big Balls : ${quotaError.message}`
+      `Impossible de lire le cache Supabase : ${initialCacheError.message}`
     );
   }
+
+  const now = Date.now();
 
   if (
-    typeof reservedCount !== "number" ||
-    reservedCount < 1
+    initialCache &&
+    new Date(initialCache.expires_at).getTime() > now
   ) {
+    const cachedMatches = readCachedMatches(initialCache.payload);
+
+    if (cachedMatches !== null) {
+      return formatResult(cachedMatches, {
+        cached: true,
+      });
+    }
+  }
+
+  // Un seul processus peut réserver le renouvellement de cette clé.
+  const { data: claimed, error: claimError } = await supabase.rpc(
+    "claim_football_database_cache_refresh",
+    {
+      p_cache_key: cacheKey,
+      p_lock_seconds: LOCK_SECONDS,
+    }
+  );
+
+  if (claimError) {
     throw new Error(
-      `Quota quotidien Big Balls atteint : maximum ${MAX_DAILY_CALLS} appels.`
+      `Impossible de réserver le renouvellement du cache : ${claimError.message}`
     );
   }
 
-  const url = new URL("/v1/matches", BIGBALLS_BASE_URL);
+  if (claimed !== true) {
+    // Un autre processus renouvelle probablement déjà le cache.
+    // On privilégie les anciennes données disponibles plutôt
+    // que de déclencher un second appel API.
+    if (initialCache) {
+      const previousMatches = readCachedMatches(
+        initialCache.payload
+      );
 
-  url.searchParams.set("sport", "football");
-  url.searchParams.set("limit", "100");
+      if (previousMatches !== null) {
+        return formatResult(previousMatches, {
+          cached: true,
+          stale: true,
+        });
+      }
+    }
 
-  if (options?.date) {
-    url.searchParams.set("date", options.date);
+    // Le cache a pu être rempli entre notre première lecture
+    // et la tentative de réservation : on le vérifie à nouveau.
+    const { data: latestCache, error: latestCacheError } =
+      await supabase
+        .from("football_database_cache")
+        .select("payload, expires_at")
+        .eq("cache_key", cacheKey)
+        .maybeSingle();
+
+    if (latestCacheError) {
+      throw new Error(
+        `Impossible de relire le cache : ${latestCacheError.message}`
+      );
+    }
+
+    if (
+      latestCache &&
+      new Date(latestCache.expires_at).getTime() > Date.now()
+    ) {
+      const latestMatches = readCachedMatches(
+        latestCache.payload
+      );
+
+      if (latestMatches !== null) {
+        return formatResult(latestMatches, {
+          cached: true,
+        });
+      }
+    }
+
+    throw new Error(
+      "Le renouvellement du cache est déjà en cours. Réessaie dans quelques instants."
+    );
   }
 
-  if (options?.league) {
-    url.searchParams.set("league", options.league);
+  // Récupération du jeton attribué à ce processus.
+  const { data: lockRow, error: lockError } = await supabase
+    .from("football_database_cache")
+    .select("refresh_token")
+    .eq("cache_key", cacheKey)
+    .maybeSingle();
+
+  if (lockError || !lockRow?.refresh_token) {
+    throw new Error(
+      "Impossible de confirmer le verrouillage du cache."
+    );
   }
 
-  const controller = new AbortController();
-  const timeout = setTimeout(() => controller.abort(), 15000);
-
-  let response: Response;
+  const refreshToken = lockRow.refresh_token;
 
   try {
-    response = await fetch(url.toString(), {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${apiKey}`,
-        Accept: "application/json",
-      },
-      cache: "no-store",
-      signal: controller.signal,
+    const apiKey = getBigBallsApiKey();
+
+    // Réservation atomique du quota quotidien.
+    // Aucun appel externe n'est effectué si cette réservation échoue.
+    const { data: reservedCount, error: quotaError } =
+      await supabase.rpc("reserve_football_database_call", {
+        p_max_calls: MAX_DAILY_CALLS,
+      });
+
+    if (quotaError) {
+      throw new Error(
+        `Impossible de vérifier le quota Big Balls : ${quotaError.message}`
+      );
+    }
+
+    if (
+      typeof reservedCount !== "number" ||
+      reservedCount < 1
+    ) {
+      throw new Error(
+        `Quota quotidien Big Balls atteint : maximum ${MAX_DAILY_CALLS} appels.`
+      );
+    }
+
+    const url = new URL("/v1/matches", BIGBALLS_BASE_URL);
+
+    url.searchParams.set("sport", "football");
+    url.searchParams.set("limit", "100");
+
+    if (options?.date) {
+      url.searchParams.set("date", options.date);
+    }
+
+    if (options?.league) {
+      url.searchParams.set("league", options.league);
+    }
+
+    const controller = new AbortController();
+    const timeout = setTimeout(
+      () => controller.abort(),
+      REQUEST_TIMEOUT_MS
+    );
+
+    let response: Response;
+
+    try {
+      response = await fetch(url.toString(), {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${apiKey}`,
+          Accept: "application/json",
+        },
+        cache: "no-store",
+        signal: controller.signal,
+      });
+    } finally {
+      clearTimeout(timeout);
+    }
+
+    if (!response.ok) {
+      throw new Error(
+        `Big Balls Data a répondu avec le statut HTTP ${response.status}.`
+      );
+    }
+
+    const body = (await response.json()) as BigBallsResponse;
+
+    const matches = extractMatches(body)
+      .map(normalizeMatch)
+      .filter(
+        (match): match is FootballDatabaseMatch =>
+          match !== null
+      );
+
+    // Enregistrer les matchs reçus.
+    if (matches.length > 0) {
+      const rows = matches.map((match) => ({
+        match_id: match.id,
+        league: match.league,
+        kickoff_utc: match.kickoff_utc,
+        status: match.status,
+        home_team: match.home.name ?? "Équipe inconnue",
+        away_team: match.away.name ?? "Équipe inconnue",
+        home_score: match.score.home,
+        away_score: match.score.away,
+        payload: match,
+        updated_at: new Date().toISOString(),
+      }));
+
+      const { error: saveMatchesError } = await supabase
+        .from("football_database_matches")
+        .upsert(rows, {
+          onConflict: "match_id",
+        });
+
+      if (saveMatchesError) {
+        throw new Error(
+          `Impossible d'enregistrer les matchs : ${saveMatchesError.message}`
+        );
+      }
+    }
+
+    // Le cache est valide pendant 15 minutes, même si la réponse
+    // contient zéro match. Cela évite de rappeler l'API en boucle.
+    const savedAt = new Date();
+    const expiresAt = new Date(
+      savedAt.getTime() + CACHE_TTL_MS
+    );
+
+    const { data: updatedCache, error: saveCacheError } =
+      await supabase
+        .from("football_database_cache")
+        .update({
+          payload: {
+            matches,
+          },
+          updated_at: savedAt.toISOString(),
+          expires_at: expiresAt.toISOString(),
+          refresh_lock_until: null,
+          refresh_token: null,
+        })
+        .eq("cache_key", cacheKey)
+        .eq("refresh_token", refreshToken)
+        .select("cache_key")
+        .maybeSingle();
+
+    if (saveCacheError || !updatedCache) {
+      throw new Error(
+        saveCacheError
+          ? `Impossible d'enregistrer le cache : ${saveCacheError.message}`
+          : "Le verrou du cache a changé avant la fin du renouvellement."
+      );
+    }
+
+    return formatResult(matches, {
+      cached: false,
+      reservedCallsToday: reservedCount,
     });
   } catch (error) {
-    const message =
-      error instanceof Error ? error.message : "Erreur inconnue";
+    // En cas d'échec, libérer le verrou pour autoriser une nouvelle
+    // tentative. Le compteur de quota reste conservé si un appel
+    // avait déjà été réservé.
+    await supabase
+      .from("football_database_cache")
+      .update({
+        expires_at: new Date().toISOString(),
+        refresh_lock_until: null,
+        refresh_token: null,
+      })
+      .eq("cache_key", cacheKey)
+      .eq("refresh_token", refreshToken);
 
-    throw new Error(
-      `La requête Big Balls Data a échoué : ${message}`
-    );
-  } finally {
-    clearTimeout(timeout);
+    throw error;
   }
-
-  if (!response.ok) {
-    throw new Error(
-      `Big Balls Data a répondu avec le statut HTTP ${response.status}.`
-    );
-  }
-
-  const body = (await response.json()) as BigBallsResponse;
-  const rawMatches = extractMatches(body);
-
-  const matches = rawMatches
-    .map(normalizeMatch)
-    .filter(
-      (match): match is FootballDatabaseMatch => match !== null
-    );
-
-  if (matches.length === 0) {
-    return {
-      success: true,
-      count: 0,
-      matches: [],
-      quota: {
-        reservedCallsToday: reservedCount,
-        dailyLimit: MAX_DAILY_CALLS,
-      },
-    };
-  }
-
-  const rows = matches.map((match) => ({
-    match_id: match.id,
-    league: match.league,
-    kickoff_utc: match.kickoff_utc,
-    status: match.status,
-    home_team: match.home.name ?? "Équipe inconnue",
-    away_team: match.away.name ?? "Équipe inconnue",
-    home_score: match.score.home,
-    away_score: match.score.away,
-    payload: match,
-    updated_at: new Date().toISOString(),
-  }));
-
-  const { error: saveError } = await supabase
-    .from("football_database_matches")
-    .upsert(rows, {
-      onConflict: "match_id",
-    });
-
-  if (saveError) {
-    throw new Error(
-      `Impossible d'enregistrer les matchs : ${saveError.message}`
-    );
-  }
-
-  return {
-    success: true,
-    count: matches.length,
-    matches,
-    quota: {
-      reservedCallsToday: reservedCount,
-      dailyLimit: MAX_DAILY_CALLS,
-    },
-  };
 }
