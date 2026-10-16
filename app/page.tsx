@@ -510,7 +510,7 @@ if (!response.ok) {
           <SectionTitle
             eyebrow="Aujourd’hui"
             title="Matchs à suivre"
-            href="#resultats"
+            href="resultats-calendrier"
           />
 
           <div className="flex items-center justify-between gap-3 mb-4">
@@ -808,6 +808,7 @@ if (!response.ok) {
             <SectionTitle
               eyebrow="Scores"
               title="Résultats"
+              href="/resultats-calendrier"
             />
 
             <div className="glass rounded-2xl overflow-hidden">
