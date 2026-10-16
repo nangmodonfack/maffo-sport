@@ -156,9 +156,6 @@ export default function CompetitionMatches({
           {title}
         </h2>
 
-        <p className="mt-2 text-sm text-slate-400">
-          Les horaires sont affichés à l’heure du Cameroun.
-        </p>
       </div>
 
       {loading && (
