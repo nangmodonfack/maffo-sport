@@ -119,14 +119,14 @@ export default function Header() {
           </Link>
 
           <Link
-            href="/#resultats"
+            href="/resultats-calendrier"
             className="hover:text-green-300 transition"
           >
             Résultats
           </Link>
 
           <Link
-            href="/#calendrier"
+            href="/resultats-calendrier"
             className="hover:text-green-300 transition"
           >
             Calendrier
@@ -295,7 +295,7 @@ export default function Header() {
           </Link>
 
           <Link
-            href="/#resultats"
+            href="/resultats-calendrier"
             onClick={closeMobileMenu}
             className="block py-3 border-b border-white/5 text-sm font-semibold text-zinc-300"
           >
@@ -303,7 +303,7 @@ export default function Header() {
           </Link>
 
           <Link
-            href="/#calendrier"
+            href="/resultats-calendrier"
             onClick={closeMobileMenu}
             className="block py-3 border-b border-white/5 text-sm font-semibold text-zinc-300"
           >
