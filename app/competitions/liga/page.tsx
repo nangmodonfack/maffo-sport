@@ -21,7 +21,6 @@ export const metadata: Metadata = {
 
 export default function CompetitionPage() {
   return (
-    <>
       <EditorialHubPage
         eyebrow={`Football · ${page.name}`}
         title={page.title}
