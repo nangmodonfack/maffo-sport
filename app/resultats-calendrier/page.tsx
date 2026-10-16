@@ -69,7 +69,11 @@ type Fixture = {
 
 type Tab = "calendrier" | "resultats";
 
-type MatchFilter = "À venir" | "Direct" | "Terminé";
+type MatchFilter =
+  | "À venir"
+  | "Direct"
+  | "Terminé"
+  | "Statut à confirmer";
 
 const LIVE_STATUSES = [
   "1H",
@@ -83,16 +87,19 @@ const LIVE_STATUSES = [
 ];
 
 const FINISHED_STATUSES = ["FT", "AET", "PEN"];
-
 const POSTPONED_STATUSES = ["PST"];
-
 const CANCELLED_STATUSES = ["CANC"];
-
 const SUSPENDED_STATUSES = ["SUSP"];
-
 const INTERRUPTED_STATUSES = ["ABD"];
-
 const NOT_STARTED_STATUSES = ["NS", "TBD"];
+
+const UNCERTAIN_STATUSES: MatchStatus[] = [
+  "Statut à confirmer",
+  "Reporté",
+  "Annulé",
+  "Suspendu",
+  "Interrompu",
+];
 
 function formatDate(date: string) {
   return new Intl.DateTimeFormat("fr-FR", {
@@ -379,22 +386,22 @@ export default function ResultatsCalendrierPage() {
           return match.status === "Terminé";
         }
 
-        if (matchFilter === "À venir") {
-          return match.status === "À venir";
+        if (matchFilter === "Statut à confirmer") {
+          return UNCERTAIN_STATUSES.includes(match.status);
         }
 
-        if (matchFilter === "Direct") {
-          return match.status === "Direct";
-        }
-
-        return match.status === "Terminé";
+        return match.status === matchFilter;
       })
       .filter(
         (match) =>
           competition === "Toutes" || match.league === competition
       )
       .sort((a, b) => {
-        if (tab === "resultats" || matchFilter === "Terminé") {
+        if (
+          tab === "resultats" ||
+          matchFilter === "Terminé" ||
+          matchFilter === "Statut à confirmer"
+        ) {
           return new Date(b.date).getTime() - new Date(a.date).getTime();
         }
 
@@ -415,14 +422,12 @@ export default function ResultatsCalendrierPage() {
   ).length;
 
   const uncertainCount = matches.filter((match) =>
-    [
-      "Statut à confirmer",
-      "Reporté",
-      "Annulé",
-      "Suspendu",
-      "Interrompu",
-    ].includes(match.status)
+    UNCERTAIN_STATUSES.includes(match.status)
   ).length;
+
+  const isUncertainView =
+    tab === "calendrier" &&
+    matchFilter === "Statut à confirmer";
 
   return (
     <main className="min-h-screen bg-[#080b11] text-white">
@@ -457,7 +462,9 @@ export default function ResultatsCalendrierPage() {
                 setTab("calendrier");
                 setMatchFilter("À venir");
               }}
-              aria-pressed={tab === "calendrier" && matchFilter === "À venir"}
+              aria-pressed={
+                tab === "calendrier" && matchFilter === "À venir"
+              }
               className={`rounded-2xl border p-3 text-left transition sm:p-4 ${
                 tab === "calendrier" && matchFilter === "À venir"
                   ? "border-green-400 bg-green-500/10 ring-1 ring-green-400/30"
@@ -479,7 +486,9 @@ export default function ResultatsCalendrierPage() {
                 setTab("calendrier");
                 setMatchFilter("Direct");
               }}
-              aria-pressed={tab === "calendrier" && matchFilter === "Direct"}
+              aria-pressed={
+                tab === "calendrier" && matchFilter === "Direct"
+              }
               className={`rounded-2xl border p-3 text-left transition sm:p-4 ${
                 tab === "calendrier" && matchFilter === "Direct"
                   ? "border-red-400 bg-red-500/10 ring-1 ring-red-400/30"
@@ -516,15 +525,34 @@ export default function ResultatsCalendrierPage() {
           </div>
 
           {uncertainCount > 0 && (
-            <div className="mt-4 flex items-start gap-2 rounded-xl border border-amber-400/20 bg-amber-500/5 p-3 text-xs leading-5 text-amber-200">
+            <button
+              type="button"
+              onClick={() => {
+                setTab("calendrier");
+                setMatchFilter("Statut à confirmer");
+              }}
+              aria-pressed={isUncertainView}
+              className={`mt-4 flex w-full items-start gap-2 rounded-xl border p-3 text-left text-xs leading-5 transition ${
+                isUncertainView
+                  ? "border-amber-400/50 bg-amber-500/10 ring-1 ring-amber-400/20"
+                  : "border-amber-400/20 bg-amber-500/5 hover:border-amber-400/50 hover:bg-amber-500/10"
+              } text-amber-200`}
+            >
               <AlertCircle size={16} className="mt-0.5 shrink-0" />
-              <p>
-                {uncertainCount} rencontre
-                {uncertainCount > 1 ? "s présentent" : " présente"} un
-                statut incertain, reporté, annulé ou interrompu. Consultez
-                les informations affichées sur chaque rencontre.
-              </p>
-            </div>
+
+              <span className="flex-1">
+                <span className="font-bold">
+                  {uncertainCount} rencontre
+                  {uncertainCount > 1 ? "s présentent" : " présente"} un
+                  statut à vérifier.
+                </span>{" "}
+                Cliquez ici pour consulter la liste des matchs concernés.
+              </span>
+
+              <span className="shrink-0 font-bold" aria-hidden="true">
+                →
+              </span>
+            </button>
           )}
         </div>
       </section>
@@ -639,18 +667,37 @@ export default function ResultatsCalendrierPage() {
               size={28}
               className="mx-auto text-zinc-600"
             />
+
             <h2 className="mt-4 text-lg font-bold">
               {tab === "resultats"
                 ? "Aucun résultat disponible"
                 : matchFilter === "Direct"
                 ? "Aucun match en direct"
+                : matchFilter === "Statut à confirmer"
+                ? "Aucun match à vérifier"
                 : "Aucun match à venir"}
             </h2>
+
             <p className="mx-auto mt-2 max-w-lg text-sm leading-6 text-zinc-500">
               {competition !== "Toutes"
                 ? "Aucune rencontre ne correspond à cette compétition et à cette catégorie."
+                : isUncertainView
+                ? "Aucune rencontre avec un statut incertain, reporté, annulé, suspendu ou interrompu n'est disponible dans le cache."
                 : "Seules les rencontres présentes dans le cache sont affichées. Certains matchs peuvent avoir un statut à confirmer."}
             </p>
+
+            {isUncertainView && (
+              <button
+                type="button"
+                onClick={() => {
+                  setTab("calendrier");
+                  setMatchFilter("À venir");
+                }}
+                className="mt-5 rounded-xl border border-white/10 px-4 py-2 text-sm font-bold transition hover:bg-white/5"
+              >
+                Retour aux matchs à venir
+              </button>
+            )}
           </div>
         )}
 
@@ -662,6 +709,8 @@ export default function ResultatsCalendrierPage() {
                   ? "Matchs terminés"
                   : matchFilter === "Direct"
                   ? "Matchs en direct"
+                  : matchFilter === "Statut à confirmer"
+                  ? "Matchs dont le statut est à vérifier"
                   : "Matchs à venir"}
               </h2>
 
