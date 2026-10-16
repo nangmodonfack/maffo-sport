@@ -60,12 +60,15 @@ export default function EditorialHubPage({
           <p className="mb-3 text-xs font-bold uppercase tracking-[0.2em] text-emerald-400">
             {eyebrow}
           </p>
+
           <h1 className="max-w-4xl text-3xl font-extrabold leading-tight tracking-tight text-white sm:text-5xl">
             {title}
           </h1>
+
           <p className="mt-5 max-w-3xl text-base leading-8 text-gray-300 sm:text-lg">
             {intro}
           </p>
+
           {notice && (
             <p className="mt-5 max-w-3xl rounded-xl border border-white/10 bg-black/20 p-4 text-sm leading-7 text-gray-300">
               {notice}
@@ -73,12 +76,17 @@ export default function EditorialHubPage({
           )}
         </header>
 
-        {children}
+        {/* Contenu optionnel placé juste après le carré d'introduction */}
+        {children && <div className="mt-8">{children}</div>}
 
         <section className="mt-10" aria-labelledby="hub-cards-heading">
-          <h2 id="hub-cards-heading" className="mb-5 text-2xl font-bold text-white sm:text-3xl">
+          <h2
+            id="hub-cards-heading"
+            className="mb-5 text-2xl font-bold text-white sm:text-3xl"
+          >
             {cardsHeading}
           </h2>
+
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {cards.map((card) => (
               <Link
@@ -91,10 +99,15 @@ export default function EditorialHubPage({
                     {card.label}
                   </p>
                 )}
+
                 <h3 className="text-lg font-bold text-white group-hover:text-emerald-300">
                   {card.title}
                 </h3>
-                <p className="mt-3 text-sm leading-7 text-gray-300">{card.description}</p>
+
+                <p className="mt-3 text-sm leading-7 text-gray-300">
+                  {card.description}
+                </p>
+
                 <span className="mt-4 inline-block text-sm font-semibold text-emerald-300">
                   En savoir plus →
                 </span>
@@ -106,15 +119,23 @@ export default function EditorialHubPage({
         <div className="mt-12 grid gap-10 lg:grid-cols-[minmax(0,1fr)_280px]">
           <div>
             {sections.map((section) => (
-              <section key={section.heading} className="mb-10 scroll-mt-24">
+              <section
+                key={section.heading}
+                className="mb-10 scroll-mt-24"
+              >
                 <h2 className="mb-4 text-2xl font-bold text-white sm:text-3xl">
                   {section.heading}
                 </h2>
+
                 {section.paragraphs.map((paragraph, index) => (
-                  <p key={index} className="mb-4 leading-8 text-gray-300">
+                  <p
+                    key={index}
+                    className="mb-4 leading-8 text-gray-300"
+                  >
                     {paragraph}
                   </p>
                 ))}
+
                 {section.bullets && (
                   <ul className="mt-4 list-disc space-y-2 pl-6 leading-7 marker:text-emerald-400">
                     {section.bullets.map((bullet) => (
@@ -127,10 +148,15 @@ export default function EditorialHubPage({
           </div>
 
           <aside className="h-fit rounded-2xl border border-white/10 bg-white/[0.03] p-5 lg:sticky lg:top-6">
-            <h2 className="text-lg font-bold text-white">Explorer Maffo Sport</h2>
+            <h2 className="text-lg font-bold text-white">
+              Explorer Maffo Sport
+            </h2>
+
             <p className="mt-2 text-sm leading-6 text-gray-400">
-              Retrouvez les guides, analyses et ressources sportives disponibles sur le site.
+              Retrouvez les guides, analyses et ressources sportives
+              disponibles sur le site.
             </p>
+
             <div className="mt-4 space-y-3">
               {allLinks.slice(0, 7).map((link) => (
                 <Link
@@ -150,6 +176,7 @@ export default function EditorialHubPage({
             <h2 className="mb-5 text-2xl font-bold text-white sm:text-3xl">
               Questions fréquentes
             </h2>
+
             <div className="space-y-3">
               {faq.map((item) => (
                 <details
@@ -159,7 +186,10 @@ export default function EditorialHubPage({
                   <summary className="cursor-pointer font-semibold text-white">
                     {item.question}
                   </summary>
-                  <p className="mt-3 leading-7 text-gray-300">{item.answer}</p>
+
+                  <p className="mt-3 leading-7 text-gray-300">
+                    {item.answer}
+                  </p>
                 </details>
               ))}
             </div>
