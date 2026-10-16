@@ -144,7 +144,7 @@ export default function Footer() {
             </a>
 
             <a
-              href="/#resultats"
+              href="/resultats-calendrier"
               className="block hover:text-white"
             >
               Résultats
