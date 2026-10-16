@@ -5,6 +5,7 @@ import { getFootballDatabaseClient } from "./client";
 const BIGBALLS_BASE_URL = "https://api.bigballsdata.com";
 
 const MAX_DAILY_CALLS = 180;
+const MAX_MINUTE_CALLS = 9;
 const CACHE_TTL_MS = 15 * 60 * 1000;
 const LOCK_SECONDS = 120;
 const REQUEST_TIMEOUT_MS = 15000;
@@ -236,8 +237,10 @@ export async function getStoredMatches(options?: {
  * 1. Lit le cache Supabase.
  * 2. Si le cache est encore valide, ne fait aucun appel externe.
  * 3. Réserve le renouvellement pour éviter les appels simultanés.
- * 4. Vérifie le quota quotidien avant tout appel externe.
- * 5. Enregistre les résultats et leur expiration.
+ * 4. Vérifie le quota par minute.
+ * 5. Vérifie le quota quotidien.
+ * 6. Récupère les matchs et les enregistre dans Supabase.
+ * 7. Met le cache à jour pour 15 minutes.
  */
 export async function refreshFootballDatabaseMatches(options?: {
   date?: string;
@@ -361,12 +364,44 @@ export async function refreshFootballDatabaseMatches(options?: {
   try {
     const apiKey = getBigBallsApiKey();
 
-    // Réservation atomique du quota quotidien.
+    // 1. Réservation atomique du quota par minute.
+    // Maximum : 9 réservations pendant la même minute.
+    const {
+      data: minuteCount,
+      error: minuteQuotaError,
+    } = await supabase.rpc(
+      "reserve_football_database_minute_call",
+      {
+        p_max_calls: MAX_MINUTE_CALLS,
+      }
+    );
+
+    if (minuteQuotaError) {
+      throw new Error(
+        `Impossible de vérifier le quota Big Balls par minute : ${minuteQuotaError.message}`
+      );
+    }
+
+    if (
+      typeof minuteCount !== "number" ||
+      minuteCount < 1
+    ) {
+      throw new Error(
+        `Limite interne Big Balls atteinte : maximum ${MAX_MINUTE_CALLS} appels par minute.`
+      );
+    }
+
+    // 2. Réservation atomique du quota quotidien.
     // Aucun appel externe n'est effectué si cette réservation échoue.
-    const { data: reservedCount, error: quotaError } =
-      await supabase.rpc("reserve_football_database_call", {
+    const {
+      data: reservedCount,
+      error: quotaError,
+    } = await supabase.rpc(
+      "reserve_football_database_call",
+      {
         p_max_calls: MAX_DAILY_CALLS,
-      });
+      }
+    );
 
     if (quotaError) {
       throw new Error(
@@ -383,6 +418,7 @@ export async function refreshFootballDatabaseMatches(options?: {
       );
     }
 
+    // 3. Préparation de la requête Big Balls Data.
     const url = new URL("/v1/matches", BIGBALLS_BASE_URL);
 
     url.searchParams.set("sport", "football");
@@ -396,7 +432,9 @@ export async function refreshFootballDatabaseMatches(options?: {
       url.searchParams.set("league", options.league);
     }
 
+    // 4. Appel de l'API avec un délai maximal de 15 secondes.
     const controller = new AbortController();
+
     const timeout = setTimeout(
       () => controller.abort(),
       REQUEST_TIMEOUT_MS
@@ -433,7 +471,7 @@ export async function refreshFootballDatabaseMatches(options?: {
           match !== null
       );
 
-    // Enregistrer les matchs reçus.
+    // 5. Enregistrement des matchs reçus dans Supabase.
     if (matches.length > 0) {
       const rows = matches.map((match) => ({
         match_id: match.id,
@@ -461,29 +499,33 @@ export async function refreshFootballDatabaseMatches(options?: {
       }
     }
 
-    // Le cache est valide pendant 15 minutes, même si la réponse
-    // contient zéro match. Cela évite de rappeler l'API en boucle.
+    // 6. Enregistrement du cache pendant 15 minutes.
+    // Même une réponse vide est mise en cache pour éviter
+    // des appels répétés lorsque l'API ne renvoie aucun match.
     const savedAt = new Date();
+
     const expiresAt = new Date(
       savedAt.getTime() + CACHE_TTL_MS
     );
 
-    const { data: updatedCache, error: saveCacheError } =
-      await supabase
-        .from("football_database_cache")
-        .update({
-          payload: {
-            matches,
-          },
-          updated_at: savedAt.toISOString(),
-          expires_at: expiresAt.toISOString(),
-          refresh_lock_until: null,
-          refresh_token: null,
-        })
-        .eq("cache_key", cacheKey)
-        .eq("refresh_token", refreshToken)
-        .select("cache_key")
-        .maybeSingle();
+    const {
+      data: updatedCache,
+      error: saveCacheError,
+    } = await supabase
+      .from("football_database_cache")
+      .update({
+        payload: {
+          matches,
+        },
+        updated_at: savedAt.toISOString(),
+        expires_at: expiresAt.toISOString(),
+        refresh_lock_until: null,
+        refresh_token: null,
+      })
+      .eq("cache_key", cacheKey)
+      .eq("refresh_token", refreshToken)
+      .select("cache_key")
+      .maybeSingle();
 
     if (saveCacheError || !updatedCache) {
       throw new Error(
@@ -498,9 +540,8 @@ export async function refreshFootballDatabaseMatches(options?: {
       reservedCallsToday: reservedCount,
     });
   } catch (error) {
-    // En cas d'échec, libérer le verrou pour autoriser une nouvelle
-    // tentative. Le compteur de quota reste conservé si un appel
-    // avait déjà été réservé.
+    // En cas d'échec, libérer le verrou pour autoriser une nouvelle tentative.
+    // Les quotas déjà réservés ne sont pas annulés.
     await supabase
       .from("football_database_cache")
       .update({
