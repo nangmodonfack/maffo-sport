@@ -68,6 +68,6 @@ export default function CompetitionPage() {
       />
 
       <CompetitionMatches league="La Liga" />
-    </>
+    </EditorialHubPage>
   );
 }
