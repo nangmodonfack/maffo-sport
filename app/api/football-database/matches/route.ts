@@ -10,8 +10,6 @@ const ALLOWED_LEAGUES = [
   "Serie A",
   "Bundesliga",
   "UEFA Champions League",
-  "UEFA Europa League",
-  "CAF Champions League",
 ];
 
 export async function GET(request: NextRequest) {
@@ -20,7 +18,7 @@ export async function GET(request: NextRequest) {
 
     const league = searchParams.get("league");
     const date = searchParams.get("date");
-    const rawLimit = Number(searchParams.get("limit") ?? 50);
+    const requestedLimit = Number(searchParams.get("limit") ?? 50);
 
     if (!league || !ALLOWED_LEAGUES.includes(league)) {
       return NextResponse.json(
@@ -33,19 +31,22 @@ export async function GET(request: NextRequest) {
       );
     }
 
-    if (date && !/^\d{4}-\d{2}-\d{2}$/.test(date)) {
+    if (
+      date &&
+      !/^\d{4}-\d{2}-\d{2}$/.test(date)
+    ) {
       return NextResponse.json(
         {
           success: false,
-          error: "Le format de la date doit être AAAA-MM-JJ.",
+          error: "La date doit respecter le format AAAA-MM-JJ.",
           matches: [],
         },
         { status: 400 }
       );
     }
 
-    const limit = Number.isFinite(rawLimit)
-      ? Math.min(Math.max(Math.trunc(rawLimit), 1), 100)
+    const limit = Number.isFinite(requestedLimit)
+      ? Math.min(Math.max(Math.trunc(requestedLimit), 1), 100)
       : 50;
 
     const matches = await getStoredMatches({
@@ -54,22 +55,22 @@ export async function GET(request: NextRequest) {
       limit,
     });
 
-    const formattedMatches = matches.map((match: any) => ({
+    const formattedMatches = matches.map((match) => ({
       id: match.id,
       league: match.league,
       kickoff_utc: match.kickoff_utc,
       status: match.status,
       home: {
-        name: match.home?.name ?? match.home_team ?? "Équipe à confirmer",
+        name: match.home?.name ?? "Équipe à confirmer",
         logo_url: match.home?.logo_url ?? null,
       },
       away: {
-        name: match.away?.name ?? match.away_team ?? "Équipe à confirmer",
+        name: match.away?.name ?? "Équipe à confirmer",
         logo_url: match.away?.logo_url ?? null,
       },
       score: {
-        home: match.score?.home ?? match.home_score ?? null,
-        away: match.score?.away ?? match.away_score ?? null,
+        home: match.score?.home ?? null,
+        away: match.score?.away ?? null,
       },
     }));
 
