@@ -65,7 +65,7 @@ export default function CompetitionPage() {
           answer,
         }))}
         footerNote="Maffo Sport propose des contenus informatifs sur le football. Les calendriers, résultats, classements et statistiques peuvent changer ; vérifiez leur date de mise à jour et les sources officielles."
-      />
+      >
 
       <CompetitionMatches league="La Liga" />
     </EditorialHubPage>
