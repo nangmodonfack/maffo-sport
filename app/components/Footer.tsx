@@ -259,16 +259,6 @@ export default function Footer() {
             </a>
 
             <a
-              href="https://www.youtube.com/@maffohub"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-2 hover:text-white"
-            >
-              <Youtube size={17} />
-              YouTube
-            </a>
-
-            <a
               href="https://tiktok.com/@maffosport"
               target="_blank"
               rel="noopener noreferrer"
