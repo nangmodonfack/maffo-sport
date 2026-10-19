@@ -46,10 +46,7 @@ const featuredCompetitions = [
   { name: "Ligue 1", href: "/competitions/ligue-1" },
   { name: "Serie A", href: "/competitions/serie-a" },
   { name: "Bundesliga", href: "/competitions/bundesliga" },
-  {
-    name: "Champions League",
-    href: "/competitions/ligue-des-champions",
-  },
+  { name: "Champions League", href: "/competitions/ligue-des-champions" },
 ];
 
 const demoMatches: Match[] = [
@@ -278,16 +275,14 @@ function SectionTitle({
 
 /* =========================
    CARTE DE MATCH
-   Toute la carte mène vers les résultats et le calendrier.
-   Le bouton « Voir l’analyse » a été supprimé.
+   Toute la carte mène aux résultats et au calendrier.
 ========================== */
-
 function MatchCard({ m }: { m: Match }) {
   return (
     <a
       href="/resultats-calendrier"
+      className="glass card-hover rounded-2xl p-4 min-w-[260px] snap-start block text-white"
       aria-label={`Voir les résultats et le calendrier : ${m.home} contre ${m.away}`}
-      className="glass card-hover rounded-2xl p-4 min-w-[260px] snap-start block cursor-pointer"
     >
       <div className="flex justify-between text-[11px] text-zinc-500 mb-4">
         <span>{m.league}</span>
@@ -323,8 +318,8 @@ function MatchCard({ m }: { m: Match }) {
             {m.status === "Direct"
               ? "En direct"
               : m.status === "Terminé"
-                ? "Terminé"
-                : "Aujourd’hui"}
+              ? "Terminé"
+              : "Aujourd’hui"}
           </div>
         </div>
 
@@ -420,7 +415,6 @@ export default function Home() {
         {/* =========================
             1. À LA UNE
         ========================== */}
-
         <section className="hero-grid border-b border-white/10">
           <div className="container-x py-10 md:py-16 grid lg:grid-cols-[1.35fr_.65fr] gap-5">
             <a
@@ -511,7 +505,6 @@ export default function Home() {
         {/* =========================
             2. MATCHS AUTOMATIQUES
         ========================== */}
-
         <section
           id="calendrier"
           className="container-x py-10"
@@ -545,7 +538,6 @@ export default function Home() {
               onClick={loadData}
               className="p-2 rounded-xl border border-white/10 hover:bg-white/5"
               title="Actualiser"
-              aria-label="Actualiser les matchs"
             >
               <RefreshCw
                 size={17}
@@ -587,7 +579,6 @@ export default function Home() {
         {/* =========================
             3. ANALYSES & GUIDES
         ========================== */}
-
         <section
           id="analyses"
           className="bg-[#0b0e14] border-y border-white/5"
@@ -638,9 +629,7 @@ export default function Home() {
 
         {/* =========================
             4. PARIS SPORTIFS
-            Carte entière cliquable, sans lien imbriqué.
         ========================== */}
-
         <section
           id="paris"
           className="container-x py-12"
@@ -655,7 +644,7 @@ export default function Home() {
               <a
                 href={article.link}
                 key={article.title}
-                className="glass rounded-2xl p-5 card-hover block"
+                className="glass rounded-2xl p-5 card-hover block group"
               >
                 <div className="flex justify-between items-start">
                   <span className="text-xs text-zinc-500">
@@ -676,7 +665,7 @@ export default function Home() {
                   {article.description}
                 </p>
 
-                <span className="mt-4 inline-flex items-center gap-1 text-sm font-bold text-white">
+                <span className="mt-4 inline-flex items-center gap-1 text-sm font-bold text-white group-hover:text-green-400">
                   Lire le guide
                   <ArrowRight size={15} />
                 </span>
@@ -693,7 +682,6 @@ export default function Home() {
         {/* =========================
             5. ACTUALITÉS
         ========================== */}
-
         <section
           id="actus"
           className="bg-[#0b0e14] border-y border-white/5"
@@ -770,9 +758,7 @@ export default function Home() {
 
         {/* =========================
             6. FOOTBALL AFRICAIN
-            Carte entière cliquable, sans lien imbriqué.
         ========================== */}
-
         <section
           id="football"
           className="container-x py-12"
@@ -801,9 +787,8 @@ export default function Home() {
                     {article.title}
                   </h3>
 
-                  <span className="text-sm text-green-400 inline-flex items-center gap-1 mt-3">
-                    Découvrir
-                    <ArrowRight size={15} />
+                  <span className="text-sm text-green-400 inline-block mt-3">
+                    Découvrir →
                   </span>
                 </div>
               </a>
@@ -814,7 +799,6 @@ export default function Home() {
         {/* =========================
             7. RÉSULTATS AUTOMATIQUES
         ========================== */}
-
         <section
           id="resultats"
           className="bg-[#0b0e14] border-y border-white/5"
@@ -868,7 +852,6 @@ export default function Home() {
         {/* =========================
             8. TELEGRAM
         ========================== */}
-
         <section className="container-x py-12">
           <div className="rounded-3xl border border-green-400/20 bg-gradient-to-r from-green-500/10 to-transparent p-7 md:p-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
             <div>
@@ -900,7 +883,6 @@ export default function Home() {
         {/* =========================
             9. NEWSLETTER
         ========================== */}
-
         <section className="container-x pb-14">
           <div className="glass rounded-3xl p-7 md:p-9 flex flex-col md:flex-row gap-6 md:items-center justify-between">
             <div>
