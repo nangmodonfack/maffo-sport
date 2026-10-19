@@ -1,3 +1,4 @@
+Import Link from "next/link";
 import { notFound } from "next/navigation";
 import { articles } from "../../data/articles";
 
@@ -8,15 +9,16 @@ type PageProps = {
 };
 
 function renderParagraph(paragraph: string, index: number) {
-  // Afficher les sous-titres
-  if (
-    paragraph ===
-      "POURQUOI LE REAL MADRID RÉCLAME-T-IL LA DÉMISSION DE TEBAS ?" ||
-    paragraph === "L'AFFAIRE NEGREIRA REVIENT DANS LE DÉBAT" ||
-    paragraph === "ARBITRAGE ESPAGNOL : LE REAL MADRID VEUT DES RÉFORMES" ||
-    paragraph === "JAVIER TEBAS VA-T-IL DÉMISSIONNER ?" ||
-    paragraph === "CE QU'IL FAUT RETENIR"
-  ) {
+  // Sous-titres de l'article Real Madrid
+  const headings = [
+    "POURQUOI LE REAL MADRID RÉCLAME-T-IL LA DÉMISSION DE TEBAS ?",
+    "L'AFFAIRE NEGREIRA REVIENT DANS LE DÉBAT",
+    "ARBITRAGE ESPAGNOL : LE REAL MADRID VEUT DES RÉFORMES",
+    "JAVIER TEBAS VA-T-IL DÉMISSIONNER ?",
+    "CE QU'IL FAUT RETENIR",
+  ];
+
+  if (headings.includes(paragraph)) {
     return (
       <h2
         key={index}
@@ -27,59 +29,60 @@ function renderParagraph(paragraph: string, index: number) {
     );
   }
 
-  // Afficher les photos intégrées dans l'article
+  // Première photo intégrée
   if (paragraph.startsWith("IMAGE 1")) {
     return (
       <figure key={index} className="my-8">
         <img
           src="https://images.unsplash.com/photo-1508098682722-e99c43a406b2?auto=format&fit=crop&w=1200&q=85"
-          alt="Illustration du football espagnol dans le contexte de la polémique entre le Real Madrid et Javier Tebas"
+          alt="Illustration du football espagnol"
           className="w-full rounded-2xl object-cover max-h-[500px]"
           loading="lazy"
         />
         <figcaption className="text-sm text-zinc-500 mt-3">
-          Le conflit entre le Real Madrid et la direction de LaLiga.
-          Photo d'illustration.
+          Le football espagnol au cœur de l'actualité. Photo d'illustration.
         </figcaption>
       </figure>
     );
   }
 
+  // Deuxième photo intégrée
   if (paragraph.startsWith("IMAGE 2")) {
     return (
       <figure key={index} className="my-8">
         <img
           src="https://images.unsplash.com/photo-1522778119026-d647f0596c20?auto=format&fit=crop&w=1200&q=85"
-          alt="Stade de football illustrant l'actualité du Real Madrid"
+          alt="Stade de football"
           className="w-full rounded-2xl object-cover max-h-[500px]"
           loading="lazy"
         />
         <figcaption className="text-sm text-zinc-500 mt-3">
-          Le Real Madrid au centre de l'actualité du football espagnol.
-          Photo d'illustration.
+          Le Real Madrid au centre des débats du football espagnol. Photo
+          d'illustration.
         </figcaption>
       </figure>
     );
   }
 
+  // Troisième photo intégrée
   if (paragraph.startsWith("IMAGE 3")) {
     return (
       <figure key={index} className="my-8">
         <img
           src="https://images.unsplash.com/photo-1522778119026-d647f0596c20?auto=format&fit=crop&w=1200&q=85"
-          alt="Terrain de football illustrant les débats sur l'arbitrage espagnol"
+          alt="Terrain de football"
           className="w-full rounded-2xl object-cover max-h-[500px]"
           loading="lazy"
         />
         <figcaption className="text-sm text-zinc-500 mt-3">
-          Les questions d'arbitrage alimentent les débats dans le football
-          espagnol. Photo d'illustration.
+          Les débats autour de l'arbitrage dans le football. Photo
+          d'illustration.
         </figcaption>
       </figure>
     );
   }
 
-  // Ne pas afficher les mentions techniques comme des paragraphes
+  // Masquer les marqueurs techniques et le surtitre
   if (
     paragraph.startsWith("IMAGE ") ||
     paragraph === "ACTUALITÉ FOOTBALL — ESPAGNE"
@@ -87,20 +90,7 @@ function renderParagraph(paragraph: string, index: number) {
     return null;
   }
 
-  // Afficher les sources avec un style distinct
-  if (paragraph.startsWith("Sources :")) {
-    return (
-      <div
-        key={index}
-        className="border-t border-white/10 pt-6 mt-10 text-sm text-zinc-400"
-      >
-        <strong className="text-white">Sources :</strong>{" "}
-        {paragraph.replace("Sources :", "").trim()}
-      </div>
-    );
-  }
-
-  // Paragraphes normaux
+  // Les paragraphes ordinaires sont affichés normalement
   return <p key={index}>{paragraph}</p>;
 }
 
@@ -126,9 +116,14 @@ export default async function ArticlePage({ params }: PageProps) {
           {article.title}
         </h1>
 
-        {/* INFOS */}
+        {/* DATE DE PUBLICATION ET DERNIÈRE MISE À JOUR */}
         <div className="text-sm text-zinc-500 mt-4">
-          {article.date} · {article.author}
+          Publié le {article.date}
+          {article.updated && (
+            <span> · Mis à jour le {article.updated}</span>
+          )}
+          {" · "}
+          {article.author}
         </div>
 
         {/* IMAGE PRINCIPALE */}
@@ -141,7 +136,7 @@ export default async function ArticlePage({ params }: PageProps) {
               fetchPriority="high"
             />
             <figcaption className="text-sm text-zinc-500 mt-3">
-              Illustration de l'actualité.
+              Illustration : {article.title}
             </figcaption>
           </figure>
         )}
@@ -153,14 +148,36 @@ export default async function ArticlePage({ params }: PageProps) {
           )}
         </div>
 
+        {/* SOURCES CLIQUABLES */}
+        {article.sources && article.sources.length > 0 && (
+          <section className="mt-10 border-t border-white/10 pt-6">
+            <h2 className="text-xl font-bold text-white mb-4">Sources</h2>
+
+            <ul className="space-y-3">
+              {article.sources.map((source, index) => (
+                <li key={`${source.url}-${index}`}>
+                  <a
+                    href={source.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-green-400 hover:text-green-300 underline underline-offset-4"
+                  >
+                    {source.name}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </section>
+        )}
+
         {/* RETOUR AUX ACTUALITÉS */}
         <div className="mt-12 border-t border-white/10 pt-6">
-          <a
+          <Link
             href="/actualites"
             className="inline-flex items-center text-green-400 font-bold hover:text-green-300 transition"
           >
             ← Retour aux actualités
-          </a>
+          </Link>
         </div>
       </article>
     </main>
