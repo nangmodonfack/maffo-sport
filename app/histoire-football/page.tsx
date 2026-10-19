@@ -41,7 +41,7 @@ const miniPhotos = [
     caption: "Les grandes dates",
   },
   {
-    src: "/images/home/histoire-trophee.svg",
+    src: "/images/home/histoire-trophee.jpg",
     alt: "Illustration d’un trophée et d’un ballon de football",
     caption: "Les grands tournois",
   },
