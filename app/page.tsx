@@ -1,4 +1,4 @@
-"use client";  
+"use client";
 
 import NewsletterForm from "./components/NewsletterForm";
 import { useEffect, useMemo, useState } from "react";
@@ -39,15 +39,18 @@ const leagueIds: Record<string, number> = {
   "Europa League": 3,
   "Ligue des champions CAF": 12,
 };
+
 const featuredCompetitions = [
   { name: "Premier League", href: "/competitions/premier-league" },
   { name: "La Liga", href: "/competitions/liga" },
   { name: "Ligue 1", href: "/competitions/ligue-1" },
   { name: "Serie A", href: "/competitions/serie-a" },
   { name: "Bundesliga", href: "/competitions/bundesliga" },
-  { name: "Champions League", href: "/competitions/ligue-des-champions" },
+  {
+    name: "Champions League",
+    href: "/competitions/ligue-des-champions",
+  },
 ];
-
 
 const demoMatches: Match[] = [
   {
@@ -102,14 +105,15 @@ const evergreenArticles = [
     link: "/articles/lire-statistiques-match-football",
   },
 ];
+
 const bettingArticles = [
- {
-  category: "Types de paris",
-  title: "Les types de paris sportifs : le guide complet",
-  description:
-    "Comprendre le 1N2, la double chance, l’Over/Under, le BTTS et les handicaps.",
-  link: "/types-de-paris-sportifs",
-},
+  {
+    category: "Types de paris",
+    title: "Les types de paris sportifs : le guide complet",
+    description:
+      "Comprendre le 1N2, la double chance, l’Over/Under, le BTTS et les handicaps.",
+    link: "/types-de-paris-sportifs",
+  },
   {
     category: "Stratégie",
     title: "Comment analyser les cotes d'un match ?",
@@ -186,9 +190,7 @@ function formatTime(date: string) {
 }
 
 function statusOf(short: string): MatchStatus {
-  if (
-    ["1H", "2H", "HT", "ET", "P", "BT", "LIVE"].includes(short)
-  ) {
+  if (["1H", "2H", "HT", "ET", "P", "BT", "LIVE"].includes(short)) {
     return "Direct";
   }
 
@@ -274,9 +276,19 @@ function SectionTitle({
   );
 }
 
+/* =========================
+   CARTE DE MATCH
+   Toute la carte mène vers les résultats et le calendrier.
+   Le bouton « Voir l’analyse » a été supprimé.
+========================== */
+
 function MatchCard({ m }: { m: Match }) {
   return (
-    <div className="glass card-hover rounded-2xl p-4 min-w-[260px] snap-start">
+    <a
+      href="/resultats-calendrier"
+      aria-label={`Voir les résultats et le calendrier : ${m.home} contre ${m.away}`}
+      className="glass card-hover rounded-2xl p-4 min-w-[260px] snap-start block cursor-pointer"
+    >
       <div className="flex justify-between text-[11px] text-zinc-500 mb-4">
         <span>{m.league}</span>
 
@@ -311,8 +323,8 @@ function MatchCard({ m }: { m: Match }) {
             {m.status === "Direct"
               ? "En direct"
               : m.status === "Terminé"
-              ? "Terminé"
-              : "Aujourd’hui"}
+                ? "Terminé"
+                : "Aujourd’hui"}
           </div>
         </div>
 
@@ -324,14 +336,7 @@ function MatchCard({ m }: { m: Match }) {
           </div>
         </div>
       </div>
-
-      <a
-        href="/analyses-guides"
-        className="mt-4 block text-center text-xs text-green-400 hover:text-green-300"
-      >
-        Voir l’analyse →
-      </a>
-    </div>
+    </a>
   );
 }
 
@@ -358,13 +363,14 @@ export default function Home() {
         }
       );
 
-if (!response.ok) {
-  throw new Error(
-    "API-Football indisponible."
-  );
-}
+      if (!response.ok) {
+        throw new Error("API-Football indisponible.");
+      }
 
-      const data = await response.json(); const realMatches: Match[] = (data.fixtures || []).map((fixture: any) => ({
+      const data = await response.json();
+
+      const realMatches: Match[] = (data.fixtures || []).map(
+        (fixture: any) => ({
           id: fixture.fixture.id,
           league: fixture.league.name,
           home: fixture.teams.home.name,
@@ -375,7 +381,8 @@ if (!response.ok) {
           awayLogo: fixture.teams.away.logo,
           homeScore: fixture.goals.home,
           awayScore: fixture.goals.away,
-        }));
+        })
+      );
 
       setMatches(realMatches);
       setApiOnline(true);
@@ -410,92 +417,93 @@ if (!response.ok) {
   return (
     <div className="min-h-screen">
       <main>
-     {/* =========================
-    1. À LA UNE
-========================== */}
-<section className="hero-grid border-b border-white/10">
-  <div className="container-x py-10 md:py-16 grid lg:grid-cols-[1.35fr_.65fr] gap-5">
-    <a
-      href="/actualites"
-      className="relative overflow-hidden rounded-3xl min-h-[390px] border border-white/10 block"
-    >
-      <ImagePlaceholder
-        src="/images/home/hero.jpg"
-        alt="Actualité sportive"
-      />
+        {/* =========================
+            1. À LA UNE
+        ========================== */}
 
-      <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
+        <section className="hero-grid border-b border-white/10">
+          <div className="container-x py-10 md:py-16 grid lg:grid-cols-[1.35fr_.65fr] gap-5">
+            <a
+              href="/actualites"
+              className="relative overflow-hidden rounded-3xl min-h-[390px] border border-white/10 block"
+            >
+              <ImagePlaceholder
+                src="/images/home/hero.jpg"
+                alt="Actualité sportive"
+              />
 
-      <div className="absolute bottom-0 p-6 md:p-9 max-w-3xl">
-        <div className="flex items-center gap-2 text-xs font-bold text-green-400 uppercase tracking-widest">
-          <Flame size={15} />
-          À la une
-        </div>
+              <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
 
-        <h1 className="text-3xl md:text-5xl font-black leading-tight mt-3">
-          Toute l’actualité sportive, les analyses et les rendez-vous à ne pas manquer
-        </h1>
+              <div className="absolute bottom-0 p-6 md:p-9 max-w-3xl">
+                <div className="flex items-center gap-2 text-xs font-bold text-green-400 uppercase tracking-widest">
+                  <Flame size={15} />
+                  À la une
+                </div>
 
-        <p className="text-zinc-300 mt-3 max-w-2xl">
-          Un regard clair sur le football, les grandes compétitions,
-          les statistiques et les paris sportifs.
-        </p>
+                <h1 className="text-3xl md:text-5xl font-black leading-tight mt-3">
+                  Toute l’actualité sportive, les analyses et les rendez-vous à ne pas manquer
+                </h1>
 
-        <span className="inline-flex items-center mt-5 bg-green-500 text-black font-bold px-5 py-3 rounded-xl hover:bg-green-400 transition">
-          Voir les actualités
-          <ArrowRight className="ml-1" size={17} />
-        </span>
-      </div>
-    </a>
+                <p className="text-zinc-300 mt-3 max-w-2xl">
+                  Un regard clair sur le football, les grandes compétitions,
+                  les statistiques et les paris sportifs.
+                </p>
 
-    <div className="grid sm:grid-cols-2 lg:grid-cols-1 gap-5">
-             {[
-  [
-    "Analyse",
-    "Les clés pour comprendre les grands matchs",
-    "/images/home/analyse-match.jpg",
-    "/articles/comment-analyser-un-match-de-football",
-  ],
-  [
-  "Guide",
-  "Les statistiques à connaître au football",
-  "/images/home/statistiques.jpg",
-  "/articles/statistiques-a-connaitre-football",
-],
- [
-  "Paris sportifs",
-  "Comprendre les principaux marchés de paris",
-  "/images/home/paris-sportifs.jpg",
-  "/articles/comprendre-principaux-marches-paris-sportifs",
-],
-].map(([cat, title, image, link]) => (
-  <a
-    key={title}
-    href={link}
-    className="glass rounded-2xl overflow-hidden card-hover block"
-  >
-    <div className="h-28">
-      <ImagePlaceholder
-        src={image}
-        alt={title}
-      />
-    </div>
+                <span className="inline-flex items-center mt-5 bg-green-500 text-black font-bold px-5 py-3 rounded-xl hover:bg-green-400 transition">
+                  Voir les actualités
+                  <ArrowRight className="ml-1" size={17} />
+                </span>
+              </div>
+            </a>
 
-    <div className="p-4">
-      <div className="text-xs text-green-400 font-bold uppercase">
-        {cat}
-      </div>
+            <div className="grid sm:grid-cols-2 lg:grid-cols-1 gap-5">
+              {[
+                [
+                  "Analyse",
+                  "Les clés pour comprendre les grands matchs",
+                  "/images/home/analyse-match.jpg",
+                  "/articles/comment-analyser-un-match-de-football",
+                ],
+                [
+                  "Guide",
+                  "Les statistiques à connaître au football",
+                  "/images/home/statistiques.jpg",
+                  "/articles/statistiques-a-connaitre-football",
+                ],
+                [
+                  "Paris sportifs",
+                  "Comprendre les principaux marchés de paris",
+                  "/images/home/paris-sportifs.jpg",
+                  "/articles/comprendre-principaux-marches-paris-sportifs",
+                ],
+              ].map(([cat, title, image, link]) => (
+                <a
+                  key={title}
+                  href={link}
+                  className="glass rounded-2xl overflow-hidden card-hover block"
+                >
+                  <div className="h-28">
+                    <ImagePlaceholder
+                      src={image}
+                      alt={title}
+                    />
+                  </div>
 
-      <h3 className="font-bold mt-1 leading-snug">
-        {title}
-      </h3>
+                  <div className="p-4">
+                    <div className="text-xs text-green-400 font-bold uppercase">
+                      {cat}
+                    </div>
 
-      <span className="text-xs text-zinc-500 mt-2 inline-block">
-        Lire →
-      </span>
-    </div>
-  </a>
-))}
+                    <h3 className="font-bold mt-1 leading-snug">
+                      {title}
+                    </h3>
+
+                    <span className="text-xs text-zinc-500 mt-2 inline-block">
+                      Lire →
+                    </span>
+                  </div>
+                </a>
+              ))}
             </div>
           </div>
         </section>
@@ -503,6 +511,7 @@ if (!response.ok) {
         {/* =========================
             2. MATCHS AUTOMATIQUES
         ========================== */}
+
         <section
           id="calendrier"
           className="container-x py-10"
@@ -536,6 +545,7 @@ if (!response.ok) {
               onClick={loadData}
               className="p-2 rounded-xl border border-white/10 hover:bg-white/5"
               title="Actualiser"
+              aria-label="Actualiser les matchs"
             >
               <RefreshCw
                 size={17}
@@ -577,6 +587,7 @@ if (!response.ok) {
         {/* =========================
             3. ANALYSES & GUIDES
         ========================== */}
+
         <section
           id="analyses"
           className="bg-[#0b0e14] border-y border-white/5"
@@ -589,45 +600,47 @@ if (!response.ok) {
 
             <div className="grid md:grid-cols-3 gap-5">
               {evergreenArticles.map((article) => (
-  <a
-    key={article.title}
-    href={article.link}
-    className="glass rounded-2xl overflow-hidden card-hover block"
-  >
-    <div className="h-40">
-      <ImagePlaceholder
-        src={article.image}
-        alt={article.title}
-      />
-    </div>
+                <a
+                  key={article.title}
+                  href={article.link}
+                  className="glass rounded-2xl overflow-hidden card-hover block"
+                >
+                  <div className="h-40">
+                    <ImagePlaceholder
+                      src={article.image}
+                      alt={article.title}
+                    />
+                  </div>
 
-    <div className="p-5">
-      <div className="text-xs text-green-400 font-bold uppercase">
-        {article.category}
-      </div>
+                  <div className="p-5">
+                    <div className="text-xs text-green-400 font-bold uppercase">
+                      {article.category}
+                    </div>
 
-      <h3 className="font-black text-xl mt-2">
-        {article.title}
-      </h3>
+                    <h3 className="font-black text-xl mt-2">
+                      {article.title}
+                    </h3>
 
-      <p className="text-sm text-zinc-400 mt-2 leading-6">
-        {article.description}
-      </p>
+                    <p className="text-sm text-zinc-400 mt-2 leading-6">
+                      {article.description}
+                    </p>
 
-      <span className="inline-flex items-center gap-1 text-sm font-bold mt-5">
-        Lire la suite
-        <ArrowRight size={15} />
-      </span>
-    </div>
-  </a>
-))}
+                    <span className="inline-flex items-center gap-1 text-sm font-bold mt-5">
+                      Lire la suite
+                      <ArrowRight size={15} />
+                    </span>
+                  </div>
+                </a>
+              ))}
             </div>
           </div>
         </section>
 
         {/* =========================
             4. PARIS SPORTIFS
+            Carte entière cliquable, sans lien imbriqué.
         ========================== */}
+
         <section
           id="paris"
           className="container-x py-12"
@@ -640,10 +653,10 @@ if (!response.ok) {
           <div className="grid md:grid-cols-3 gap-5">
             {bettingArticles.map((article) => (
               <a
-  href={article.link}
-  key={article.title}
-  className="glass rounded-2xl p-5 card-hover block"
->
+                href={article.link}
+                key={article.title}
+                className="glass rounded-2xl p-5 card-hover block"
+              >
                 <div className="flex justify-between items-start">
                   <span className="text-xs text-zinc-500">
                     {article.category}
@@ -663,14 +676,11 @@ if (!response.ok) {
                   {article.description}
                 </p>
 
-                <a
-                  href="#"
-                  className="mt-4 inline-flex items-center gap-1 text-sm font-bold text-white hover:text-green-400"
-                >
+                <span className="mt-4 inline-flex items-center gap-1 text-sm font-bold text-white">
                   Lire le guide
                   <ArrowRight size={15} />
-                </a>
-             </a>
+                </span>
+              </a>
             ))}
           </div>
 
@@ -680,83 +690,89 @@ if (!response.ok) {
           </p>
         </section>
 
-      {/* =========================
-    5. ACTUALITÉS
-========================== */}
-<section
-  id="actus"
-  className="bg-[#0b0e14] border-y border-white/5"
->
-  <div className="container-x py-12">
-    <SectionTitle
-      eyebrow="À ne pas manquer"
-      title="Dernières actualités"
-    />
+        {/* =========================
+            5. ACTUALITÉS
+        ========================== */}
 
-    <div className="grid lg:grid-cols-[1.5fr_1fr] gap-6">
-      <div className="grid sm:grid-cols-2 gap-5">
-       {news.map(
-  ([category, title, label, image, link]) => (
-    <a
-      href={link}
-      key={title}
-      className="glass rounded-2xl overflow-hidden card-hover block"
-    >
-      <div className="h-36">
-        <ImagePlaceholder
-          src={image}
-          alt={title}
-        />
-      </div>
+        <section
+          id="actus"
+          className="bg-[#0b0e14] border-y border-white/5"
+        >
+          <div className="container-x py-12">
+            <SectionTitle
+              eyebrow="À ne pas manquer"
+              title="Dernières actualités"
+            />
 
-      <div className="p-5">
-        <div className="text-xs text-green-400 font-bold uppercase">
-          {category}
-        </div>
+            <div className="grid lg:grid-cols-[1.5fr_1fr] gap-6">
+              <div className="grid sm:grid-cols-2 gap-5">
+                {news.map(
+                  ([category, title, label, image, link]) => (
+                    <a
+                      href={link}
+                      key={title}
+                      className="glass rounded-2xl overflow-hidden card-hover block"
+                    >
+                      <div className="h-36">
+                        <ImagePlaceholder
+                          src={image}
+                          alt={title}
+                        />
+                      </div>
 
-        <h3 className="font-black text-lg mt-1">
-          {title}
-        </h3>
+                      <div className="p-5">
+                        <div className="text-xs text-green-400 font-bold uppercase">
+                          {category}
+                        </div>
 
-        <div className="flex items-center gap-2 text-xs text-zinc-500 mt-3">
-          <Clock3 size={13} />
-          {label}
-        </div>
-      </div>
-    </a>
-  )
-)}
-      </div>
+                        <h3 className="font-black text-lg mt-1">
+                          {title}
+                        </h3>
 
-      <aside className="glass rounded-2xl p-5 h-fit">
-        <div className="flex items-center gap-2 font-black">
-          <Trophy
-            size={18}
-            className="text-green-400"
-          />
-          À suivre
-        </div>
+                        <div className="flex items-center gap-2 text-xs text-zinc-500 mt-3">
+                          <Clock3 size={13} />
+                          {label}
+                        </div>
+                      </div>
+                    </a>
+                  )
+                )}
+              </div>
 
-        <div className="mt-4 space-y-1">
-         {featuredCompetitions.map((competition) => (
-  <a
-    href={competition.href}
-    key={competition.href}
-    className="flex justify-between p-3 rounded-xl hover:bg-white/5"
-  >
-    <span>{competition.name}</span>
-    <ChevronRight size={16} className="text-zinc-600" />
-  </a>
-))}
+              <aside className="glass rounded-2xl p-5 h-fit">
+                <div className="flex items-center gap-2 font-black">
+                  <Trophy
+                    size={18}
+                    className="text-green-400"
+                  />
+                  À suivre
+                </div>
 
-        </div>
-      </aside>
-    </div>
-  </div>
-</section>
+                <div className="mt-4 space-y-1">
+                  {featuredCompetitions.map((competition) => (
+                    <a
+                      href={competition.href}
+                      key={competition.href}
+                      className="flex justify-between p-3 rounded-xl hover:bg-white/5"
+                    >
+                      <span>{competition.name}</span>
+                      <ChevronRight
+                        size={16}
+                        className="text-zinc-600"
+                      />
+                    </a>
+                  ))}
+                </div>
+              </aside>
+            </div>
+          </div>
+        </section>
+
         {/* =========================
             6. FOOTBALL AFRICAIN
+            Carte entière cliquable, sans lien imbriqué.
         ========================== */}
+
         <section
           id="football"
           className="container-x py-12"
@@ -768,11 +784,11 @@ if (!response.ok) {
 
           <div className="grid md:grid-cols-3 gap-5">
             {africanFootball.map((article) => (
-             <a
-  href={article.link}
-  key={article.title}
-  className="glass rounded-2xl overflow-hidden card-hover block"
->
+              <a
+                href={article.link}
+                key={article.title}
+                className="glass rounded-2xl overflow-hidden card-hover block"
+              >
                 <div className="h-36">
                   <ImagePlaceholder
                     src={article.image}
@@ -785,12 +801,10 @@ if (!response.ok) {
                     {article.title}
                   </h3>
 
-                  <a
-                    href="#"
-                    className="text-sm text-green-400 inline-block mt-3"
-                  >
-                    Découvrir →
-                  </a>
+                  <span className="text-sm text-green-400 inline-flex items-center gap-1 mt-3">
+                    Découvrir
+                    <ArrowRight size={15} />
+                  </span>
                 </div>
               </a>
             ))}
@@ -800,6 +814,7 @@ if (!response.ok) {
         {/* =========================
             7. RÉSULTATS AUTOMATIQUES
         ========================== */}
+
         <section
           id="resultats"
           className="bg-[#0b0e14] border-y border-white/5"
@@ -853,6 +868,7 @@ if (!response.ok) {
         {/* =========================
             8. TELEGRAM
         ========================== */}
+
         <section className="container-x py-12">
           <div className="rounded-3xl border border-green-400/20 bg-gradient-to-r from-green-500/10 to-transparent p-7 md:p-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
             <div>
@@ -884,6 +900,7 @@ if (!response.ok) {
         {/* =========================
             9. NEWSLETTER
         ========================== */}
+
         <section className="container-x pb-14">
           <div className="glass rounded-3xl p-7 md:p-9 flex flex-col md:flex-row gap-6 md:items-center justify-between">
             <div>
@@ -907,4 +924,3 @@ if (!response.ok) {
     </div>
   );
 }
-
