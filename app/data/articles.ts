@@ -38,7 +38,6 @@ export const articles: Article[] = [
 
       "Le conflit entre le Real Madrid et Javier Tebas franchit un nouveau cap. Le club madrilène réclame le départ du président de LaLiga après des déclarations controversées sur les méthodes de communication du club. Dans son communiqué du 16 octobre 2026, le Real Madrid demande également une réforme de l'arbitrage espagnol et remet en avant ses revendications concernant l'affaire Negreira.",
 
-      "IMAGE 1 — Javier Tebas et la polémique avec le Real Madrid",
 
       "POURQUOI LE REAL MADRID RÉCLAME-T-IL LA DÉMISSION DE TEBAS ?",
 
@@ -71,7 +70,7 @@ export const articles: Article[] = [
 
       "Une demande de démission ne constitue pas une démission effective. La situation devra donc être suivie à partir de déclarations officielles et de sources journalistiques fiables.",
 
-      "CONCLUSION",
+      "CE QU'IL FAUT RETENIR",
 
       "En réclamant le départ de Javier Tebas, le Real Madrid transforme une polémique sur la communication en une nouvelle confrontation institutionnelle. Le club maintient également la pression sur les questions liées à l'affaire Negreira et à la réforme de l'arbitrage espagnol.",
 
