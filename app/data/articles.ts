@@ -48,8 +48,7 @@ export const articles: Article[] = [
 
       "Le club demande donc la démission de Javier Tebas de la présidence de LaLiga et de son poste de vice-président de la Fédération royale espagnole de football. Cette demande constitue la position officielle du Real Madrid : elle ne signifie pas que le dirigeant a effectivement quitté ses fonctions.",
 
-      "IMAGE 2 — Le Real Madrid au cœur de la polémique",
-
+    
       "L'AFFAIRE NEGREIRA REVIENT DANS LE DÉBAT",
 
       "Le communiqué permet également au Real Madrid de réaffirmer ses demandes concernant l'affaire Negreira. Ce dossier porte sur des paiements effectués par le FC Barcelone à des sociétés liées à José María Enríquez Negreira, ancien vice-président du Comité technique des arbitres espagnols.",
@@ -64,7 +63,7 @@ export const articles: Article[] = [
 
       "Cette revendication s'inscrit dans un conflit plus large entre le Real Madrid et les responsables du football espagnol. Les critiques portant sur l'arbitrage, la communication des clubs et la gestion des compétitions alimentent régulièrement les tensions.",
 
-      "IMAGE 3 — Le football espagnol et les enjeux institutionnels",
+      
 
       "JAVIER TEBAS VA-T-IL DÉMISSIONNER ?",
 
