@@ -15,7 +15,7 @@ function renderParagraph(paragraph: string, index: number) {
     paragraph === "L'AFFAIRE NEGREIRA REVIENT DANS LE DÉBAT" ||
     paragraph === "ARBITRAGE ESPAGNOL : LE REAL MADRID VEUT DES RÉFORMES" ||
     paragraph === "JAVIER TEBAS VA-T-IL DÉMISSIONNER ?" ||
-    paragraph === "CONCLUSION"
+    paragraph === "CE QU'IL FAUT RETENIR"
   ) {
     return (
       <h2
