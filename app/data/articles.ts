@@ -23,6 +23,63 @@ export function generateExcerpt(content: string[]) {
 }
 export const articles: Article[] = [
   {
+    slug: "real-madrid-demande-demission-javier-tebas",
+    title:
+      "Real Madrid : le club exige la démission de Javier Tebas après ses propos polémiques",
+    category: "Football",
+    excerpt:
+      "Le Real Madrid réclame la démission de Javier Tebas après ses déclarations controversées sur la communication du club. L'affaire Negreira et la réforme de l'arbitrage espagnol sont également au cœur du communiqué.",
+    image:
+      "https://images.unsplash.com/photo-1522778119026-d647f0596c20?auto=format&fit=crop&w=1200&q=85",
+    date: "17 octobre 2026",
+    author: "Maffo Sport",
+    content: [
+      "ACTUALITÉ FOOTBALL — ESPAGNE",
+
+      "Le conflit entre le Real Madrid et Javier Tebas franchit un nouveau cap. Le club madrilène réclame le départ du président de LaLiga après des déclarations controversées sur les méthodes de communication du club. Dans son communiqué du 16 octobre 2026, le Real Madrid demande également une réforme de l'arbitrage espagnol et remet en avant ses revendications concernant l'affaire Negreira.",
+
+      "IMAGE 1 — Javier Tebas et la polémique avec le Real Madrid",
+
+      "POURQUOI LE REAL MADRID RÉCLAME-T-IL LA DÉMISSION DE TEBAS ?",
+
+      "À l'origine de cette nouvelle confrontation se trouvent des propos de Javier Tebas concernant la communication du Real Madrid et de sa chaîne de télévision, Real Madrid TV. Le dirigeant a établi une comparaison avec des méthodes de propagande associées à Joseph Goebbels, ancien ministre de la Propagande du régime nazi.",
+
+      "Cette comparaison a provoqué une réaction ferme du club madrilène. Dans son communiqué, le Real Madrid juge ces déclarations absolument intolérables et estime qu'elles sont incompatibles avec les responsabilités institutionnelles du président de LaLiga.",
+
+      "Le club demande donc la démission de Javier Tebas de la présidence de LaLiga et de son poste de vice-président de la Fédération royale espagnole de football. Cette demande constitue la position officielle du Real Madrid : elle ne signifie pas que le dirigeant a effectivement quitté ses fonctions.",
+
+      "IMAGE 2 — Le Real Madrid au cœur de la polémique",
+
+      "L'AFFAIRE NEGREIRA REVIENT DANS LE DÉBAT",
+
+      "Le communiqué permet également au Real Madrid de réaffirmer ses demandes concernant l'affaire Negreira. Ce dossier porte sur des paiements effectués par le FC Barcelone à des sociétés liées à José María Enríquez Negreira, ancien vice-président du Comité technique des arbitres espagnols.",
+
+      "Cette affaire a suscité de nombreuses interrogations sur les relations entre le club catalan et l'environnement arbitral. Le Real Madrid demande que les faits soient examinés et que la transparence des institutions du football espagnol soit renforcée.",
+
+      "Il convient toutefois de distinguer les faits établis, les accusations et les conclusions judiciaires. L'existence de paiements ne permet pas, à elle seule, d'affirmer que des matchs ont été truqués ou que des arbitres ont été corrompus.",
+
+      "ARBITRAGE ESPAGNOL : LE REAL MADRID VEUT DES RÉFORMES",
+
+      "Au-delà du départ de Javier Tebas, le club réclame des changements dans le fonctionnement de l'arbitrage et des instances du football espagnol. Il souhaite notamment davantage de transparence et de confiance dans les mécanismes de gouvernance.",
+
+      "Cette revendication s'inscrit dans un conflit plus large entre le Real Madrid et les responsables du football espagnol. Les critiques portant sur l'arbitrage, la communication des clubs et la gestion des compétitions alimentent régulièrement les tensions.",
+
+      "IMAGE 3 — Le football espagnol et les enjeux institutionnels",
+
+      "JAVIER TEBAS VA-T-IL DÉMISSIONNER ?",
+
+      "La demande du Real Madrid ouvre un nouvel épisode dans les relations déjà tendues entre le club et Javier Tebas. La suite dépendra des réactions du dirigeant et des éventuelles prises de position des instances concernées.",
+
+      "Une demande de démission ne constitue pas une démission effective. La situation devra donc être suivie à partir de déclarations officielles et de sources journalistiques fiables.",
+
+      "CONCLUSION",
+
+      "En réclamant le départ de Javier Tebas, le Real Madrid transforme une polémique sur la communication en une nouvelle confrontation institutionnelle. Le club maintient également la pression sur les questions liées à l'affaire Negreira et à la réforme de l'arbitrage espagnol.",
+
+      "Sources : Real Madrid, communiqué officiel du 16 octobre 2026 ; Reuters, compte rendu de la demande de démission ; médias espagnols couvrant la réaction de Javier Tebas."
+    ],
+  },
+  {
     slug: "comment-analyser-un-match-de-football",
     title: "Comment analyser un match de football avant de faire un pronostic ?",
     category: "Analyse & guides",
