@@ -326,7 +326,7 @@ function MatchCard({ m }: { m: Match }) {
       </div>
 
       <a
-        href="#analyses"
+        href="/analyses-guides"
         className="mt-4 block text-center text-xs text-green-400 hover:text-green-300"
       >
         Voir l’analyse →
