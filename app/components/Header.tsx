@@ -15,10 +15,9 @@ export default function Header() {
   const [mobileParis, setMobileParis] = useState(false);
   const [desktopDropdownOpen, setDesktopDropdownOpen] = useState(false);
 
-  // Référence pour détecter les clics à l'extérieur du menu dropdown desktop
+  // Référence pour fermer au clic extérieur
   const dropdownRef = useRef<HTMLDivElement>(null);
 
-  // Fermer le dropdown desktop ou le menu mobile si on clique en dehors
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
@@ -42,7 +41,7 @@ export default function Header() {
 
   const toggleSearch = () => {
     setSearchOpen((prev) => {
-      if (prev) setSearchQuery(""); // Réinitialise la recherche à la fermeture
+      if (prev) setSearchQuery("");
       return !prev;
     });
   };
@@ -85,7 +84,15 @@ export default function Header() {
             Compétitions
           </Link>
 
-          {/* MENU PARIS SPORTIFS (Desktop avec clic & survol) */}
+          <Link href="/bookmakers" className="hover:text-green-300 transition">
+            Bookmakers
+          </Link>
+
+          <Link href="/pronostics" className="hover:text-green-300 transition">
+            Pronostics
+          </Link>
+
+          {/* MENU PARIS SPORTIFS (Déplacé plus à droite) */}
           <div className="relative" ref={dropdownRef}>
             <button
               type="button"
@@ -133,14 +140,6 @@ export default function Header() {
               </div>
             )}
           </div>
-
-          <Link href="/bookmakers" className="hover:text-green-300 transition">
-            Bookmakers
-          </Link>
-
-          <Link href="/pronostics" className="hover:text-green-300 transition">
-            Pronostics
-          </Link>
 
           <Link
             href="/resultats-calendrier"
@@ -194,7 +193,7 @@ export default function Header() {
         </div>
       </div>
 
-      {/* BANNIÈRE PUBLICITAIRE 1XBET */}
+      {/* BANNIÈRE PUBLICITAIRE 1XBET (Reste centrée et bien alignée) */}
       <div className="border-t border-white/5 bg-[#07090d] px-3 py-3">
         <div className="mx-auto flex w-full max-w-[300px] flex-col items-center gap-1.5">
           <div className="flex items-center gap-2">
@@ -224,7 +223,7 @@ export default function Header() {
           </a>
 
           <p className="text-center text-[10px] text-zinc-500">
-            Publicité partenaire · Réservé aux adultes selon la loi applicable
+             Réservé aux adultes selon la loi applicable.
           </p>
         </div>
       </div>
@@ -289,6 +288,22 @@ export default function Header() {
             Compétitions
           </Link>
 
+          <Link
+            href="/bookmakers"
+            onClick={closeMobileMenu}
+            className="block py-3 border-b border-white/5 text-sm font-semibold text-zinc-300"
+          >
+            Bookmakers
+          </Link>
+
+          <Link
+            href="/pronostics"
+            onClick={closeMobileMenu}
+            className="block py-3 border-b border-white/5 text-sm font-semibold text-zinc-300"
+          >
+            Pronostics
+          </Link>
+
           {/* PARIS SPORTIFS MOBILE */}
           <div className="border-b border-white/5">
             <button
@@ -335,22 +350,6 @@ export default function Header() {
               </div>
             )}
           </div>
-
-          <Link
-            href="/bookmakers"
-            onClick={closeMobileMenu}
-            className="block py-3 border-b border-white/5 text-sm font-semibold text-zinc-300"
-          >
-            Bookmakers
-          </Link>
-
-          <Link
-            href="/pronostics"
-            onClick={closeMobileMenu}
-            className="block py-3 border-b border-white/5 text-sm font-semibold text-zinc-300"
-          >
-            Pronostics
-          </Link>
 
           <Link
             href="/resultats-calendrier"
