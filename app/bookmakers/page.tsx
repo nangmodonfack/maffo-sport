@@ -27,7 +27,7 @@ const bookmakers: Bookmaker[] = [
     slug: "1xbet",
     logo: "/images/bookmakers/1xbet.png",
     bonus: "Bonus de premier dépôt",
-    bonusPercentage: "Jusqu’à 120 %*",
+    bonusPercentage: "Jusqu’à 200 %*",
     bonusCode: "UBET10",
     description:
       "Une plateforme de paris sportifs proposant de nombreux marchés de football et différentes compétitions.",
