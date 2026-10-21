@@ -1,4 +1,4 @@
-export type ArticleSource = {
+ export type ArticleSource = {
   name: string;
   url: string;
 };
@@ -32,6 +32,70 @@ export function generateExcerpt(content: string[]) {
 }
 
 export const articles: Article[] = [
+   {
+  slug: "ten-hag-ronaldo-manchester-united-declaration",
+  title:
+    "Ten Hag accuse Cristiano Ronaldo d’avoir déçu Manchester United et révèle ses désaccords avec le club",
+  category: "Actualités football",
+  excerpt:
+    "Erik ten Hag revient sur sa relation conflictuelle avec Cristiano Ronaldo à Manchester United. L’ancien entraîneur évoque le manque d’implication qu’il reprochait au Portugais et dénonce également des promesses non tenues par la direction du club.",
+  image: "/images/home/ten-hag-ronaldo.jpg",
+  date: "20 octobre 2026",
+  author: "Maffo Sport",
+  content: [
+    "ACTUALITÉ FOOTBALL — ANGLETERRE",
+    "Erik ten Hag est revenu sur l’une des périodes les plus tendues de son passage à Manchester United. Dans un entretien accordé à The Athletic, l’ancien entraîneur néerlandais a vivement critiqué le comportement de Cristiano Ronaldo pendant leur collaboration à Old Trafford. Il a également dénoncé des engagements que la direction du club n’aurait pas respectés avant son départ en octobre 2024.",
+    "UNE DÉCLARATION FORTE SUR CRISTIANO RONALDO",
+    "Erik ten Hag n’a pas caché sa déception concernant Cristiano Ronaldo. Le technicien estime que l’attaquant portugais n’a pas répondu aux attentes collectives pendant leur collaboration. Il a expliqué que le club avait préparé son projet en comptant sur le joueur, avant de constater des difficultés qu’il jugeait incompatibles avec ses exigences sportives.",
+    "Ten Hag a notamment déclaré que Ronaldo avait déçu l’équipe et lui-même. Il a toutefois reconnu le statut exceptionnel du Portugais dans l’histoire du football et expliqué que ses décisions devaient rester guidées par les intérêts collectifs de Manchester United.",
+    "Selon le récit de l’ancien entraîneur, le désaccord concernait notamment la préparation physique, les efforts fournis pendant les séances et la participation au jeu. Ten Hag estimait que les joueurs devaient être suffisamment préparés pour se rendre disponibles dans la surface adverse et contribuer au fonctionnement de l'équipe.",
+    "LE SOUVENIR D’UN EXERCICE PHYSIQUE APRÈS LA DÉFAITE CONTRE BRENTFORD",
+    "Pour illustrer ses reproches, Ten Hag est revenu sur un épisode survenu au début de la saison 2022-2023. Après la lourde défaite de Manchester United contre Brentford, les joueurs avaient dû effectuer un exercice de course supplémentaire. L’entraîneur affirme que Cristiano Ronaldo n’avait pas terminé l’ensemble de l’exercice prévu.",
+    "Cet épisode symbolise, selon Ten Hag, les différences d’approche qui se sont installées entre les deux hommes. Le technicien souhaitait imposer des exigences communes à son groupe, tandis que la gestion d’un joueur aussi expérimenté et médiatisé que Ronaldo rendait la situation particulièrement délicate.",
+    "Il faut néanmoins préciser que ces éléments proviennent du témoignage de Ten Hag. Ils représentent sa version des événements et ne constituent pas, à eux seuls, une évaluation indépendante de la préparation du joueur à cette période.",
+    "COMMENT LA RELATION ENTRE TEN HAG ET RONALDO S’EST-ELLE TERMINÉE ?",
+    "Cristiano Ronaldo avait retrouvé Manchester United en août 2021, après avoir marqué l’histoire du club lors de son premier passage. Lorsque Ten Hag a pris ses fonctions en 2022, le Portugais faisait déjà partie de l’effectif.",
+    "Leur relation s’est rapidement détériorée au cours de la saison 2022-2023. En octobre 2022, Ronaldo avait notamment refusé d’entrer en jeu lors d’une rencontre contre Tottenham et quitté le terrain avant la fin du match. Le joueur avait ensuite publiquement critiqué le club et son environnement dans une interview télévisée.",
+    "En novembre 2022, Manchester United et Cristiano Ronaldo ont annoncé la résiliation de son contrat d’un commun accord. L’attaquant a ensuite rejoint Al-Nassr, en Arabie saoudite, en janvier 2023.",
+    "TEN HAG DÉNONCE AUSSI DES PROMESSES NON TENUES PAR LA DIRECTION",
+    "Les déclarations de l’ancien entraîneur ne se limitent pas à Cristiano Ronaldo. Ten Hag est également revenu sur ses relations avec les dirigeants de Manchester United et affirme que plusieurs engagements pris lors des discussions concernant son avenir n’ont pas été respectés.",
+    "Il a notamment évoqué la vente de Scott McTominay à Naples durant l’été 2024. Ten Hag souhaitait conserver le milieu de terrain écossais, qu’il considérait comme un élément important de son effectif. Il explique avoir été déçu par cette décision, prise alors qu’il estimait avoir demandé aux responsables du club de ne pas vendre le joueur.",
+    "L’ancien entraîneur affirme que la loyauté, le soutien et une meilleure communication faisaient partie des engagements discutés avec la direction. Selon lui, le décalage entre ces engagements et les décisions prises a fragilisé leur relation.",
+    "HARRY KANE ET DECLAN RICE FIGURAIENT AUSSI DANS SES PLANS",
+    "Ten Hag a également révélé qu’il avait défendu l’idée de recruter Harry Kane et Declan Rice pendant son passage à Manchester United. Ces deux internationaux anglais ont finalement rejoint d’autres clubs : Kane a signé au Bayern Munich en 2023, tandis que Rice a rejoint Arsenal durant le même mercato estival.",
+    "Ces transferts manqués illustrent les désaccords que Ten Hag affirme avoir rencontrés dans la construction de son effectif. Pour un entraîneur, le recrutement est un élément important du projet sportif, car il détermine en partie les profils disponibles pour mettre en place une identité de jeu.",
+    "QUELLE LEÇON RETENIR DE CETTE AFFAIRE ?",
+    "Le témoignage d’Erik ten Hag remet en lumière les difficultés rencontrées par Manchester United pendant cette période. La gestion d’une star comme Cristiano Ronaldo, les exigences collectives de l'entraîneur et les choix de la direction ont contribué à créer un climat tendu au sein du club.",
+    "Il convient cependant de distinguer les faits historiques des interprétations de l’ancien entraîneur. La résiliation du contrat de Ronaldo en novembre 2022 et le transfert de McTominay à Naples en 2024 sont des événements établis. Les reproches concernant l’implication du Portugais et les engagements non respectés relèvent, eux, du témoignage de Ten Hag.",
+    "Cette distinction est importante pour comprendre l’affaire sans présenter le point de vue d’une seule personne comme une vérité incontestable.",
+    "CE QU’IL FAUT RETENIR",
+    "Erik ten Hag affirme que Cristiano Ronaldo l’a déçu pendant leur collaboration à Manchester United, notamment sur les questions de préparation et d’implication collective.",
+    "Leur relation s’est terminée en novembre 2022, lorsque le contrat de Ronaldo a été résilié d’un commun accord.",
+    "L’ancien entraîneur reproche également à la direction du club de ne pas avoir respecté certains engagements, notamment concernant la vente de Scott McTominay.",
+    "Ses déclarations apportent un nouvel éclairage sur les tensions de cette période, mais elles doivent être comprises comme le témoignage de l’ancien entraîneur.",
+    "ET VOUS, QU’EN PENSEZ-VOUS ?",
+    "Selon vous, Erik ten Hag a-t-il eu raison de faire passer ses exigences collectives avant le statut de Cristiano Ronaldo, ou Manchester United aurait-il dû mieux gérer cette relation ? Partagez votre avis dans les commentaires.",
+    "Article rédigé par Maffo Sport à partir de déclarations rapportées par plusieurs médias. Les accusations et appréciations attribuées à Erik ten Hag sont présentées comme son point de vue.",
+  ],
+  sources: [
+    {
+      name: "Reuters — Déclaration de Ten Hag sur Cristiano Ronaldo",
+      url: "https://www.reuters.com/sports/soccer/ronaldo-let-man-united-down-says-clubs-former-boss-ten-hag-2026-10-20/",
+    },
+    {
+      name: "The Guardian — Ten Hag accuse Ronaldo d’avoir déçu Manchester United",
+      url: "https://www.theguardian.com/football/2026/oct/20/erik-ten-hag-accuses-cristiano-ronaldo-of-letting-down-manchester-united",
+    },
+    {
+      name: "The Independent — Les critiques de Ten Hag sur Cristiano Ronaldo",
+      url: "https://www.independent.co.uk/sport/football/cristiano-ronaldo-manchester-united-erik-ten-hag-b3069813.html",
+    },
+    {
+      name: "Sky Sports — L’entretien de Ten Hag sur Manchester United",
+      url: "https://www.skysports.com/football/news/13601227/erik-ten-hag-interview-man-utd-s-broken-promises-wanting-kane-ronaldo-tension-fa-cup-glory",
+    },
+  ],
+},
   {
     slug: "real-madrid-demande-demission-javier-tebas",
     title:
