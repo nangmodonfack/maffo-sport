@@ -36,7 +36,7 @@ export const articles: Article[] = [
   slug: "ten-hag-ronaldo-manchester-united-declaration",
   title:
     "Ten Hag accuse Cristiano Ronaldo d’avoir déçu Manchester United et révèle ses désaccords avec le club",
-  category: "Actualités football",
+  category: "football",
   excerpt:
     "Erik ten Hag revient sur sa relation conflictuelle avec Cristiano Ronaldo à Manchester United. L’ancien entraîneur évoque le manque d’implication qu’il reprochait au Portugais et dénonce également des promesses non tenues par la direction du club.",
   image: "/images/home/ten-hag-ronaldo.jpg",
