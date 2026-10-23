@@ -6,6 +6,7 @@ import {
   Flame,
   Send,
   TrendingUp,
+  ShieldCheck,
 } from "lucide-react";
 import NewsletterForm from "../components/NewsletterForm";
 import { supabase } from "@/lib/supabase";
@@ -34,12 +35,12 @@ type DailyPrediction = {
     home: {
       id: number | null;
       name: string | null;
-      logo: string | null;
+      logo?: string | null;
     };
     away: {
       id: number | null;
       name: string | null;
-      logo: string | null;
+      logo?: string | null;
     };
   };
   prediction: {
@@ -84,7 +85,7 @@ function formatDate(date: string) {
     day: "numeric",
     month: "long",
     year: "numeric",
-  }).format(new Date(`${date}T12:00:00`));
+  }).format(date ? new Date(`${date}T12:00:00`) : new Date());
 }
 
 function formatTime(date: string) {
@@ -126,17 +127,17 @@ export default async function PronosticsPage() {
       <div className="max-w-3xl mb-10">
         <div className="flex items-center gap-2 text-xs font-bold text-green-400 uppercase tracking-widest">
           <TrendingUp size={15} />
-          Pronostics
+          Analyses & Pronostics Foot
         </div>
 
         <h1 className="text-3xl md:text-5xl font-black leading-tight mt-3">
-          Pronostics du jour
+          Pronostics du jour : analyses et tendances
         </h1>
 
         <p className="text-zinc-400 text-base md:text-lg mt-4 leading-relaxed">
-          Retrouvez les rencontres sélectionnées et analysées par Maffo Sport
-          pour la journée. Les statistiques, la forme des équipes et les
-          différents marchés sont pris en compte avant chaque sélection.
+          Retrouvez les rencontres décryptées par la rédaction de Maffo Sport. 
+          Forme du moment, statistiques avancées, dynamiques à domicile ou à l&apos;extérieur : 
+          tout est passé au crible pour vous aider à y voir plus clair avant les matchs.
         </p>
 
         <div className="flex flex-wrap items-center gap-4 text-sm text-zinc-500 mt-5">
@@ -147,22 +148,31 @@ export default async function PronosticsPage() {
 
           <div className="flex items-center gap-2">
             <Clock3 size={15} />
-            <span>Mise à jour quotidienne</span>
+            <span>Actualisé en continu</span>
           </div>
         </div>
       </div>
 
       {/* PRONOSTICS */}
       <section>
-        <div className="flex items-center justify-between gap-4 mb-6">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-6">
           <div>
             <h2 className="text-2xl md:text-3xl font-black">
               Sélections du jour
             </h2>
 
-            <p className="text-sm text-zinc-500 mt-2">
-              Les rencontres sont regroupées sur cette seule page.
+            <p className="text-sm text-zinc-400 mt-2">
+              Les affiches majeures de la journée analysées pour vous.
             </p>
+          </div>
+
+          {/* PETIT LIEN NATUREL VERS LES BOOKMAKERS */}
+          <div className="text-xs text-zinc-400 bg-white/[0.03] border border-white/10 rounded-xl px-4 py-3">
+            Vous cherchez où parier ? Consultez notre comparatif des{" "}
+            <Link href="/bookmakers" className="text-green-400 font-bold hover:underline">
+              meilleurs bookmakers disponibles
+            </Link>{" "}
+            en toute sécurité.
           </div>
         </div>
 
@@ -179,8 +189,8 @@ export default async function PronosticsPage() {
                 </h3>
 
                 <p className="text-sm text-zinc-400 mt-2 leading-6">
-                  Les rencontres disponibles aujourd&apos;hui apparaîtront ici
-                  automatiquement dès que les données seront disponibles.
+                  Les rencontres du jour s&apos;afficheront ici automatiquement dès que les 
+                  données de notre cache seront actualisées. Revenez un peu plus tard !
                 </p>
               </div>
             </div>
@@ -227,7 +237,7 @@ export default async function PronosticsPage() {
                   </div>
 
                   <div className="text-center">
-                    <span className="text-xs text-zinc-600 uppercase">
+                    <span className="text-xs text-zinc-600 uppercase font-bold">
                       VS
                     </span>
                   </div>
@@ -249,20 +259,20 @@ export default async function PronosticsPage() {
 
                 <div className="mt-6 border-t border-white/5 pt-5">
                   <div className="text-xs uppercase tracking-widest text-zinc-500">
-                    Pronostic
+                    Analyse & Tendance
                   </div>
 
                   {pronostic.prediction ? (
                     <div className="mt-3">
                       {pronostic.prediction.advice && (
-                        <div className="text-lg font-black">
+                        <div className="text-lg font-black text-green-300">
                           {pronostic.prediction.advice}
                         </div>
                       )}
 
                       {pronostic.prediction.winner?.name && (
                         <p className="text-sm text-zinc-400 mt-2">
-                          Équipe donnée gagnante :{" "}
+                          Scénario privilégié :{" "}
                           <span className="font-bold text-zinc-200">
                             {pronostic.prediction.winner.name}
                           </span>
@@ -272,7 +282,7 @@ export default async function PronosticsPage() {
                       <div className="flex flex-wrap gap-x-5 gap-y-2 text-sm text-zinc-400 mt-4">
                         {pronostic.prediction.percent.home && (
                           <span>
-                            Domicile{" "}
+                            1N2 Domicile{" "}
                             <strong className="text-zinc-200">
                               {pronostic.prediction.percent.home}
                             </strong>
@@ -290,7 +300,7 @@ export default async function PronosticsPage() {
 
                         {pronostic.prediction.percent.away && (
                           <span>
-                            Extérieur{" "}
+                            1N2 Extérieur{" "}
                             <strong className="text-zinc-200">
                               {pronostic.prediction.percent.away}
                             </strong>
@@ -301,20 +311,17 @@ export default async function PronosticsPage() {
                       {(pronostic.prediction.goals.home ||
                         pronostic.prediction.goals.away) && (
                         <div className="text-sm text-zinc-400 mt-3">
-                          Buts estimés :{" "}
+                          Projection buts :{" "}
                           <span className="text-zinc-200">
-                            {pronostic.prediction.goals.home ??
-                              "—"}{" "}
-                            -{" "}
-                            {pronostic.prediction.goals.away ??
-                              "—"}
+                            {pronostic.prediction.goals.home ?? "—"} -{" "}
+                            {pronostic.prediction.goals.away ?? "—"}
                           </span>
                         </div>
                       )}
 
                       {pronostic.prediction.under_over && (
                         <div className="text-sm text-zinc-400 mt-2">
-                          Marché buts :{" "}
+                          Tendance buts :{" "}
                           <span className="text-zinc-200">
                             {pronostic.prediction.under_over}
                           </span>
@@ -324,12 +331,11 @@ export default async function PronosticsPage() {
                   ) : (
                     <div className="mt-3">
                       <div className="text-lg font-black">
-                        Pronostic indisponible
+                        Tendances en cours d&apos;analyse
                       </div>
 
                       <p className="text-sm text-zinc-400 mt-2 leading-6">
-                        Aucune prédiction exploitable n&apos;est actuellement
-                        disponible pour cette rencontre.
+                        Les indicateurs statistiques de cette rencontre sont en train d&apos;être consolidés.
                       </p>
                     </div>
                   )}
@@ -338,6 +344,32 @@ export default async function PronosticsPage() {
             ))}
           </div>
         )}
+      </section>
+
+      {/* BLOC SEO RÉDACTIONNEL EN BAS DE PAGE (EXCELLENT POUR GOOGLE) */}
+      <section className="mt-14">
+        <div className="glass rounded-2xl p-6 md:p-10 space-y-4 text-zinc-300 leading-7 text-sm md:text-base">
+          <h2 className="text-xl md:text-2xl font-black text-white">
+            Comment bien utiliser nos pronostics football ?
+          </h2>
+          <p>
+            Le pari sportif ne repose pas uniquement sur la chance, mais sur une lecture rigoureuse 
+            des chiffres, des dynamiques d&apos;effectifs et des contextes de match. Sur Maffo Sport, 
+            chaque pronostic s&apos;appuie sur des données objectives (historique des confrontations, 
+            nombre de buts marqués/encaissés, forme récente à domicile et à l&apos;extérieur) pour 
+            mettre en lumière de potentiels value bets.
+          </p>
+          <p>
+            Que vous suiviez les grands championnats européens (Premier League, Liga, Serie A, Ligue 1, 
+            Bundesliga) ou les compétitions continentales comme la Ligue des Champions, l&apos;objectif 
+            reste de croiser nos tendances avec votre propre analyse. 
+          </p>
+          <p className="pt-2 text-zinc-400 text-xs md:text-sm">
+            💡 <strong className="text-zinc-200">Conseil parieur :</strong> Avant de valider vos tickets, 
+            prenez le temps de comparer les cotes proposées sur le marché. N&apos;hésitez pas à jeter un 
+            œil à notre guide et comparatif des <Link href="/bookmakers" className="text-green-400 underline font-semibold">meilleurs opérateurs de paris sportifs</Link> pour maximiser vos gains potentiels.
+          </p>
+        </div>
       </section>
 
       {/* TELEGRAM */}
@@ -351,13 +383,12 @@ export default async function PronosticsPage() {
 
               <div>
                 <h2 className="text-xl md:text-2xl font-black">
-                  Recevez les pronostics sur Telegram
+                  Rejoignez la communauté sur Telegram
                 </h2>
 
                 <p className="text-sm text-zinc-400 mt-2 leading-6 max-w-xl">
-                  Actualités, analyses et pronostics sélectionnés. Et les
-                  mises à jour de Maffo Sport directement sur notre canal
-                  Telegram.
+                  Ne ratez aucune alerte de dernière minute. Retrouvez nos sélections 
+                  du jour et les analyses partagées en direct sur notre canal Telegram.
                 </p>
               </div>
             </div>
@@ -368,7 +399,7 @@ export default async function PronosticsPage() {
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center gap-2 rounded-xl bg-green-400 text-black font-bold px-5 py-3 hover:bg-green-300 transition-colors whitespace-nowrap"
             >
-              Rejoindre Telegram
+              Rejoindre le canal
               <ArrowRight size={16} />
             </a>
           </div>
@@ -380,16 +411,16 @@ export default async function PronosticsPage() {
         <div className="glass rounded-2xl p-6 md:p-8">
           <div className="max-w-2xl">
             <div className="text-xs font-bold text-green-400 uppercase tracking-widest">
-              Newsletter
+              Newsletter Maffo Sport
             </div>
 
             <h2 className="text-2xl md:text-3xl font-black mt-2">
-              Ne manquez pas les prochains pronostics
+              Recevez nos meilleures analyses par email
             </h2>
 
             <p className="text-sm md:text-base text-zinc-400 mt-3 leading-6">
-              Inscrivez-vous pour recevoir les nouvelles analyses et
-              sélections de Maffo Sport directement par email.
+              Chaque semaine, recevez un récapitulatif des tendances fortes et des matchs 
+              à ne pas manquer directement dans votre boîte de réception.
             </p>
 
             <div className="mt-6">
@@ -401,16 +432,18 @@ export default async function PronosticsPage() {
 
       {/* JEU RESPONSABLE */}
       <section className="mt-10">
-        <div className="border border-white/10 rounded-2xl p-5 text-sm text-zinc-500 leading-6">
-          <Link
-            href="/jouer-responsable"
-            className="text-zinc-300 hover:text-white underline"
-          >
-            Jouez responsablement.
-          </Link>{" "}
-          Réservé aux personnes majeures selon la législation en vigueur dans
-          votre pays de résidence (18+ / 21+). Jouer comporte des risques :
-          endettement, isolement, dépendance.
+        <div className="border border-white/10 rounded-2xl p-5 text-sm text-zinc-500 leading-6 flex items-start gap-3">
+          <ShieldCheck size={20} className="text-zinc-400 shrink-0 mt-0.5" />
+          <div>
+            <Link
+              href="/jouer-responsable"
+              className="text-zinc-300 hover:text-white underline font-semibold"
+            >
+              Jouez de manière responsable.
+            </Link>{" "}
+            Les paris sportifs sont strictement réservés aux personnes majeures (18+ / 21+ selon la législation de votre pays). 
+            Le jeu comporte des risques : endettement, dépendance, isolement. Fixez-vous des limites et ne pariez que ce que vous pouvez vous permettre de perdre.
+          </div>
         </div>
       </section>
     </main>
