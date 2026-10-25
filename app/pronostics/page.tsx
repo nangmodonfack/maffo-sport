@@ -394,7 +394,7 @@ export default async function PronosticsPage() {
             </div>
 
             <a
-              href="https://t.me/maffoparissportifs"
+              href="https://t.me/mfparissportifs"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center gap-2 rounded-xl bg-green-400 text-black font-bold px-5 py-3 hover:bg-green-300 transition-colors whitespace-nowrap"
