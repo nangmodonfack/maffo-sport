@@ -223,7 +223,7 @@ export default function Header() {
           </a>
 
           <p className="text-center text-[10px] text-zinc-500">
-             Réservé aux adultes selon la loi applicable.
+            Publicité! Réservé aux adultes selon la loi applicable.
           </p>
         </div>
       </div>
