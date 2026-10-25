@@ -870,7 +870,7 @@ export default function Home() {
             </div>
 
             <a
-              href="https://t.me/maffoparissportifs"
+              href="https://t.me/mfparissportifs"
               target="_blank"
               rel="noopener noreferrer"
               className="bg-green-500 text-black font-black px-6 py-3 rounded-xl text-center hover:bg-green-400 transition"
