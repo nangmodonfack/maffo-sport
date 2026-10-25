@@ -269,7 +269,7 @@ export default function Footer() {
             </a>
 
             <a
-              href="https://t.me/maffoparissportifs"
+              href="https://t.me/mfparissportifs"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-2 hover:text-white"
