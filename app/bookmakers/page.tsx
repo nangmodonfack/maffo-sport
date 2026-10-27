@@ -68,7 +68,7 @@ const bookmakers: Bookmaker[] = [
     bonusCode: "400MC",
     description:
       "Une plateforme proposant des paris sportifs, notamment sur le football, avec une offre de bienvenue annoncée.",
-    affiliateUrl: "https://r1wtvmb.life/?p=8kkp",
+    affiliateUrl: "https://r1wlulu.life/?p=8kkp",
     advantages: [
       "Offre de bienvenue annoncée",
       "Paris sur différentes compétitions",
