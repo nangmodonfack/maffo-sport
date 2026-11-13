@@ -23,6 +23,38 @@ type Bookmaker = {
 
 const bookmakers: Bookmaker[] = [
   {
+    name: "Premier Bet",
+    slug: "premierbet",
+    logo: "/images/bookmakers/premierbet.png",
+    bonus: "Premier pari remboursé & Bonus 2e dépôt",
+    bonusPercentage: "Jusqu’à 15 000 F CFA*",
+    bonusCode: "UBET10",
+    description:
+      "Une plateforme de référence proposant des paris sportifs, des jeux virtuels et Aviator, avec des options de retrait en agence et par Mobile Money.",
+    affiliateUrl:
+      "https://media.premierbetpartners.com/redirect.aspx?pid=155098&bid=1991",
+    advantages: [
+      "Premier pari remboursé en free bet jusqu'à 15 000 F CFA",
+      "Dépôts et retraits ultra-rapides (Mobile Money & Cash en agence)",
+      "Bonus et paris gratuits sur le deuxième dépôt",
+    ],
+    disadvantages: [
+      "Conditions de mise à respecter sur les free bets",
+      "Disponibilité des offres selon le pays",
+    ],
+    paymentMethods: [
+      {
+        title: "Mobile Money & Paiements locaux",
+        description:
+          "MTN Mobile Money, Orange Money, Wave.",
+      },
+      {
+        title: "Retrait physique",
+        description: "Retrait en cash directement en agence (Voucher).",
+      },
+    ],
+  },
+  {
     name: "1xBet",
     slug: "1xbet",
     logo: "/images/bookmakers/1xbet.png",
@@ -135,17 +167,17 @@ function BonusPanel({
   onCopy: () => void;
 }) {
   return (
-    <div className="rounded-2xl border border-emerald-400/25 bg-emerald-400/[0.07] p-4">
-      <p className="text-sm text-slate-300">{bookmaker.bonus}</p>
+    <div className="rounded-xl border border-emerald-400/25 bg-emerald-400/[0.07] p-3">
+      <p className="text-xs text-slate-300">{bookmaker.bonus}</p>
 
-      <p className="mt-1 text-2xl font-extrabold text-emerald-300">
+      <p className="mt-1 text-xl font-extrabold text-emerald-300">
         {bookmaker.bonusPercentage}
       </p>
 
-      <div className="mt-4 flex flex-wrap items-center justify-between gap-3 rounded-xl border border-white/10 bg-slate-950/70 p-3">
+      <div className="mt-3 flex flex-wrap items-center justify-between gap-2 rounded-lg border border-white/10 bg-slate-950/70 p-2.5">
         <div>
-          <p className="text-xs text-slate-400">Code d’inscription</p>
-          <p className="mt-1 text-lg font-extrabold tracking-wider text-white">
+          <p className="text-[10px] text-slate-400">Code d’inscription</p>
+          <p className="mt-0.5 text-base font-extrabold tracking-wider text-white">
             {bookmaker.bonusCode}
           </p>
         </div>
@@ -153,16 +185,14 @@ function BonusPanel({
         <button
           type="button"
           onClick={onCopy}
-          className="rounded-lg bg-emerald-400 px-4 py-2 text-sm font-bold text-slate-950 transition hover:bg-emerald-300"
+          className="rounded-lg bg-emerald-400 px-3 py-1.5 text-xs font-bold text-slate-950 transition hover:bg-emerald-300"
         >
-          {copied ? "Copié ✓" : "Copier le code"}
+          {copied ? "Copié ✓" : "Copier"}
         </button>
       </div>
 
-      <p className="mt-3 text-xs leading-5 text-slate-400">
-        * Offre annoncée, soumise aux conditions du bookmaker et aux
-        restrictions applicables dans ton pays. Vérifie les conditions
-        avant tout dépôt.
+      <p className="mt-2 text-[10px] leading-4 text-slate-400">
+        * Offre soumise aux conditions du bookmaker.
       </p>
     </div>
   );
@@ -174,17 +204,14 @@ function CountryProfilePanel({
   bookmaker: Bookmaker;
 }) {
   return (
-    <section className="mt-6 rounded-2xl border border-white/10 bg-slate-950/60 p-4">
-      <h4 className="text-lg font-extrabold text-white">
+    <section className="mt-4 rounded-xl border border-white/10 bg-slate-950/60 p-3">
+      <h4 className="text-sm font-extrabold text-white">
         Disponibilité par pays
       </h4>
 
-      <p className="mt-2 text-sm leading-6 text-slate-400">
-        Les conditions d’inscription et les restrictions géographiques
-        varient selon le pays. Consulte les informations officielles
-        avant de t’inscrire.
+      <p className="mt-1 text-xs leading-5 text-slate-400">
+        Les conditions et restrictions varient selon le pays.
       </p>
-
     </section>
   );
 }
@@ -195,28 +222,26 @@ function PaymentMethodsPanel({
   paymentMethods: PaymentGroup[];
 }) {
   return (
-    <section className="mt-6 rounded-2xl border border-white/10 bg-slate-950/60 p-4">
-      <h4 className="text-lg font-extrabold text-white">
+    <section className="mt-4 rounded-xl border border-white/10 bg-slate-950/60 p-3">
+      <h4 className="text-sm font-extrabold text-white">
         Moyens de paiement
       </h4>
 
-      <div className="mt-4 space-y-4">
+      <div className="mt-2 space-y-2">
         {paymentMethods.map((group) => (
           <div key={group.title}>
-            <h5 className="font-semibold text-emerald-300">
+            <h5 className="text-xs font-semibold text-emerald-300">
               {group.title}
             </h5>
-            <p className="mt-1 text-sm leading-6 text-slate-300">
+            <p className="mt-0.5 text-xs leading-5 text-slate-300">
               {group.description}
             </p>
           </div>
         ))}
       </div>
 
-      <p className="mt-4 rounded-xl border border-amber-400/15 bg-amber-400/[0.05] p-3 text-xs leading-5 text-amber-100/80">
-        Avant tout dépôt, consulte la caisse officielle de l’opérateur
-        pour vérifier les méthodes disponibles, les frais, les limites
-        et les conditions de retrait dans ton pays.
+      <p className="mt-3 rounded-lg border border-amber-400/15 bg-amber-400/[0.05] p-2 text-[10px] leading-4 text-amber-100/80">
+        Vérifie les méthodes disponibles et les frais dans ton pays.
       </p>
     </section>
   );
@@ -306,7 +331,7 @@ export default function BookmakersPage() {
             text: "Consulte les offres annoncées et leurs conditions.",
           },
           {
-            icon: "🏷️",
+            icon: "🏷",
             title: "Codes faciles à retrouver",
             text: "Copie le code directement depuis sa fiche.",
           },
@@ -362,24 +387,24 @@ export default function BookmakersPage() {
                 >
                   <td className="px-5 py-5">
                     <a
-  href={bookmaker.affiliateUrl}
-  target="_blank"
-  rel="sponsored nofollow noopener noreferrer"
-  aria-label={`Visiter ${bookmaker.name} via notre lien affilié`}
-  className="inline-flex items-center gap-3"
->
-  <img
-    src={bookmaker.logo}
-    alt=""
-    width={44}
-    height={44}
-    className="h-11 w-11 rounded-lg bg-white object-contain p-1 transition hover:scale-105"
-  />
+                      href={bookmaker.affiliateUrl}
+                      target="_blank"
+                      rel="sponsored nofollow noopener noreferrer"
+                      aria-label={`Visiter ${bookmaker.name} via notre lien affilié`}
+                      className="inline-flex items-center gap-3"
+                    >
+                      <img
+                        src={bookmaker.logo}
+                        alt=""
+                        width={44}
+                        height={44}
+                        className="h-11 w-11 rounded-lg bg-white object-contain p-1 transition hover:scale-105"
+                      />
 
-  <span className="font-bold text-white transition hover:text-emerald-300">
-    {bookmaker.name}
-  </span>
-</a>
+                      <span className="font-bold text-white transition hover:text-emerald-300">
+                        {bookmaker.name}
+                      </span>
+                    </a>
                   </td>
 
                   <td className="px-5 py-5">
@@ -431,57 +456,58 @@ export default function BookmakersPage() {
         )}
       </section>
 
+      {/* SECTION DES DÉTAILS SUR 4 COLONNES (lg:grid-cols-4) */}
       <section className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
         <h2 className="mb-8 text-3xl font-black">
           Découvrir chaque bookmaker
         </h2>
 
-        <div className="grid gap-6 lg:grid-cols-3">
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {bookmakers.map((bookmaker) => (
             <article
               key={bookmaker.slug}
-              className="flex flex-col rounded-2xl border border-white/10 bg-slate-900/60 p-5 sm:p-6"
+              className="flex flex-col rounded-2xl border border-white/10 bg-slate-900/60 p-4"
             >
-              <div className="flex items-center gap-4">
-  <a
-    href={bookmaker.affiliateUrl}
-    target="_blank"
-    rel="sponsored nofollow noopener noreferrer"
-    aria-label={`Visiter ${bookmaker.name} via notre lien affilié`}
-    className="shrink-0"
-  >
-    <img
-      src={bookmaker.logo}
-      alt=""
-      width={64}
-      height={64}
-      className="h-16 w-16 rounded-xl bg-white object-contain p-2 transition hover:scale-105"
-    />
-  </a>
+              <div className="flex items-center gap-3">
+                <a
+                  href={bookmaker.affiliateUrl}
+                  target="_blank"
+                  rel="sponsored nofollow noopener noreferrer"
+                  aria-label={`Visiter ${bookmaker.name} via notre lien affilié`}
+                  className="shrink-0"
+                >
+                  <img
+                    src={bookmaker.logo}
+                    alt=""
+                    width={48}
+                    height={48}
+                    className="h-12 w-12 rounded-xl bg-white object-contain p-1.5 transition hover:scale-105"
+                  />
+                </a>
 
-  <div>
-    <h3 className="text-xl font-extrabold">
-      <a
-        href={bookmaker.affiliateUrl}
-        target="_blank"
-        rel="sponsored nofollow noopener noreferrer"
-        className="transition hover:text-emerald-300"
-      >
-        {bookmaker.name}
-      </a>
-    </h3>
+                <div>
+                  <h3 className="text-base font-extrabold">
+                    <a
+                      href={bookmaker.affiliateUrl}
+                      target="_blank"
+                      rel="sponsored nofollow noopener noreferrer"
+                      className="transition hover:text-emerald-300"
+                    >
+                      {bookmaker.name}
+                    </a>
+                  </h3>
 
-    <p className="mt-1 text-sm text-slate-400">
-      {bookmaker.bonus}
-    </p>
-  </div>
-</div>
+                  <p className="text-[11px] text-slate-400 line-clamp-1">
+                    {bookmaker.bonus}
+                  </p>
+                </div>
+              </div>
 
-              <p className="mt-5 text-sm leading-7 text-slate-300">
+              <p className="mt-3 text-xs leading-5 text-slate-300 line-clamp-3">
                 {bookmaker.description}
               </p>
 
-              <div className="mt-5">
+              <div className="mt-3">
                 <BonusPanel
                   bookmaker={bookmaker}
                   copied={copiedSlug === bookmaker.slug}
@@ -489,31 +515,31 @@ export default function BookmakersPage() {
                 />
               </div>
 
-              <div className="mt-6">
-                <h4 className="font-bold">Points à retenir</h4>
-                <ul className="mt-3 space-y-2">
+              <div className="mt-4">
+                <h4 className="text-xs font-bold text-white">Points à retenir</h4>
+                <ul className="mt-2 space-y-1.5">
                   {bookmaker.advantages.map((item) => (
                     <li
                       key={item}
-                      className="text-sm leading-6 text-slate-300"
+                      className="text-xs leading-5 text-slate-300 flex items-start"
                     >
-                      <span className="mr-2 text-emerald-300">✓</span>
-                      {item}
+                      <span className="mr-1.5 text-emerald-300 shrink-0">✓</span>
+                      <span className="line-clamp-2">{item}</span>
                     </li>
                   ))}
                 </ul>
               </div>
 
-              <div className="mt-5">
-                <h4 className="font-bold">À vérifier</h4>
-                <ul className="mt-3 space-y-2">
+              <div className="mt-4">
+                <h4 className="text-xs font-bold text-white">À vérifier</h4>
+                <ul className="mt-2 space-y-1.5">
                   {bookmaker.disadvantages.map((item) => (
                     <li
                       key={item}
-                      className="text-sm leading-6 text-slate-400"
+                      className="text-xs leading-5 text-slate-400 flex items-start"
                     >
-                      <span className="mr-2 text-amber-300">•</span>
-                      {item}
+                      <span className="mr-1.5 text-amber-300 shrink-0">•</span>
+                      <span className="line-clamp-2">{item}</span>
                     </li>
                   ))}
                 </ul>
@@ -529,7 +555,7 @@ export default function BookmakersPage() {
                 href={bookmaker.affiliateUrl}
                 target="_blank"
                 rel="sponsored nofollow noopener noreferrer"
-                className="mt-6 block rounded-xl bg-emerald-400 px-5 py-3 text-center font-extrabold text-slate-950 hover:bg-emerald-300"
+                className="mt-5 block rounded-xl bg-emerald-400 px-4 py-2.5 text-center text-xs font-extrabold text-slate-950 hover:bg-emerald-300"
               >
                 Découvrir {bookmaker.name} ↗️
               </a>
