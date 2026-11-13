@@ -32,6 +32,187 @@ export function generateExcerpt(content: string[]) {
 }
 
 export const articles: Article[] = [
+ {
+  slug: "regle-hors-jeu-football-explication",
+
+  title: "Hors-jeu au football : comprendre la règle, les exceptions et les exemples",
+
+  category: "Analyses & guides",
+
+  excerpt:
+    "Qu'est-ce que le hors-jeu au football ? Découvrez la règle expliquée simplement, comment reconnaître une position de hors-jeu, les exceptions et le rôle de la VAR.",
+
+  image: "/images/home/regle-hors-jeu-football.jpg",
+
+  date: "13 novembre 2026",
+
+  author: "Maffo Sport",
+
+  content: [
+    "GUIDE FOOTBALL — COMPRENDRE LES RÈGLES DU JEU",
+
+    "Le hors-jeu est l'une des règles les plus discutées du football. Un but refusé, un appel dans le dos de la défense ou une intervention de la VAR peuvent parfois provoquer de longues contestations. Pourtant, le principe de cette règle est assez simple lorsqu'on connaît les critères à observer.",
+
+    "Dans ce guide, Maffo Sport vous explique comment fonctionne le hors-jeu, à quel moment l'arbitre doit intervenir, quelles sont les exceptions et pourquoi certaines actions sont sanctionnées alors que d'autres ne le sont pas.",
+
+    "QU'EST-CE QUE LE HORS-JEU AU FOOTBALL ?",
+
+    "Un joueur est en position de hors-jeu lorsqu'une partie de sa tête, de son corps ou de ses pieds se trouve dans la moitié de terrain adverse et plus près de la ligne de but adverse que le ballon et l'avant-dernier adversaire.",
+
+    "Autrement dit, un attaquant peut être placé derrière la défense au moment d'une passe, dans une position qui lui donne un avantage potentiel pour recevoir le ballon.",
+
+    "Attention : être en position de hors-jeu n'est pas automatiquement une infraction. Pour que l'arbitre siffle, le joueur doit également participer activement à l'action selon les critères définis par la Loi 11 de l'IFAB.",
+
+    "À QUEL MOMENT LE HORS-JEU EST-IL JUGÉ ?",
+
+    "C'est un élément essentiel pour comprendre cette règle : l'arbitre observe la position du joueur au moment précis où son coéquipier joue ou touche le ballon.",
+
+    "Il ne faut donc pas regarder uniquement l'endroit où se trouve l'attaquant lorsqu'il reçoit le ballon. Ce qui compte, c'est sa position au moment de la passe ou du contact avec le ballon par son coéquipier.",
+
+    "Exemple : un attaquant commence sa course derrière le dernier défenseur. Son milieu de terrain effectue une passe en profondeur. Si l'attaquant était en position régulière au moment de cette passe, il peut continuer sa course et recevoir le ballon même s'il dépasse ensuite les défenseurs.",
+
+    "En revanche, s'il était déjà en position de hors-jeu au moment de la passe et qu'il intervient dans l'action, l'arbitre peut sanctionner l'infraction.",
+
+    "QUELS JOUEURS SONT PRIS EN COMPTE POUR LE HORS-JEU ?",
+
+    "La règle ne se limite pas au dernier défenseur. Pour déterminer la position de hors-jeu, il faut comparer la position de l'attaquant avec le ballon et l'avant-dernier adversaire.",
+
+    "Dans la plupart des situations, le gardien de but est le dernier adversaire et un défenseur constitue l'avant-dernier. Mais ce n'est pas toujours le cas : le gardien peut se trouver loin de son but, et plusieurs défenseurs peuvent être positionnés différemment.",
+
+    "La règle repose donc sur le deuxième adversaire le plus proche de la ligne de but, et non systématiquement sur le dernier défenseur de champ.",
+
+    "Autre précision importante : les mains et les bras ne sont pas pris en compte pour déterminer une position de hors-jeu. La limite supérieure du bras correspond au bas de l'aisselle.",
+
+    "QUAND UN JOUEUR EN POSITION DE HORS-JEU EST-IL SANCTIONNÉ ?",
+
+    "Un joueur placé en position de hors-jeu est sanctionné uniquement lorsqu'il prend une part active au jeu. La Loi 11 distingue trois grandes situations.",
+
+    "1. INTERVENIR DIRECTEMENT DANS LE JEU",
+
+    "C'est le cas le plus facile à comprendre. Un joueur en position de hors-jeu reçoit une passe de son coéquipier et joue le ballon. L'arbitre signale alors l'infraction.",
+
+    "Exemple : un attaquant se trouve derrière la défense au moment d'une passe en profondeur. Il contrôle le ballon et part seul face au gardien. Si sa position était irrégulière au départ de la passe, le hors-jeu doit être signalé.",
+
+    "2. INTERFÉRER AVEC UN ADVERSAIRE",
+
+    "Un joueur peut être sanctionné même s'il ne touche pas le ballon. C'est notamment le cas lorsqu'il gêne clairement le gardien en masquant sa vision ou lorsqu'il dispute le ballon à un défenseur.",
+
+    "Un attaquant placé en position de hors-jeu peut donc provoquer une infraction simplement par son influence sur l'action adverse.",
+
+    "3. TIRER UN AVANTAGE DE SA POSITION",
+
+    "Un joueur en position de hors-jeu peut également être sanctionné s'il récupère un ballon après un rebond ou une déviation provenant notamment d'un poteau, de la barre transversale ou d'un adversaire.",
+
+    "Exemple : un attaquant est en position de hors-jeu au moment où son coéquipier tire. Le gardien repousse le ballon et celui-ci revient directement vers cet attaquant, qui marque. L'arbitre peut signaler le hors-jeu.",
+
+    "LES TROIS SITUATIONS OÙ IL N'Y A PAS DE HORS-JEU",
+
+    "Certaines remises en jeu constituent des exceptions prévues par la Loi 11. Un joueur ne peut pas être sanctionné pour hors-jeu s'il reçoit directement le ballon depuis :",
+
+    "- Un coup de pied de but.",
+
+    "- Une rentrée de touche.",
+
+    "- Un corner.",
+
+    "Exemple : un joueur se trouve derrière la défense adverse lorsqu'un coéquipier effectue une rentrée de touche. Il reçoit directement le ballon et peut poursuivre son action sans être sanctionné pour hors-jeu.",
+
+    "Attention : cette exception concerne uniquement la réception directe. Après cette remise en jeu, si un autre coéquipier touche le ballon et effectue une nouvelle passe, la règle habituelle du hors-jeu s'applique.",
+
+    "QUE SE PASSE-T-IL SI UN DÉFENSEUR TOUCHE LE BALLON ?",
+
+    "C'est une situation qui provoque régulièrement des débats. Lorsqu'un défenseur touche le ballon, l'attaquant initialement en position de hors-jeu n'est pas automatiquement remis en jeu.",
+
+    "Il faut distinguer une action délibérée d'une simple déviation.",
+
+    "Si le défenseur contrôle suffisamment la situation et tente volontairement de jouer le ballon, par exemple pour effectuer une passe ou dégager, l'attaquant peut généralement recevoir le ballon sans être sanctionné pour hors-jeu.",
+
+    "En revanche, si le ballon touche simplement le défenseur à la suite d'une déviation ou d'un réflexe, cela ne remet pas automatiquement l'attaquant en jeu.",
+
+    "L'IFAB précise que les arbitres doivent notamment tenir compte de la distance du ballon, de sa vitesse, de la possibilité pour le défenseur de coordonner ses mouvements et du caractère prévisible de la trajectoire.",
+
+    "Il existe également une exception importante : un arrêt délibéré d'un ballon qui se dirige vers le but ne remet pas l'attaquant en jeu. Si celui-ci récupère le ballon après cet arrêt alors qu'il était en position de hors-jeu au départ de l'action, il peut être sanctionné.",
+
+    "COMMENT FONCTIONNE LA VAR POUR LE HORS-JEU ?",
+
+    "La VAR, ou assistance vidéo à l'arbitrage, permet de revoir certaines situations susceptibles de changer une décision importante, notamment lorsqu'un but est marqué après une possible position de hors-jeu.",
+
+    "Les images permettent de vérifier la position des joueurs au moment où le ballon est joué par un coéquipier. Les arbitres vidéo examinent également si le joueur concerné a participé activement à l'action.",
+
+    "La VAR ne remplace cependant pas l'interprétation de l'arbitre dans toutes les situations. Par exemple, déterminer si un joueur gêne la vision du gardien ou influence un adversaire peut nécessiter une appréciation de l'action.",
+
+    "Le recours à la vidéo permet donc de mieux vérifier les faits, mais certaines décisions restent liées à l'interprétation des règles.",
+
+    "QUELLE EST LA SANCTION EN CAS DE HORS-JEU ?",
+
+    "Lorsqu'une infraction de hors-jeu est signalée, l'équipe adverse bénéficie d'un coup franc indirect à l'endroit où l'infraction a été commise.",
+
+    "Un coup franc indirect signifie qu'un but ne peut pas être marqué directement depuis cette remise en jeu sans qu'un autre joueur touche le ballon.",
+
+    "COMMENT ÉVITER LE HORS-JEU EN ATTAQUE ?",
+
+    "Les attaquants peuvent utiliser plusieurs méthodes pour éviter d'être sanctionnés.",
+
+    "Surveiller la ligne défensive : l'attaquant doit observer la position des défenseurs avant de déclencher son appel.",
+
+    "Démarrer sa course au bon moment : partir trop tôt peut placer le joueur en position irrégulière au moment de la passe.",
+
+    "Jouer avec le passeur : les attaquants doivent coordonner leurs déplacements avec les milieux de terrain afin de recevoir le ballon dans de bonnes conditions.",
+
+    "Revenir en position régulière : un joueur peut se trouver en position de hors-jeu sans être sanctionné s'il ne participe pas à l'action. Il doit toutefois éviter d'interférer avec un adversaire.",
+
+    "FAQ : LES QUESTIONS FRÉQUENTES SUR LE HORS-JEU",
+
+    "Un joueur peut-il être hors-jeu dans son propre camp ?",
+
+    "Non. Pour être en position de hors-jeu, une partie de la tête, du corps ou des pieds du joueur doit se trouver dans la moitié de terrain adverse. La ligne médiane elle-même ne compte pas comme faisant partie de cette moitié.",
+
+    "Un joueur peut-il être hors-jeu s'il est à la même hauteur que le défenseur ?",
+
+    "Non. Un joueur qui se trouve à la même hauteur que l'avant-dernier adversaire ou les deux derniers adversaires n'est pas en position de hors-jeu.",
+
+    "Un joueur peut-il marquer directement après un corner sans hors-jeu ?",
+
+    "Oui. Il n'y a pas d'infraction de hors-jeu lorsqu'un joueur reçoit directement le ballon sur un corner. Il faut toutefois tenir compte de la règle habituelle si le ballon est ensuite joué par un coéquipier.",
+
+    "Un joueur peut-il être hors-jeu sans toucher le ballon ?",
+
+    "Oui. Il peut être sanctionné s'il gêne clairement un adversaire, par exemple en masquant la vision du gardien ou en disputant le ballon.",
+
+    "Le gardien de but est-il toujours le dernier adversaire ?",
+
+    "Non. La position du gardien ne détermine pas automatiquement la ligne de hors-jeu. L'arbitre doit prendre en compte les deux adversaires les plus proches de la ligne de but.",
+
+    "Un défenseur qui dévie le ballon remet-il automatiquement l'attaquant en jeu ?",
+
+    "Non. Une déviation involontaire ne remet pas automatiquement l'attaquant en jeu. L'arbitre doit distinguer une déviation d'une action délibérée de jeu du ballon.",
+
+    "CE QU'IL FAUT RETENIR",
+
+    "Le hors-jeu ne dépend pas uniquement de la position d'un attaquant derrière la défense. L'arbitre doit observer sa position au moment où son coéquipier joue le ballon, puis vérifier s'il intervient activement dans l'action.",
+
+    "Les exceptions concernant les corners, les touches et les coups de pied de but, ainsi que la distinction entre une déviation et une action délibérée d'un défenseur, expliquent pourquoi certaines décisions peuvent sembler difficiles à comprendre.",
+
+    "Pour connaître précisément les critères appliqués par les arbitres, la référence reste la Loi 11 de l'International Football Association Board (IFAB).",
+
+    "Article pédagogique rédigé par Maffo Sport à partir des Lois du Jeu officielles. Les règles peuvent être mises à jour : consultez toujours la version officielle de l'IFAB."
+  ],
+
+  sources: [
+    {
+      name: "IFAB — Loi 11 : Hors-jeu",
+      url: "https://www.theifab.com/fr/laws/latest/offside/"
+    },
+    {
+      name: "IFAB — Clarification des notions d'action délibérée et de déviation",
+      url: "https://www.theifab.com/fr/news/law-11-offside-deliberate-play-guidelines-clarified/"
+    },
+    {
+      name: "The Football Association — Law 11: Offside",
+      url: "https://www.thefa.com/football-rules-governance/lawsandrules/laws/football-11-11/law-11---offside."
+    },
+  ],
+},
    {
   slug: "ten-hag-ronaldo-manchester-united-declaration",
   title:
