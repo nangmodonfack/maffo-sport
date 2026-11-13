@@ -91,7 +91,7 @@ const evergreenArticles = [
     description:
       "Possession, tirs cadrés, buts attendus, efficacité offensive et autres indicateurs utiles.",
     image: "/images/home/analyse-2.jpg",
-    link: "/articles/principales-statistiques-du-football",
+    link: "/articles/regle-hors-jeu-football-explication",
   },
   {
     category: "Guide",
