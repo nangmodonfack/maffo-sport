@@ -37,7 +37,7 @@ export const articles: Article[] = [
 
   title: "Hors-jeu au football : comprendre la règle, les exceptions et les exemples",
 
-  category: "Analyses & guides",
+  category: "Guide",
 
   excerpt:
     "Qu'est-ce que le hors-jeu au football ? Découvrez la règle expliquée simplement, comment reconnaître une position de hors-jeu, les exceptions et le rôle de la VAR.",
