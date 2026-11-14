@@ -460,8 +460,8 @@ export default function Home() {
                 ],
                 [
                   "Guide",
-                  "Les statistiques à connaître au football",
-                  "/images/home/statistiques.jpg",
+                  "Hors-jeu au football : comprendre la règle, les exceptions et les exemples",
+                  "/images/home/regle-hors-jeu-football.jpg",
                   "/regle-hors-jeu-football-explication",
                 ],
                 [
