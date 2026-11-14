@@ -26,7 +26,7 @@ const bookmakers: Bookmaker[] = [
     name: "Premier Bet",
     slug: "premierbet",
     logo: "/images/bookmakers/premierbet.png",
-    bonus: "Premier pari remboursé & Bonus 2e dépôt",
+    bonus: "Premier pari remboursé & des bonus 1e et 2e dépôt",
     bonusPercentage: "Jusqu’à 15 000 F",
     bonusCode: "UBET10",
     description:
@@ -46,7 +46,7 @@ const bookmakers: Bookmaker[] = [
       {
         title: "Mobile Money & Paiements locaux",
         description:
-          "MTN Mobile Money, Orange Money, Wave.",
+          "MTN Mobile Money, Orange Money, Wave...etc",
       },
       {
         title: "Retrait physique",
