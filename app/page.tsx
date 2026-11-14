@@ -462,7 +462,7 @@ export default function Home() {
                   "Guide",
                   "Hors-jeu au football : comprendre la règle, les exceptions et les exemples",
                   "/images/home/regle-hors-jeu-football.jpg",
-                  "/regle-hors-jeu-football-explication",
+                  "/articles/regle-hors-jeu-football-explication",
                 ],
                 [
                   "Paris sportifs",
