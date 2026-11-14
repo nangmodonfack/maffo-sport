@@ -27,14 +27,14 @@ const bookmakers: Bookmaker[] = [
     slug: "premierbet",
     logo: "/images/bookmakers/premierbet.png",
     bonus: "Premier pari remboursé & Bonus 2e dépôt",
-    bonusPercentage: "Jusqu’à 15 000 F CFA*",
+    bonusPercentage: "Jusqu’à 15 000 F",
     bonusCode: "UBET10",
     description:
       "Une plateforme de référence proposant des paris sportifs, des jeux virtuels et Aviator, avec des options de retrait en agence et par Mobile Money.",
     affiliateUrl:
       "https://media.premierbetpartners.com/redirect.aspx?pid=155098&bid=1991",
     advantages: [
-      "Premier pari remboursé en free bet jusqu'à 15 000 F CFA",
+      "Premier pari remboursé en free bet jusqu'à 15 000 F",
       "Dépôts et retraits ultra-rapides (Mobile Money & Cash en agence)",
       "Bonus et paris gratuits sur le deuxième dépôt",
     ],
